@@ -13,7 +13,7 @@ struct ExpenseListItemView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("5/4/2023")
+                Text("\(expense.friendlyDate)")
             }
             HStack {
                 Text("M1")
@@ -28,7 +28,7 @@ struct ExpenseListItemView: View {
             HStack {
                 Text("\(expense.name)")
                 Spacer()
-                Text("\(expense.price)")
+                Text("\(expense.cost)")
             }
             .padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0))
         }

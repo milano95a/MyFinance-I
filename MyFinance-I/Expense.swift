@@ -11,12 +11,12 @@ class Expense: Object, ObjectKeyIdentifiable {
 }
 
 extension Expense {
-    static func add(name: String, quantity: Double, price: Int) {
+    static func add(name: String, quantity: Double, price: Int, date: Date) {
         let expense = Expense()
         expense.name = name
         expense.quantity = quantity
         expense.price = price
-        expense.date = Date()
+        expense.date = date
 
         Realm.writeWithTry { realm in
             realm.add(expense)
@@ -44,7 +44,7 @@ extension Expense {
         }
     }
     
-    func write(_ callback: (Expense, Realm) -> Void) {
+    private func write(_ callback: (Expense, Realm) -> Void) {
         guard let thawedObj = self.thaw() else { return }
         assert(thawedObj.isFrozen == false)
         guard let thawedRealm = thawedObj.realm else { return }
@@ -58,15 +58,12 @@ extension Expense {
     }
 }
 
-extension Realm {
-    static func writeWithTry(_ callback: (Realm) -> Void ) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                callback(realm)
-            }
-        } catch let error {
-            print(error)
-        }
+extension Expense {
+    var cost: Int {
+        Int(quantity * Double(price))
+    }
+    
+    var friendlyDate: String {
+        date.formatted(date: .abbreviated, time: .omitted)
     }
 }

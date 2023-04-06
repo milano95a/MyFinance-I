@@ -13,22 +13,23 @@ class ExpenseViewModel: ObservableObject {
     
     // MARK: Intents
     
+    func importDataFromJson() {
+        
+    }
+    
     func delete(_ expense: Expense) {
         self.objectWillChange.send()
         Expense.delete(expense)
     }
     
-    func update(_ expense: Expense, name: String, price: Int, quantity: Double, date: Date) {
-        
+    func update(_ expense: Expense, name: String?, price: Int?, quantity: Double?, date: Date?) {
+        self.objectWillChange.send()
+        Expense.update(expense, name: name, quantity: quantity, price: price, date: date)
     }
     
     func add(name: String, price: Int, quantity: Double, date: Date) {
         self.objectWillChange.send()
-        Expense.add(
-            name: "saxarniy pudra",
-            quantity: 1,
-            price: 4000)
-        print(expenses)
+        Expense.add(name: name, quantity: quantity, price: price, date: date)
     }
     
     func deleteAll() {

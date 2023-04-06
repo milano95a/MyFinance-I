@@ -7,18 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD11260229DDC6CB00B1FBFA /* ExpenseListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260129DDC6CB00B1FBFA /* ExpenseListItemView.swift */; };
+		BD11260429DDC7D500B1FBFA /* ExpenseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260329DDC7D500B1FBFA /* ExpenseListView.swift */; };
+		BD11260629DDC9FE00B1FBFA /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260529DDC9FE00B1FBFA /* ExpenseViewModel.swift */; };
 		BD17A09F29DD63EB0052668D /* MyFinance_IApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */; };
-		BD17A0A129DD63EB0052668D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A0A029DD63EB0052668D /* ContentView.swift */; };
+		BD17A0A129DD63EB0052668D /* ExpenseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A0A029DD63EB0052668D /* ExpenseScreen.swift */; };
 		BD17A0A329DD63ED0052668D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD17A0A229DD63ED0052668D /* Assets.xcassets */; };
 		BD17A0A629DD63ED0052668D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD17A0A529DD63ED0052668D /* Preview Assets.xcassets */; };
+		BD17A0AE29DD67DC0052668D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = BD17A0AD29DD67DC0052668D /* Realm */; };
+		BD17A0B029DD67DC0052668D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BD17A0AF29DD67DC0052668D /* RealmSwift */; };
+		BD17A0B229DD6AD90052668D /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A0B129DD6AD90052668D /* Expense.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD11260129DDC6CB00B1FBFA /* ExpenseListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListItemView.swift; sourceTree = "<group>"; };
+		BD11260329DDC7D500B1FBFA /* ExpenseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListView.swift; sourceTree = "<group>"; };
+		BD11260529DDC9FE00B1FBFA /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
 		BD17A09B29DD63EB0052668D /* MyFinance-I.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyFinance-I.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFinance_IApp.swift; sourceTree = "<group>"; };
-		BD17A0A029DD63EB0052668D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BD17A0A029DD63EB0052668D /* ExpenseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseScreen.swift; sourceTree = "<group>"; };
 		BD17A0A229DD63ED0052668D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD17A0A529DD63ED0052668D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BD17A0B129DD6AD90052668D /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,12 +36,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD17A0B029DD67DC0052668D /* RealmSwift in Frameworks */,
+				BD17A0AE29DD67DC0052668D /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD11260029DDA4F100B1FBFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */,
+				BD17A0A229DD63ED0052668D /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		BD17A09229DD63EB0052668D = {
 			isa = PBXGroup;
 			children = (
@@ -51,9 +72,12 @@
 		BD17A09D29DD63EB0052668D /* MyFinance-I */ = {
 			isa = PBXGroup;
 			children = (
-				BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */,
-				BD17A0A029DD63EB0052668D /* ContentView.swift */,
-				BD17A0A229DD63ED0052668D /* Assets.xcassets */,
+				BD17A0A029DD63EB0052668D /* ExpenseScreen.swift */,
+				BD11260529DDC9FE00B1FBFA /* ExpenseViewModel.swift */,
+				BD11260329DDC7D500B1FBFA /* ExpenseListView.swift */,
+				BD11260129DDC6CB00B1FBFA /* ExpenseListItemView.swift */,
+				BD17A0B129DD6AD90052668D /* Expense.swift */,
+				BD11260029DDA4F100B1FBFA /* Supporting Files */,
 				BD17A0A429DD63ED0052668D /* Preview Content */,
 			);
 			path = "MyFinance-I";
@@ -83,6 +107,10 @@
 			dependencies = (
 			);
 			name = "MyFinance-I";
+			packageProductDependencies = (
+				BD17A0AD29DD67DC0052668D /* Realm */,
+				BD17A0AF29DD67DC0052668D /* RealmSwift */,
+			);
 			productName = "MyFinance-I";
 			productReference = BD17A09B29DD63EB0052668D /* MyFinance-I.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +139,9 @@
 				Base,
 			);
 			mainGroup = BD17A09229DD63EB0052668D;
+			packageReferences = (
+				BD17A0AC29DD67DC0052668D /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = BD17A09C29DD63EB0052668D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,7 +168,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD17A0A129DD63EB0052668D /* ContentView.swift in Sources */,
+				BD17A0B229DD6AD90052668D /* Expense.swift in Sources */,
+				BD11260629DDC9FE00B1FBFA /* ExpenseViewModel.swift in Sources */,
+				BD17A0A129DD63EB0052668D /* ExpenseScreen.swift in Sources */,
+				BD11260429DDC7D500B1FBFA /* ExpenseListView.swift in Sources */,
+				BD11260229DDC6CB00B1FBFA /* ExpenseListItemView.swift in Sources */,
 				BD17A09F29DD63EB0052668D /* MyFinance_IApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +374,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BD17A0AC29DD67DC0052668D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BD17A0AD29DD67DC0052668D /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD17A0AC29DD67DC0052668D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		BD17A0AF29DD67DC0052668D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD17A0AC29DD67DC0052668D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BD17A09329DD63EB0052668D /* Project object */;
 }

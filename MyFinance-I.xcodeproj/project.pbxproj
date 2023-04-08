@@ -12,6 +12,8 @@
 		BD11260629DDC9FE00B1FBFA /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260529DDC9FE00B1FBFA /* ExpenseViewModel.swift */; };
 		BD11260829DED33E00B1FBFA /* ExpenseEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260729DED33D00B1FBFA /* ExpenseEditorView.swift */; };
 		BD11260A29DEF7F500B1FBFA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260929DEF7F500B1FBFA /* Extensions.swift */; };
+		BD11260D29DFE88200B1FBFA /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260C29DFE88100B1FBFA /* HomeTabView.swift */; };
+		BD11260F29E014FC00B1FBFA /* OldExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260E29E014FC00B1FBFA /* OldExpense.swift */; };
 		BD17A09F29DD63EB0052668D /* MyFinance_IApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */; };
 		BD17A0A129DD63EB0052668D /* ExpenseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A0A029DD63EB0052668D /* ExpenseScreen.swift */; };
 		BD17A0A329DD63ED0052668D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD17A0A229DD63ED0052668D /* Assets.xcassets */; };
@@ -19,6 +21,7 @@
 		BD17A0AE29DD67DC0052668D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = BD17A0AD29DD67DC0052668D /* Realm */; };
 		BD17A0B029DD67DC0052668D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BD17A0AF29DD67DC0052668D /* RealmSwift */; };
 		BD17A0B229DD6AD90052668D /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A0B129DD6AD90052668D /* Expense.swift */; };
+		BDF5C27B29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF5C27A29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,12 +30,15 @@
 		BD11260529DDC9FE00B1FBFA /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
 		BD11260729DED33D00B1FBFA /* ExpenseEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditorView.swift; sourceTree = "<group>"; };
 		BD11260929DEF7F500B1FBFA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BD11260C29DFE88100B1FBFA /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
+		BD11260E29E014FC00B1FBFA /* OldExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldExpense.swift; sourceTree = "<group>"; };
 		BD17A09B29DD63EB0052668D /* MyFinance-I.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyFinance-I.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFinance_IApp.swift; sourceTree = "<group>"; };
 		BD17A0A029DD63EB0052668D /* ExpenseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseScreen.swift; sourceTree = "<group>"; };
 		BD17A0A229DD63ED0052668D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD17A0A529DD63ED0052668D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BD17A0B129DD6AD90052668D /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		BDF5C27A29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithAutoCompleteSuggestion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +67,22 @@
 		BD11260B29DEFA3900B1FBFA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BD11260C29DFE88100B1FBFA /* HomeTabView.swift */,
 				BD11260729DED33D00B1FBFA /* ExpenseEditorView.swift */,
 				BD11260329DDC7D500B1FBFA /* ExpenseListView.swift */,
+				BDF5C27A29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift */,
 				BD11260129DDC6CB00B1FBFA /* ExpenseListItemView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BD11261029E0157100B1FBFA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BD11260E29E014FC00B1FBFA /* OldExpense.swift */,
+				BD17A0B129DD6AD90052668D /* Expense.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BD17A09229DD63EB0052668D = {
@@ -89,7 +106,7 @@
 			children = (
 				BD17A0A029DD63EB0052668D /* ExpenseScreen.swift */,
 				BD11260529DDC9FE00B1FBFA /* ExpenseViewModel.swift */,
-				BD17A0B129DD6AD90052668D /* Expense.swift */,
+				BD11261029E0157100B1FBFA /* Models */,
 				BD11260B29DEFA3900B1FBFA /* Views */,
 				BD11260029DDA4F100B1FBFA /* Supporting Files */,
 				BD17A0A429DD63ED0052668D /* Preview Content */,
@@ -182,13 +199,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF5C27B29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift in Sources */,
 				BD17A0B229DD6AD90052668D /* Expense.swift in Sources */,
 				BD11260829DED33E00B1FBFA /* ExpenseEditorView.swift in Sources */,
 				BD11260629DDC9FE00B1FBFA /* ExpenseViewModel.swift in Sources */,
+				BD11260D29DFE88200B1FBFA /* HomeTabView.swift in Sources */,
 				BD11260A29DEF7F500B1FBFA /* Extensions.swift in Sources */,
 				BD17A0A129DD63EB0052668D /* ExpenseScreen.swift in Sources */,
 				BD11260429DDC7D500B1FBFA /* ExpenseListView.swift in Sources */,
 				BD11260229DDC6CB00B1FBFA /* ExpenseListItemView.swift in Sources */,
+				BD11260F29E014FC00B1FBFA /* OldExpense.swift in Sources */,
 				BD17A09F29DD63EB0052668D /* MyFinance_IApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

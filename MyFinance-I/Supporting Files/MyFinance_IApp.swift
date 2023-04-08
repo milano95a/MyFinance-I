@@ -6,7 +6,7 @@ import RealmSwift
 struct MyFinance_IApp: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
-            ExpenseScreen(vm: ExpenseViewModel())
+            HomeTabView()
                 .environment(\.realmConfiguration, Realm.Configuration(schemaVersion: 1))
         }
     }

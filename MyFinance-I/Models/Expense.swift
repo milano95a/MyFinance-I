@@ -8,9 +8,17 @@ class Expense: Object, ObjectKeyIdentifiable {
     @Persisted var quantity: Double = 0.0
     @Persisted var price: Int = 0
     @Persisted var date: Date = Date()
+    @Persisted var category: String = ""
 }
 
 extension Expense {
+    
+    static func add(expenses: [Expense]) {
+        Realm.writeWithTry { realm in
+            realm.add(expenses)
+        }
+    }
+    
     static func add(name: String, quantity: Double, price: Int, date: Date) {
         let expense = Expense()
         expense.name = name
@@ -61,9 +69,5 @@ extension Expense {
 extension Expense {
     var cost: Int {
         Int(quantity * Double(price))
-    }
-    
-    var friendlyDate: String {
-        date.formatted(date: .abbreviated, time: .omitted)
     }
 }

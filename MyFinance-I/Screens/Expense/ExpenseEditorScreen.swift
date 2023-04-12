@@ -8,10 +8,10 @@
 import SwiftUI
 import RealmSwift
 
-struct ExpenseEditorView: View {
+struct ExpenseEditorScreen: View {
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var vm: ExpenseViewModel
+    @ObservedObject var vm: ExpenseManager
     var expense: Expense?
     
     @State private var name: String
@@ -30,13 +30,13 @@ struct ExpenseEditorView: View {
     }
 }
 
-extension ExpenseEditorView {
+extension ExpenseEditorScreen {
     
     enum FocusedField: Hashable {
         case name, category, price, quantity
     }
     
-    init(vm: ExpenseViewModel, expense: Expense? = nil) {
+    init(vm: ExpenseManager, expense: Expense? = nil) {
         self.vm = vm
         self.expense = expense
         if let expense {
@@ -209,6 +209,6 @@ extension ExpenseEditorView {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpenseEditorView(vm: ExpenseViewModel.shared)
+        ExpenseEditorScreen(vm: ExpenseManager.shared)
     }
 }

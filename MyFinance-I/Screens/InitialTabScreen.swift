@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct HomeTabView: View {
+struct InitialTabScreen: View {
     var body: some View {
         TabView {
-            ExpenseScreen(vm: ExpenseViewModel.shared)
+            ExpenseScreen(vm: ExpenseManager.shared)
                 .tabItem {
                     Label("Expenses", systemImage: "dollarsign.circle")
                 }
-            Text("More")
+            MoreScreen()
                 .tabItem {
                     Label("More", systemImage: "ellipsis")
                 }
@@ -24,6 +24,6 @@ struct HomeTabView: View {
 
 struct HomeTabView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeTabView()
+        InitialTabScreen()
     }
 }

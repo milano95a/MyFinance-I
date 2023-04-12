@@ -8,19 +8,33 @@
 import Foundation
 import RealmSwift
 
-class ExpenseViewModel: ObservableObject {
-    
-    static let shared = ExpenseViewModel()
+class ExpenseManager: ObservableObject {
+    private let creationDate = Date()
+
+    static let shared = ExpenseManager()
     
     @Published var expenses: Results<Expense>
-    
+    @Published var showYearlyTotal: Bool
+    @Published var showMonthlyTotal: Bool
+    @Published var showWeeklyTotal: Bool
+    @Published var showDailyTotal: Bool
+    @Published var showExpense: Bool
     
     private init() {
-        expenses = Realm.shared.objects(Expense.self).sorted(byKeyPath: "date", ascending: false)
+        expenses = Realm.shared.objects(Expense.self)
+            .sorted(byKeyPath: "date", ascending: false)
         
         total = Total()
         categories = []
+        showYearlyTotal = UserDefaults.standard.bool(forKey: "showYearlyTotal")
+        showMonthlyTotal = UserDefaults.standard.bool(forKey: "showMonthlyTotal")
+        showWeeklyTotal = UserDefaults.standard.bool(forKey: "showWeeklyTotal")
+        showDailyTotal = UserDefaults.standard.bool(forKey: "showDailyTotal")
+        showExpense = UserDefaults.standard.bool(forKey: "showExpense")
         sync()
+        
+        let interval = Date().timeIntervalSince(creationDate)
+        print(interval)
     }
     
     // MARK: APIs
@@ -73,12 +87,9 @@ class ExpenseViewModel: ObservableObject {
     }
     
     func getSuggestions(with text: String) -> Results<Expense> {
-        let suggestions = Realm.shared.objects(Expense.self).filter(NSPredicate(format: "name CONTAINS[c] '\(text)'"))
-        return suggestions
-    }
-    
-    static func emptySuggestions() -> Results<Expense> {
-        let suggestions = Realm.shared.objects(Expense.self).filter(NSPredicate(value: false))
+        let suggestions = Realm.shared.objects(Expense.self)
+            .filter(NSPredicate(format: "name CONTAINS[c] '\(text)'"))
+            .sorted(byKeyPath: "date", ascending: false)
         return suggestions
     }
     
@@ -93,6 +104,41 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
+    func exportData() -> URL? {
+        let jsonData = try! JSONEncoder().encode(expenses)
+        guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else { return nil }
+        let fileName = "\(Date().dayOfTheYear)-\(Date().monthOfTheYear)-\(Date().year)"
+        let fileURL = directory.appendingPathComponent("my-finance-\(fileName).json")
+        try! jsonData.write(to: fileURL, options: .atomic)
+        return fileURL
+    }
+    
+    func setPreferenceYearlyTotal(_ showYearlyTotal: Bool) {
+        UserDefaults.standard.set(showYearlyTotal, forKey: "showYearlyTotal")
+        self.showYearlyTotal = UserDefaults.standard.bool(forKey: "showYearlyTotal")
+    }
+
+    func setPreferenceMonthlyTotal(_ showMonthlyTotal: Bool) {
+        UserDefaults.standard.set(showMonthlyTotal, forKey: "showMonthlyTotal")
+        self.showMonthlyTotal = UserDefaults.standard.bool(forKey: "showMonthlyTotal")
+    }
+
+    func setPreferenceWeeklyTotal(_ showWeeklyTotal: Bool) {
+        UserDefaults.standard.set(showWeeklyTotal, forKey: "showWeeklyTotal")
+        self.showWeeklyTotal = UserDefaults.standard.bool(forKey: "showWeeklyTotal")
+    }
+
+    func setPreferenceDailyTotal(_ showDailyTotal: Bool) {
+        UserDefaults.standard.set(showDailyTotal, forKey: "showDailyTotal")
+        self.showDailyTotal = UserDefaults.standard.bool(forKey: "showDailyTotal")
+    }
+    
+    func setPreferenceExpense(_ showExpense: Bool) {
+        UserDefaults.standard.set(showExpense, forKey: "showExpense")
+        self.showExpense = UserDefaults.standard.bool(forKey: "showExpense")
+    }
+
+
     // MARK: Intents
     func delete(_ expense: Expense) {
         self.objectWillChange.send()
@@ -209,13 +255,14 @@ class ExpenseViewModel: ObservableObject {
     
     func loadCategories() {
         expenses = Realm.shared.objects(Expense.self)
+            .sorted(byKeyPath: "date", ascending: false)
         
         for expense in expenses {
             categories.insert(expense.category)
         }
     }
     
-    // MARK: Utilities
+    // MARK: Helper functions
     
     private func sync() {
         calculateTotals()

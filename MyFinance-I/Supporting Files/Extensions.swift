@@ -99,3 +99,61 @@ extension String {
         return self
     }
 }
+
+@discardableResult
+func share(items: [Any], excludedActivityTypes: [UIActivity.ActivityType]? = nil) -> Bool {
+    guard let source = UIApplication.shared.windows.last?.rootViewController else {
+        return false
+    }
+    let vc = UIActivityViewController(
+        activityItems: items,
+        applicationActivities: nil
+    )
+    vc.excludedActivityTypes = excludedActivityTypes
+    vc.popoverPresentationController?.sourceView = source.view
+    source.present(vc, animated: true)
+    return true
+}
+
+extension Color {
+    static var defaultTextColor = Color(uiColor: .darkGray)
+    static var yearlyTotalColor = Color.yellow1
+    static var monthlyTotalColor = Color.green1
+    static var weeklyTotalColor = Color.blue1
+    static var dailyTotalColor = Color.pink1
+    static var addButtonColor = Color.yellow1
+    
+    static var blue1 = Color(red: 0/255, green: 172/255, blue: 234/255)
+    static var pink1 = Color(red: 255/255, green: 51/255, blue: 153/255)
+    static var green1 = Color(red: 0/255, green: 255/255, blue: 204/255)
+    static var yellow1 = Color(red: 254/255, green: 219/255, blue: 65/255)
+}
+
+extension UIColor {
+    
+    static var mainBackground: UIColor { UIColor(0x00ACEA) }
+    static var monthTextColor: UIColor { UIColor(0x00ffcc) }
+    static var weekTextColor: UIColor { UIColor(0x00ACEA) }
+    
+    static var lightBlack: UIColor { UIColor(0x333333) }
+    static var expanded: UIColor { UIColor(0x191919) }
+    static var statusBar: UIColor { UIColor(0x083863) }
+
+    static var scrollBackground: UIColor { UIColor(0x111111) }
+    
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+
+    convenience init(_ rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
+}

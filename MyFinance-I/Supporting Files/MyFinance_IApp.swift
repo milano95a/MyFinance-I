@@ -8,6 +8,7 @@ struct MyFinance_IApp: SwiftUI.App {
         WindowGroup {
             InitialTabScreen()
                 .environment(\.realmConfiguration, Realm.Configuration(schemaVersion: 1))
+                .environmentObject(ManagerExpense.shared)
         }
     }
 }

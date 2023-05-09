@@ -1,5 +1,5 @@
 //
-//  ExpenseSettingsView.swift
+//  SettingExpenseScreen.swift
 //  MyFinance-I
 //
 //  Created by Workspace (Abdurakhmon Jamoliddinov) on 11/04/23.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ExpenseSettingScreen: View {
-    @ObservedObject var vm: ExpenseManager
+struct SettingExpenseScreen: View {
+    @ObservedObject var vm: ManagerExpense
     
     @State private var showImportJsonPopup = false
     @State private var showYearlyTotal = false
@@ -71,6 +71,6 @@ struct ExpenseSettingScreen: View {
 
 struct ExpenseSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpenseSettingScreen(vm: ExpenseManager.shared)
+        SettingExpenseScreen(vm: ManagerExpense.shared)
     }
 }

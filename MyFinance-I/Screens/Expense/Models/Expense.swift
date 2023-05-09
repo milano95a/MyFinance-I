@@ -46,15 +46,20 @@ class Expense: Object, ObjectKeyIdentifiable, Decodable, Encodable {
 // MARK: Database stuff
 extension Expense {
     
+    static func findById(_ id: ObjectId) -> Expense? {
+        Realm.shared.object(ofType: Expense.self, forPrimaryKey: id)
+    }
+    
     static func add(expenses: [Expense]) {
         Realm.writeWithTry { realm in
             realm.add(expenses)
         }
     }
     
-    static func add(name: String, quantity: Double, price: Int, date: Date) {
+    static func add(name: String, category: String, quantity: Double, price: Int, date: Date) {
         let expense = Expense()
         expense.name = name
+        expense.category = category
         expense.quantity = quantity
         expense.price = price
         expense.date = date
@@ -76,13 +81,18 @@ extension Expense {
         }
     }
     
-    static func update(_ expense: Expense, name: String?, quantity: Double?, price: Int?, date: Date?) {
+    static func update(_ expense: Expense, name: String?, category: String?, quantity: Double?, price: Int?, date: Date?) {
         expense.write { thawedObj, thawedRealm in
             if let name = name { thawedObj.name = name }
+            if let category = category { thawedObj.category = category }
             if let quantity = quantity { thawedObj.quantity = quantity }
             if let price = price { thawedObj.price = price }
             if let date = date { thawedObj.date = date }
         }
+    }
+    
+    static func fetchRequest(_ predicate: NSPredicate) -> Results<Expense> {
+        return Realm.shared.objects(Expense.self).filter(predicate).sorted(byKeyPath: "date", ascending: false)
     }
     
     private func write(_ callback: (Expense, Realm) -> Void) {
@@ -104,5 +114,17 @@ extension Expense {
     var cost: Int {
         Int(quantity * Double(price))
     }
+}
+
+extension NSPredicate {
+    static var all = NSPredicate(format: "TRUEPREDICATE")
+    static var none = NSPredicate(format: "FALSEPREDICATE")
+    static func contains(field: String, _ string: String) -> NSPredicate {
+        NSPredicate(format: "\(field) CONTAINS[c] '\(string)'")
+    }
+    static func equals(field: String, equalsTo string: ObjectId) -> NSPredicate {
+        NSPredicate(format: "\(field) == \(string)")
+    }
+
 }
 

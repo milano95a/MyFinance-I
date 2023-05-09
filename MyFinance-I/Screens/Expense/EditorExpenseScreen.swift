@@ -1,17 +1,14 @@
-//
-//  SwiftUIView.swift
-//  MyFinance-I
-//
-//  Created by Workspace (Abdurakhmon Jamoliddinov) on 06/04/23.
-//
-
 import SwiftUI
 import RealmSwift
 
-struct ExpenseEditorScreen: View {
-    @Environment(\.dismiss) var dismiss
+struct EditorExpenseScreen: View {
     
-    @ObservedObject var vm: ExpenseManager
+    enum FocusedField: Hashable {
+        case name, category, price, quantity
+    }
+    
+    @Environment(\.dismiss) var dismiss
+    @ObservedObject var vm: ManagerExpense
     var expense: Expense?
     
     @State private var name: String
@@ -25,18 +22,15 @@ struct ExpenseEditorScreen: View {
     var body: some View {
         VStack {
             expenseForm
+            Spacer()
             saveButton
         }.padding()
     }
 }
 
-extension ExpenseEditorScreen {
+extension EditorExpenseScreen {
     
-    enum FocusedField: Hashable {
-        case name, category, price, quantity
-    }
-    
-    init(vm: ExpenseManager, expense: Expense? = nil) {
+    init(vm: ManagerExpense, expense: Expense? = nil) {
         self.vm = vm
         self.expense = expense
         if let expense {
@@ -60,24 +54,28 @@ extension ExpenseEditorScreen {
                 .focused($focusedField, equals: .name)
                 .submitLabel(.next)
                 .onSubmit { focusedField = .category }
+                .selectAllTextOnEditing()
             
             cateogryTextFieldWithAutoCompleteSuggestion
                 .focused($focusedField, equals: .category)
                 .submitLabel(.next)
                 .onSubmit { focusedField = .price }
+                .selectAllTextOnEditing()
 
-            TextField("price", text: $price).keyboardType(.numbersAndPunctuation)
+            TextField("price", text: $price)
+                .keyboardType(.numbersAndPunctuation)
                 .focused($focusedField, equals: .price)
                 .submitLabel(.next)
                 .onSubmit { focusedField = .quantity }
+                .selectAllTextOnEditing()
 
-            TextField("quantity", text: $quantity).keyboardType(.numbersAndPunctuation)
+            TextField("quantity", text: $quantity)
+                .keyboardType(.numbersAndPunctuation)
                 .focused($focusedField, equals: .quantity)
                 .submitLabel(.done)
+                .selectAllTextOnEditing()
 
             DatePicker("date", selection: $date, displayedComponents: [.date])
-            
-            Spacer()
         }.onAppear {
             focusedField = .name
         }
@@ -86,15 +84,15 @@ extension ExpenseEditorScreen {
     var nameTextFieldWithAutoCompleteSuggestion: some View {
         TextFieldWithAutoCompleteSuggestion<Expense>(
             getSuggestions: { typedText in
-                Array(vm.getSuggestions(with: typedText))
+                vm.getSuggestions(with: typedText)
             },
             placeholderText: "name",
             textBinding: $name,
             onSuggestionTap: { expense in
                 name = expense.name
+                category = expense.category
                 price = "\(expense.price)"
                 quantity = "\(expense.quantity)"
-                date = expense.date
             },
             getSuggestionText: { expense in
                 expense.name
@@ -111,40 +109,52 @@ extension ExpenseEditorScreen {
             onSuggestionTap: { category in
                 self.category = category
             },
-            getSuggestionText: { cateogry in
-                cateogry
+            getSuggestionText: { category in
+                category
             })
     }
     
     var saveButton: some View {
-        Button("Save") {
-            // TODO: validate
-            // TODO: I want number keyboard for price and quantity
-            let price = Int(price)!
-            let quantity = Double(quantity)!
+        GeometryReader { geometry in
+            Button(action: {
+                print("hello")
+                // TODO: validate
+                if name.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 ||
+                    category.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 ||
+                    price.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+                    return
+                }
+                
+                guard let price = Int(price) else { return }
+                let quantity = Double(quantity) ?? 1
 
-            if let expense = expense {
-                vm.update(expense,
-                          name: name,
-                          price: price,
-                          quantity: quantity,
-                          date: date)
-                dismiss()
-            } else {
-                vm.add(
-                    name: name,
-                    price: price,
-                    quantity: quantity,
-                    date: date)
-                resetFields()
-            }
+                if let expense = expense {
+                    vm.update(expense,
+                              name: name,
+                              category: category,
+                              price: price,
+                              quantity: quantity,
+                              date: date)
+                    dismiss()
+                } else {
+                    vm.add(
+                        name: name,
+                        category: category,
+                        price: price,
+                        quantity: quantity,
+                        date: date)
+                    dismiss()
+                }
+            }, label: {
+                Text("Save")
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .background(Color.yellow1)
+                    .cornerRadius(16)
+                    .foregroundColor(.white)
+                    .font(.headline)
+            })
         }
-    }
-
-    private func resetFields() {
-        name = ""
-        price = ""
-        quantity = ""
+        .frame(height: 64)
     }
     
     // MARK: Helper functions
@@ -207,8 +217,9 @@ extension ExpenseEditorScreen {
 
 
 
+
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpenseEditorScreen(vm: ExpenseManager.shared)
+        EditorExpenseScreen(vm: ManagerExpense.shared)
     }
 }

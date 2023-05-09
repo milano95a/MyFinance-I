@@ -7,6 +7,47 @@
 
 import SwiftUI
 import RealmSwift
+import Realm
+
+extension RealmSwiftObject {
+    func addToDB() {
+        Realm.writeWithTry { realm in
+            realm.add(self)
+        }
+    }
+    
+    func deleteFromDB() {
+        self.writeToDB { thawedObj, thawedRealm in
+            thawedRealm.delete(thawedObj)
+        }
+    }
+    
+    func writeToDB(_ callback: (RealmSwiftObject, Realm) -> Void) {
+        guard let thawedObj = self.thaw() else { return }
+        assert(thawedObj.isFrozen == false)
+        guard let thawedRealm = thawedObj.realm else { return }
+        do {
+            try thawedRealm.write {
+                callback(thawedObj, thawedRealm)
+            }
+        } catch let error {
+            print(error)
+        }
+    }
+}
+
+extension Array where Element: RealmSwiftObject {
+    func addToDB() {
+        Realm.writeWithTry { realm in
+            realm.add(self)
+        }
+    }
+}
+extension ObjectId {
+    func findById<T: RealmSwiftObject>() -> T? {
+        Realm.shared.object(ofType: T.self, forPrimaryKey: self)
+    }
+}
 
 extension Double {
     func removeZerosFromEnd() -> String {
@@ -31,6 +72,16 @@ extension Realm {
         } catch let error {
             print(error)
         }
+    }
+    
+    static func deleteAll() {
+        Realm.writeWithTry { realm in
+            realm.deleteAll()
+        }
+    }
+    
+    static func fetchRequest<Element: RealmFetchable>(_ predicate: NSPredicate) -> Results<Element> {
+        return Realm.shared.objects(Element.self)
     }
 }
 
@@ -57,7 +108,6 @@ extension View {
 extension Date {
     var dayOfTheYear: Int {
         Calendar.current.ordinality(of: .day, in: .year, for: self)!
-//        Calendar.current.component(.day, from: self)
     }
     
     var weekOfTheYear: Int {
@@ -75,7 +125,18 @@ extension Date {
     var friendlyDate: String {
         self.formatted(date: .abbreviated, time: .omitted)
     }
-
+    
+    func isSameWeek(_ date: Date) -> Bool {
+        self.weekOfTheYear == date.weekOfTheYear && self.year == date.year
+    }
+    
+    func isSameDay(_ date: Date) -> Bool {
+        return self.dayOfTheYear == date.dayOfTheYear && self.year == date.year
+    }
+    
+    func isSameMonth(_ date: Date) -> Bool {
+        self.monthOfTheYear == date.monthOfTheYear && self.year == date.year
+    }
 }
 
 extension String {
@@ -155,5 +216,39 @@ extension UIColor {
             green: (rgb >> 8) & 0xFF,
             blue: rgb & 0xFF
         )
+    }
+}
+
+extension Double {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+
+extension Array {
+    var lastIndex: Int {
+        self.count - 1
+    }
+}
+
+public struct SelectAllTextOnEditingModifier: ViewModifier {
+    public func body(content: Content) -> some View {
+        content
+            .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
+                if let textField = obj.object as? UITextField {
+                    textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+                }
+            }
+    }
+}
+
+extension View {
+
+    /// Select all the text in a TextField when starting to edit.
+    /// This will not work with multiple TextField's in a single view due to not able to match the selected TextField with underlying UITextField
+    public func selectAllTextOnEditing() -> some View {
+        modifier(SelectAllTextOnEditingModifier())
     }
 }

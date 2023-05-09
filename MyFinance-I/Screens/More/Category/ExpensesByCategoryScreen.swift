@@ -22,8 +22,50 @@ struct ExpensesByCategoryScreen: View {
                 }
             }
         }
+        .foregroundColor(.defaultTextColor)
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 struct ExpensesByCategoryView_Previews: PreviewProvider {
     static var previews: some View {

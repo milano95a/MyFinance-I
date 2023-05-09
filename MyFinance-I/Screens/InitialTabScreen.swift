@@ -10,7 +10,7 @@ import SwiftUI
 struct InitialTabScreen: View {
     var body: some View {
         TabView {
-            ExpenseScreen(vm: ExpenseManager.shared)
+            ListExpenseScreen(vm: ManagerExpense.shared)
                 .tabItem {
                     Label("Expenses", systemImage: "dollarsign.circle")
                 }

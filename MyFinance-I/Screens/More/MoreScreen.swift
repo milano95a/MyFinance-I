@@ -15,7 +15,8 @@ struct MoreScreen: View {
                     .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                 NavigationLink("Inflation", destination: ProductsListScreen())
                     .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
-
+                NavigationLink("Savings", destination: SavingsScreen())
+                    .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
             }
             .foregroundColor(.defaultTextColor)
             .navigationTitle("More")

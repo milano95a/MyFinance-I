@@ -8,61 +8,58 @@
 import SwiftUI
 
 struct InflationScreen: View {
-    var items: [ProductInflation]
+    var items: [Expense]
     
     var body: some View {
-        List(items) { item in
+        List(items.indices, id: \.self) { index in
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     Spacer()
-                    Text("\(String(item.year))")
+                    Text("\(String(items[index].date.year))")
                     Spacer()
                 }
-                Text("\(item.productName)")
+                Text("\(items[index].name)")
                 HStack {
-                    Text("\(item.firstMonthMeanPrice)  >  \(item.lastMonthMeanPrice)")
+                    Text(priceChangeForItemAt(index))
                     Spacer()
-                    if item.change > 0 {
-                        Text("+\(item.change.rounded(toPlaces: 2).removeZerosFromEnd())%")
-                            .foregroundColor(.red)
-                    } else {
-                        Text("\(item.change.rounded(toPlaces: 2).removeZerosFromEnd()) %")
-                            .foregroundColor(.green)
+                    if let change = priceChangePercentForItemAt(index) {
+                        if change > 0 {
+                            Text("+\(change.removeZerosFromEnd())%").foregroundColor(.red)
+                        } else {
+                            Text("\(change.removeZerosFromEnd())%").foregroundColor(.green)
+                        }
                     }
                 }
             }
         }
     }
-}
-
-struct ProductInflation: Identifiable {
-    var id: Int { year }
-    var year: Int
-    var productName: String
-    var firstMonthMeanPrice: Int
-    var lastMonthMeanPrice: Int
-    var change: Double {
-        let change = Double(lastMonthMeanPrice) / Double(firstMonthMeanPrice)
-        if change > 1 {
-            return (change - 1) * 100
-        } else {
-            return -(1 - change) * 100
+    
+    func priceChangeForItemAt(_ index: Int) -> String {
+        let price2 = "\(items[index].price)"
+        var price1 = "na"
+        if items.indices.contains(index-1) {
+            price1 = "\(items[index-1].price)"
         }
+        return "\(price1)  >  \(price2)"
     }
-}
-
-struct InflationScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        InflationScreen(items: [
-            ProductInflation(year: 2022,
-                             productName: "Super Twist",
-                             firstMonthMeanPrice: 4300,
-                             lastMonthMeanPrice: 5000),
-            ProductInflation(year: 2021,
-                             productName: "Super Twist",
-                             firstMonthMeanPrice: 5300,
-                             lastMonthMeanPrice: 4300)
-
-        ])
+    
+    func priceChangePercentForItemAt(_ index: Int) -> Double? {
+        let newPrice = items[index].price
+        var oldPrice = 0
+        var result: Double? = nil
+        if items.indices.contains(index-1) {
+            oldPrice = items[index-1].price
+        } else {
+            return result
+        }
+        
+        let change = Double(newPrice) / Double(oldPrice)
+        if change > 1 {
+            result = (change - 1) * 100
+        } else {
+            result = -(1-change) * 100
+        }
+        
+        return result?.rounded(toPlaces: 2)
     }
 }

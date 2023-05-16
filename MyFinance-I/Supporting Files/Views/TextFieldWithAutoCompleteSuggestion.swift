@@ -16,6 +16,7 @@ struct TextFieldWithAutoCompleteSuggestion<T>: View {
     var textBinding: Binding<String>
     var onSuggestionTap: (T) -> Void
     var getSuggestionText: (T) -> String
+    var fieldIsFocused: Binding<Bool>
     
     var body: some View {
         VStack {
@@ -39,6 +40,8 @@ struct TextFieldWithAutoCompleteSuggestion<T>: View {
                     } else {
                         suggestionView
                     }
+                } else if !fieldIsFocused.wrappedValue {
+                    // don't show suggestion because field is not focused
                 } else {
                     suggestionView
                 }

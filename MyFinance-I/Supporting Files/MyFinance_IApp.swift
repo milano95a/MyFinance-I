@@ -9,6 +9,8 @@ struct MyFinance_IApp: SwiftUI.App {
             InitialTabScreen()
                 .environment(\.realmConfiguration, Realm.Configuration(schemaVersion: 1))
                 .environmentObject(ManagerExpense.shared)
+                .environmentObject(InflationManager())
+                .environmentObject(SavingsManager())
         }
     }
 }

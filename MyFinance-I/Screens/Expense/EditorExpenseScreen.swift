@@ -1,5 +1,6 @@
 import SwiftUI
 import RealmSwift
+import Combine
 
 struct EditorExpenseScreen: View {
     
@@ -7,24 +8,29 @@ struct EditorExpenseScreen: View {
         case name, category, price, quantity
     }
     
+    var expense: Expense?
     @Environment(\.dismiss) var dismiss
     @ObservedObject var vm: ManagerExpense
-    var expense: Expense?
-    
+    @FocusState private var focusedField: FocusedField?
     @State private var name: String
+    @State private var nameFieldIsFocused = false
     @State private var category: String
+    @State private var categoryFieldIsFocused = false
     @State private var price: String
     @State private var quantity: String
     @State private var date: Date
-    
-    @FocusState private var focusedField: FocusedField?
     
     var body: some View {
         VStack {
             expenseForm
             Spacer()
             saveButton
-        }.padding()
+        }
+        .padding()
+        .onAppear {
+            focusedField = .name
+            nameFieldIsFocused = true
+        }
     }
 }
 
@@ -51,40 +57,21 @@ extension EditorExpenseScreen {
     var expenseForm: some View {
         VStack {
             nameTextFieldWithAutoCompleteSuggestion
-                .focused($focusedField, equals: .name)
-                .submitLabel(.next)
-                .onSubmit { focusedField = .category }
-                .selectAllTextOnEditing()
             
             cateogryTextFieldWithAutoCompleteSuggestion
-                .focused($focusedField, equals: .category)
-                .submitLabel(.next)
-                .onSubmit { focusedField = .price }
-                .selectAllTextOnEditing()
 
-            TextField("price", text: $price)
-                .keyboardType(.numbersAndPunctuation)
-                .focused($focusedField, equals: .price)
-                .submitLabel(.next)
-                .onSubmit { focusedField = .quantity }
-                .selectAllTextOnEditing()
+            priceTextField
 
-            TextField("quantity", text: $quantity)
-                .keyboardType(.numbersAndPunctuation)
-                .focused($focusedField, equals: .quantity)
-                .submitLabel(.done)
-                .selectAllTextOnEditing()
+            quantityTextField
 
-            DatePicker("date", selection: $date, displayedComponents: [.date])
-        }.onAppear {
-            focusedField = .name
+            datePicker
         }
     }
-    
+        
     var nameTextFieldWithAutoCompleteSuggestion: some View {
         TextFieldWithAutoCompleteSuggestion<Expense>(
             getSuggestions: { typedText in
-                vm.getSuggestions(with: typedText)
+                return vm.getSuggestions(with: typedText)
             },
             placeholderText: "name",
             textBinding: $name,
@@ -96,7 +83,17 @@ extension EditorExpenseScreen {
             },
             getSuggestionText: { expense in
                 expense.name
-            })
+            },
+            fieldIsFocused: $nameFieldIsFocused
+        )
+        .focused($focusedField, equals: .name)
+        .submitLabel(.next)
+        .onSubmit {
+            focusedField = .category
+            nameFieldIsFocused = false
+            categoryFieldIsFocused = true
+        }
+        .selectAllTextOnEditing()
     }
     
     var cateogryTextFieldWithAutoCompleteSuggestion: some View {
@@ -111,7 +108,38 @@ extension EditorExpenseScreen {
             },
             getSuggestionText: { category in
                 category
-            })
+            },
+            fieldIsFocused: $categoryFieldIsFocused
+        )
+        .focused($focusedField, equals: .category)
+        .submitLabel(.next)
+        .onSubmit {
+            focusedField = .price
+            categoryFieldIsFocused = false
+        }
+        .selectAllTextOnEditing()
+    }
+        
+    var priceTextField: some View {
+        TextField("price", text: $price)
+            .keyboardType(.numbersAndPunctuation)
+            .focused($focusedField, equals: .price)
+            .submitLabel(.next)
+            .onSubmit { focusedField = .quantity }
+            .selectAllTextOnEditing()
+
+    }
+
+    var quantityTextField: some View {
+        TextField("quantity", text: $quantity)
+            .keyboardType(.numbersAndPunctuation)
+            .focused($focusedField, equals: .quantity)
+            .submitLabel(.done)
+            .selectAllTextOnEditing()
+    }
+    
+    var datePicker: some View {
+        DatePicker("date", selection: $date, displayedComponents: [.date])
     }
     
     var saveButton: some View {

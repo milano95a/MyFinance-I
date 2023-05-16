@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ProductsListScreen: View {
-    @EnvironmentObject var expenseManager: ManagerExpense
+    @EnvironmentObject var manager: InflationManager
     
     var body: some View {
-        List(expenseManager.getUniqueProducts()) { product in
+        List(manager.getUniqueProducts()) { product in
             NavigationLink("\(product.name)", destination: {
-                InflationScreen(items: expenseManager.getProductInflation(product))
+                InflationScreen(items: manager.giveMeInflationFor(product: product.name))
             })
         }
     }

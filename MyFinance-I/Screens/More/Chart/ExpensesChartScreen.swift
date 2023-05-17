@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpensesChartScreen: View {
-    let vm: ExpenseChartManager
+    @EnvironmentObject var manager: ExpenseChartManager
     
     @State private var selectedYear = 2023
     @State private var years = [Int]()
@@ -21,12 +21,12 @@ struct ExpensesChartScreen: View {
                         Text("Monthly expenses in \(String($0)) in mlns")
                     }
                 }.pickerStyle(.automatic)
-                BarChart(data: vm.getMonthlyExpensesFor(selectedYear))
+                BarChart(data: manager.getMonthlyExpensesFor(selectedYear))
             }
             .navigationBarTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                years = vm.getYears()
+                years = manager.getYears()
             }
         }
     }
@@ -69,6 +69,6 @@ struct ExpensesChartScreen: View {
 
 struct MonthlyExpensesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ExpensesChartScreen(vm: ExpenseChartManager())
+        ExpensesChartScreen()
     }
 }

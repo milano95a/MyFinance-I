@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct InitialTabScreen: View {
+    
     var body: some View {
         TabView {
-            ListExpenseScreen(vm: ManagerExpense.shared)
+            ListExpenseScreen()
                 .tabItem {
                     Label("Expenses", systemImage: "dollarsign.circle")
                 }

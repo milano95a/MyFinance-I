@@ -22,6 +22,6 @@ struct ProductsListScreen: View {
 struct ProductsListScreen_Previews: PreviewProvider {
     static var previews: some View {
         ProductsListScreen()
-            .environmentObject(ManagerExpense.shared)
+            .environmentObject(ManagerExpense())
     }
 }

@@ -7,8 +7,11 @@ struct MyFinance_IApp: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
             InitialTabScreen()
-                .environmentObject(ManagerExpense.shared)
+                .environmentObject(ManagerExpense())
+                .environmentObject(CreditManager())
+                .environmentObject(DebtManager())
                 .environmentObject(InflationManager())
+                .environmentObject(ExpenseChartManager())
                 .environmentObject(SavingsManager())
         }
     }

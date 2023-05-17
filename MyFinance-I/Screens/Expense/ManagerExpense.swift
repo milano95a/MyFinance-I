@@ -10,8 +10,6 @@ import RealmSwift
 
 class ManagerExpense: ObservableObject {
     
-    static let shared = ManagerExpense()
-    
     @Published var expenses: Results<Expense>
     @Published var total: Total
     @Published var showYearlyTotal: Bool
@@ -20,7 +18,7 @@ class ManagerExpense: ObservableObject {
     @Published var showDailyTotal: Bool
     @Published var showExpense: Bool
     
-    private init() {
+    init() {
         expenses            = Expense.fetchRequest(.all)
         total               = Total()
         showYearlyTotal     = UserDefaults.standard.bool(forKey: "showYearlyTotal")

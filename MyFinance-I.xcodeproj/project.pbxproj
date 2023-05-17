@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BD11260229DDC6CB00B1FBFA /* ExpenseListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260129DDC6CB00B1FBFA /* ExpenseListItemView.swift */; };
-		BD11260429DDC7D500B1FBFA /* ExpenseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260329DDC7D500B1FBFA /* ExpenseListView.swift */; };
 		BD11260629DDC9FE00B1FBFA /* ManagerExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260529DDC9FE00B1FBFA /* ManagerExpense.swift */; };
 		BD11260829DED33E00B1FBFA /* EditorExpenseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260729DED33D00B1FBFA /* EditorExpenseScreen.swift */; };
 		BD11260A29DEF7F500B1FBFA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11260929DEF7F500B1FBFA /* Extensions.swift */; };
@@ -53,7 +52,6 @@
 
 /* Begin PBXFileReference section */
 		BD11260129DDC6CB00B1FBFA /* ExpenseListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListItemView.swift; sourceTree = "<group>"; };
-		BD11260329DDC7D500B1FBFA /* ExpenseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListView.swift; sourceTree = "<group>"; };
 		BD11260529DDC9FE00B1FBFA /* ManagerExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerExpense.swift; sourceTree = "<group>"; };
 		BD11260729DED33D00B1FBFA /* EditorExpenseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorExpenseScreen.swift; sourceTree = "<group>"; };
 		BD11260929DEF7F500B1FBFA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -280,7 +278,6 @@
 			isa = PBXGroup;
 			children = (
 				BD11260129DDC6CB00B1FBFA /* ExpenseListItemView.swift */,
-				BD11260329DDC7D500B1FBFA /* ExpenseListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -385,7 +382,6 @@
 				BD11260A29DEF7F500B1FBFA /* Extensions.swift in Sources */,
 				BD17A0A129DD63EB0052668D /* ListExpenseScreen.swift in Sources */,
 				BD73596329F157BD00766F9A /* EditorDebtScreen.swift in Sources */,
-				BD11260429DDC7D500B1FBFA /* ExpenseListView.swift in Sources */,
 				BD665CF92A026C4600497E40 /* InflationScreen.swift in Sources */,
 				BDF5C28429E6B345007DED13 /* ExpensesByCategoryScreen.swift in Sources */,
 				BDF79F2D29EF3848009B7D1D /* DebtManager.swift in Sources */,

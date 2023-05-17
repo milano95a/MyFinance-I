@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingExpenseScreen: View {
-    @ObservedObject var vm: ManagerExpense
     
+    @EnvironmentObject var manager: ManagerExpense
     @State private var showImportJsonPopup = false
     @State private var showYearlyTotal = false
     @State private var showMonthlyTotal = false
@@ -23,23 +23,23 @@ struct SettingExpenseScreen: View {
                 Section("Show Fields") {
                     Toggle("Yearly Totals", isOn: $showYearlyTotal)
                         .onChange(of: showYearlyTotal, perform: {newValue in
-                            vm.setPreferenceYearlyTotal(newValue)
+                            manager.setPreferenceYearlyTotal(newValue)
                         })
                     Toggle("Monthly Totals", isOn: $showMonthlyTotal)
                         .onChange(of: showMonthlyTotal, perform: {newValue in
-                            vm.setPreferenceMonthlyTotal(newValue)
+                            manager.setPreferenceMonthlyTotal(newValue)
                         })
                     Toggle("Weekly Totals", isOn: $showWeeklyTotal)
                         .onChange(of: showWeeklyTotal, perform: {newValue in
-                            vm.setPreferenceWeeklyTotal(newValue)
+                            manager.setPreferenceWeeklyTotal(newValue)
                         })
                     Toggle("Daily Totals", isOn: $showDailyTotal)
                         .onChange(of: showDailyTotal, perform: {newValue in
-                            vm.setPreferenceDailyTotal(newValue)
+                            manager.setPreferenceDailyTotal(newValue)
                         })
                     Toggle("Expense", isOn: $showExpense)
                         .onChange(of: showExpense, perform: {newValue in
-                            vm.setPreferenceExpense(newValue)
+                            manager.setPreferenceExpense(newValue)
                         })
 
                 }
@@ -47,23 +47,23 @@ struct SettingExpenseScreen: View {
                     showImportJsonPopup = true
                 })
                 Button("Export", action: {
-                    if let url = vm.exportData() {
+                    if let url = manager.exportData() {
                         share(items: [url])
                     }
                 })
             }
             .navigationTitle("Settings")
             .jsonFileImporter([OldExpense].self, isPresented: $showImportJsonPopup) { oldExpenses in
-                vm.deleteAll()
-                vm.add(oldExpenenses: oldExpenses)
-                vm.calculateTotals()
+                manager.deleteAll()
+                manager.add(oldExpenenses: oldExpenses)
+                manager.calculateTotals()
             }
             .onAppear {
-                showYearlyTotal = vm.showYearlyTotal
-                showMonthlyTotal = vm.showMonthlyTotal
-                showWeeklyTotal = vm.showWeeklyTotal
-                showDailyTotal = vm.showDailyTotal
-                showExpense = vm.showExpense
+                showYearlyTotal = manager.showYearlyTotal
+                showMonthlyTotal = manager.showMonthlyTotal
+                showWeeklyTotal = manager.showWeeklyTotal
+                showDailyTotal = manager.showDailyTotal
+                showExpense = manager.showExpense
             }
         }
     }
@@ -71,6 +71,6 @@ struct SettingExpenseScreen: View {
 
 struct ExpenseSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingExpenseScreen(vm: ManagerExpense.shared)
+        SettingExpenseScreen()
     }
 }

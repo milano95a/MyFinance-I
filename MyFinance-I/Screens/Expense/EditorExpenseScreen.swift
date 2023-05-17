@@ -9,8 +9,8 @@ struct EditorExpenseScreen: View {
     }
     
     var expense: Expense?
+    @EnvironmentObject var manager: ManagerExpense
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var vm: ManagerExpense
     @FocusState private var focusedField: FocusedField?
     @State private var name: String
     @State private var nameFieldIsFocused = false
@@ -36,8 +36,7 @@ struct EditorExpenseScreen: View {
 
 extension EditorExpenseScreen {
     
-    init(vm: ManagerExpense, expense: Expense? = nil) {
-        self.vm = vm
+    init(expense: Expense? = nil) {
         self.expense = expense
         if let expense {
             self._name = State(initialValue: expense.name)
@@ -71,7 +70,7 @@ extension EditorExpenseScreen {
     var nameTextFieldWithAutoCompleteSuggestion: some View {
         TextFieldWithAutoCompleteSuggestion<Expense>(
             getSuggestions: { typedText in
-                return vm.getSuggestions(with: typedText)
+                return manager.getSuggestions(with: typedText)
             },
             placeholderText: "name",
             textBinding: $name,
@@ -99,7 +98,7 @@ extension EditorExpenseScreen {
     var cateogryTextFieldWithAutoCompleteSuggestion: some View {
         TextFieldWithAutoCompleteSuggestion<String>(
             getSuggestions: { typedText in
-                Array(vm.getCategorySuggestions(with: typedText))
+                Array(manager.getCategorySuggestions(with: typedText))
             },
             placeholderText: "cateogry",
             textBinding: $category,
@@ -157,7 +156,7 @@ extension EditorExpenseScreen {
                 let quantity = Double(quantity) ?? 1
 
                 if let expense = expense {
-                    vm.update(expense,
+                    manager.update(expense,
                               name: name,
                               category: category,
                               price: price,
@@ -165,7 +164,7 @@ extension EditorExpenseScreen {
                               date: date)
                     dismiss()
                 } else {
-                    vm.add(
+                    manager.add(
                         name: name,
                         category: category,
                         price: price,
@@ -248,6 +247,6 @@ extension EditorExpenseScreen {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        EditorExpenseScreen(vm: ManagerExpense.shared)
+        EditorExpenseScreen()
     }
 }

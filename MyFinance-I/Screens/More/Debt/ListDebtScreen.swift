@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ListDebtScreen: View {
-    @ObservedObject var debtManager: DebtManager
+    @EnvironmentObject var manager: DebtManager
     @State private var showDebtEditorPopup = false
     @State private var selectedDebt: Debt?
     
@@ -18,14 +18,14 @@ struct ListDebtScreen: View {
 extension ListDebtScreen {
     @ViewBuilder
     var listOfDebts: some View {
-        List(debtManager.debts.freeze()) { debt in
+        List(manager.debts.freeze()) { debt in
             DebtListItemView(debt: debt)
                 .swipeActions {
                     Button("Paid") {
-                        debtManager.paid(debt)
+                        manager.paid(debt)
                     }.tint(.green)
                     Button("Delete") {
-                        debtManager.delete(debt)
+                        manager.delete(debt)
                     }.tint(.red)
                     Button("Edit") {
                         selectedDebt = debt
@@ -34,7 +34,7 @@ extension ListDebtScreen {
                 }
         }
         .popover(isPresented: $showDebtEditorPopup) { [selectedDebt] in
-            EditorDebtScreen(debtManager: debtManager, debt: selectedDebt)
+            EditorDebtScreen(debtManager: manager, debt: selectedDebt)
         }
     }
     
@@ -107,6 +107,6 @@ extension ListDebtScreen {
 
 struct DebtScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ListDebtScreen(debtManager: DebtManager())
+        ListDebtScreen()
     }
 }

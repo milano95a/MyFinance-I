@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ListCreditScreen: View {
     
-    @ObservedObject var creditManager: CreditManager
+    @EnvironmentObject var manager: CreditManager
     @State private var showAddCreditPopup = false
     @State private var selectedCredit: Credit?
     
@@ -19,14 +19,14 @@ struct ListCreditScreen: View {
 extension ListCreditScreen {
     @ViewBuilder
     var listOfCredits: some View {
-        List(creditManager.credits.freeze()) { credit in
+        List(manager.credits.freeze()) { credit in
             CreditListItemView(credit: credit)
                 .swipeActions {
                     Button("Paid") {
-                        creditManager.paid(credit)
+                        manager.paid(credit)
                     }.tint(.green)
                     Button("Delete") {
-                        creditManager.delete(credit)
+                        manager.delete(credit)
                     }.tint(.red)
                     Button("Edit") {
                         selectedCredit = credit
@@ -35,7 +35,7 @@ extension ListCreditScreen {
                 }
         }
         .popover(isPresented: $showAddCreditPopup) { [selectedCredit] in
-            EditorCreditScreen(creditManager: creditManager, credit: selectedCredit)
+            EditorCreditScreen(creditManager: manager, credit: selectedCredit)
         }
     }
     
@@ -109,6 +109,6 @@ extension ListCreditScreen {
 
 struct CreditScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ListCreditScreen(creditManager: CreditManager())
+        ListCreditScreen()
     }
 }

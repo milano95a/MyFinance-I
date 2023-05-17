@@ -3,15 +3,14 @@ import SwiftUI
 import RealmSwift
 
 struct ListExpenseScreen: View {
-    private let creationDate = Date()
-    
-    @ObservedObject var vm: ManagerExpense
-    
+
+    @EnvironmentObject var vm: ManagerExpense
     @State private var showAddExpensePopup = false
     @State private var showEditExpensePopup = false
     @State private var selectedExpenseId: ObjectId?
     @State private var showSettingsPopup = false
     @State private var searchText = ""
+    private let creationDate = Date()
 
     var body: some View {
         NavigationStack {
@@ -34,7 +33,7 @@ struct ListExpenseScreen: View {
             }
             .textInputAutocapitalization(.never)
             .popover(isPresented: $showSettingsPopup) {
-                SettingExpenseScreen(vm: vm)
+                SettingExpenseScreen()
             }.onAppear {
                 let interval = Date().timeIntervalSince(creationDate)
                 print("ExpenseScreen \(interval)")
@@ -73,9 +72,9 @@ extension ListExpenseScreen {
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
         .popover(isPresented: $showAddExpensePopup) { [selectedExpenseId] in
             if let id = selectedExpenseId { 
-                EditorExpenseScreen(vm: vm, expense: vm.findById(id))
+                EditorExpenseScreen(expense: vm.findById(id))
             } else {
-                EditorExpenseScreen(vm: vm)
+                EditorExpenseScreen()
             }
         }
     }
@@ -147,6 +146,6 @@ extension ListExpenseScreen {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ListExpenseScreen(vm: ManagerExpense.shared)
+        ListExpenseScreen()
     }
 }

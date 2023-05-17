@@ -8,9 +8,9 @@
 import Foundation
 import RealmSwift
 
-class ExpenseByCategoryViewModel: ObservableObject {
+class ExpenseByCategoryManager: ObservableObject {
     
-    static var shared = ExpenseByCategoryViewModel()
+    static var shared = ExpenseByCategoryManager()
     
     private init() {}
     
@@ -19,7 +19,7 @@ class ExpenseByCategoryViewModel: ObservableObject {
     func categories() -> [MonthlyExpensesByCategory] {
         var categoriesByMonth = [String: MonthlyExpensesByCategory]()
         
-        let expenses = Realm.shared.objects(Expense.self).sorted(byKeyPath: "date", ascending: false)
+        let expenses = Realm.shared().objects(Expense.self).sorted(byKeyPath: "date", ascending: false)
         
         for expense in expenses {
             let key = "\(expense.date.monthOfTheYear)/\(expense.date.year)"

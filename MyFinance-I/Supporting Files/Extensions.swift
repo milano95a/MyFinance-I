@@ -45,7 +45,7 @@ extension Array where Element: RealmSwiftObject {
 }
 extension ObjectId {
     func findById<T: RealmSwiftObject>() -> T? {
-        Realm.shared.object(ofType: T.self, forPrimaryKey: self)
+        Realm.shared().object(ofType: T.self, forPrimaryKey: self)
     }
 }
 
@@ -61,7 +61,12 @@ extension Double {
 
 extension Realm {
     // TODO: use this shared instance everywhere 
-    static let shared = try! Realm()
+    static func shared() -> Realm {
+        var configuration = Realm.Configuration(schemaVersion: 5)
+        Realm.Configuration.defaultConfiguration = configuration
+        let realm = try! Realm()
+        return realm
+    }
     
     static func writeWithTry(_ callback: (Realm) -> Void ) {
         do {
@@ -81,7 +86,7 @@ extension Realm {
     }
     
     static func fetchRequest<Element: RealmFetchable>(_ predicate: NSPredicate) -> Results<Element> {
-        return Realm.shared.objects(Element.self)
+        return Realm.shared().objects(Element.self)
     }
 }
 

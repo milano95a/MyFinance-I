@@ -122,13 +122,13 @@ class ManagerExpense: ObservableObject {
     }
     
     func delete(_ uiExpense: UIExpense) {
-        if let expense = Realm.shared.object(ofType: Expense.self, forPrimaryKey: uiExpense.id) {
+        if let expense = Realm.shared().object(ofType: Expense.self, forPrimaryKey: uiExpense.id) {
             self.objectWillChange.send()
             Expense.delete(expense)
         }
     }
     
-    func update(_ expense: Expense, name: String?, category: String?, price: Int?, quantity: Double?, date: Date?) {
+    func update(_ expense: Expense, name: String, category: String, price: Int, quantity: Double, date: Date) {
         self.objectWillChange.send()
         Expense.update(expense, name: name, category: category, quantity: quantity, price: price, date: date)
     }

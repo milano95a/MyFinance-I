@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ListDebtScreen: View {
-    @ObservedObject var debtManager: ViewModelDebt
+    @ObservedObject var debtManager: DebtManager
     @State private var showDebtEditorPopup = false
     @State private var selectedDebt: Debt?
     
@@ -107,6 +107,6 @@ extension ListDebtScreen {
 
 struct DebtScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ListDebtScreen(debtManager: ViewModelDebt())
+        ListDebtScreen(debtManager: DebtManager())
     }
 }

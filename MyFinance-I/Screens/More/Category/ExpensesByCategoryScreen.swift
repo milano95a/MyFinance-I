@@ -10,7 +10,7 @@ import SwiftUI
 struct ExpensesByCategoryScreen: View {
     
     var body: some View {
-        List(ExpenseByCategoryViewModel.shared.categories()) { monthlyExpensesByCategory in
+        List(ExpenseByCategoryManager.shared.categories()) { monthlyExpensesByCategory in
             VStack {
                 Text("\(monthlyExpensesByCategory.month)/\(String(monthlyExpensesByCategory.year))")
                 ForEach(monthlyExpensesByCategory.categories) { category in

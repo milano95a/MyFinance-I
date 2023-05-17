@@ -6,7 +6,7 @@ struct EditorDebtScreen: View {
         case creditor, amount, purpose
     }
 
-    var debtManager: ViewModelDebt
+    var debtManager: DebtManager
     var debt: Debt?
     
     @State private var creditor             : String
@@ -16,7 +16,7 @@ struct EditorDebtScreen: View {
     @FocusState private var focusedField    : FocusedField?
     @Environment(\.dismiss) var dismiss
     
-    init(debtManager: ViewModelDebt, debt: Debt? = nil) {
+    init(debtManager: DebtManager, debt: Debt? = nil) {
         self.debtManager = debtManager
         self.debt = debt
         
@@ -135,6 +135,6 @@ struct EditorDebtScreen: View {
 
 struct DebtEditorScreen_Previews: PreviewProvider {
     static var previews: some View {
-        EditorDebtScreen(debtManager: ViewModelDebt())
+        EditorDebtScreen(debtManager: DebtManager())
     }
 }

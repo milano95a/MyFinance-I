@@ -6,7 +6,7 @@ struct EditorCreditScreen: View {
         case borrower, amount, purpose
     }
 
-    var creditManager: ViewModelCredit
+    var creditManager: CreditManager
     var credit: Credit?
     
     @State private var borrower             : String
@@ -16,7 +16,7 @@ struct EditorCreditScreen: View {
     @FocusState private var focusedField    : FocusedField?
     @Environment(\.dismiss) var dismiss
     
-    init(creditManager: ViewModelCredit, credit: Credit? = nil) {
+    init(creditManager: CreditManager, credit: Credit? = nil) {
         self.creditManager = creditManager
         self.credit = credit
         
@@ -109,6 +109,6 @@ struct EditorCreditScreen: View {
 
 struct CreditEditorScreen_Previews: PreviewProvider {
     static var previews: some View {
-        EditorCreditScreen(creditManager: ViewModelCredit())
+        EditorCreditScreen(creditManager: CreditManager())
     }
 }

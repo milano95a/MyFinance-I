@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-class ViewModelCredit: ObservableObject {
+class CreditManager: ObservableObject {
     @Published var credits: Results<Credit>
     
     init() {

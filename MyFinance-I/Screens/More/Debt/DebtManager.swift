@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-class ViewModelDebt: ObservableObject {
+class DebtManager: ObservableObject {
     @Published var debts: Results<Debt>
     
     init() {

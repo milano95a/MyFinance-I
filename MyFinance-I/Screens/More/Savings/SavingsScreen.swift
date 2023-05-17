@@ -14,8 +14,8 @@ struct SavingsScreen: View {
     
     var body: some View {
         NavigationStack {
-            List(manager.items) { item in
-                SavingItemView(item: item)
+            List(manager.items.freeze()) { item in
+                SavingItemView(item: item, change: manager.change(for: item))
                     .swipeActions {
                         Button("Delete") {
                             manager.delete(item)
@@ -47,33 +47,9 @@ struct SavingsScreen: View {
     }
 }
 
-struct SavingItemView: View {
-    let item: Saving
-    
-    var body: some View {
-        VStack {
-            HStack {
-                Spacer()
-                Text("\(item.date.friendlyDate)")
-                Spacer()
-            }
-            HStack {
-                Text("\(item.amount)")
-                Spacer()
-                if item.change > 0 {
-                    Text("+\(item.change.removeZerosFromEnd())%")
-                        .foregroundColor(.green)
-                } else {
-                    Text("\(item.change.removeZerosFromEnd())%")
-                        .foregroundColor(.red)
-                }
-            }
-        }
-    }
-}
-
 struct SavingsScreen_Previews: PreviewProvider {
     static var previews: some View {
         SavingsScreen()
+            .environmentObject(SavingsManager())
     }
 }

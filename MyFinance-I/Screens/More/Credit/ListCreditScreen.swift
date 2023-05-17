@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ListCreditScreen: View {
     
-    @ObservedObject var creditManager: ViewModelCredit
+    @ObservedObject var creditManager: CreditManager
     @State private var showAddCreditPopup = false
     @State private var selectedCredit: Credit?
     
@@ -109,6 +109,6 @@ extension ListCreditScreen {
 
 struct CreditScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ListCreditScreen(creditManager: ViewModelCredit())
+        ListCreditScreen(creditManager: CreditManager())
     }
 }

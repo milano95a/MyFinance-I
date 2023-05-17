@@ -47,7 +47,7 @@ class Expense: Object, ObjectKeyIdentifiable, Decodable, Encodable {
 extension Expense {
     
     static func findById(_ id: ObjectId) -> Expense? {
-        Realm.shared.object(ofType: Expense.self, forPrimaryKey: id)
+        Realm.shared().object(ofType: Expense.self, forPrimaryKey: id)
     }
     
     static func add(expenses: [Expense]) {
@@ -92,7 +92,7 @@ extension Expense {
     }
     
     static func fetchRequest(_ predicate: NSPredicate) -> Results<Expense> {
-        return Realm.shared.objects(Expense.self).filter(predicate).sorted(byKeyPath: "date", ascending: false)
+        return Realm.shared().objects(Expense.self).filter(predicate).sorted(byKeyPath: "date", ascending: false)
     }
     
     private func write(_ callback: (Expense, Realm) -> Void) {

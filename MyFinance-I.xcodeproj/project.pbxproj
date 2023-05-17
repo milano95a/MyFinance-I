@@ -31,6 +31,8 @@
 		BDAD60A62A0E57CC0098C5F7 /* SavingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60A52A0E57CC0098C5F7 /* SavingsManager.swift */; };
 		BDAD60A92A0E57F50098C5F7 /* SavingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60A82A0E57F50098C5F7 /* SavingsScreen.swift */; };
 		BDAD60AB2A0E616A0098C5F7 /* SavingsEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60AA2A0E616A0098C5F7 /* SavingsEditor.swift */; };
+		BDAD60AD2A138B880098C5F7 /* GenericEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60AC2A138B880098C5F7 /* GenericEditor.swift */; };
+		BDAD60AF2A139E6C0098C5F7 /* SavingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60AE2A139E6C0098C5F7 /* SavingItemView.swift */; };
 		BDC8AE6E29EF54710076C571 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC8AE6D29EF54710076C571 /* Credit.swift */; };
 		BDC8AE7029EF5EEB0076C571 /* CreditListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC8AE6F29EF5EEB0076C571 /* CreditListItemView.swift */; };
 		BDC8AE7229EF81370076C571 /* EditorCreditScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC8AE7129EF81370076C571 /* EditorCreditScreen.swift */; };
@@ -38,15 +40,15 @@
 		BDF5C27E29E5740E007DED13 /* SettingExpenseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF5C27D29E5740E007DED13 /* SettingExpenseScreen.swift */; };
 		BDF5C28029E6B211007DED13 /* MoreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF5C27F29E6B211007DED13 /* MoreScreen.swift */; };
 		BDF5C28429E6B345007DED13 /* ExpensesByCategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF5C28329E6B345007DED13 /* ExpensesByCategoryScreen.swift */; };
-		BDF5C28629E6B47D007DED13 /* ExpenseByCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF5C28529E6B47D007DED13 /* ExpenseByCategoryViewModel.swift */; };
+		BDF5C28629E6B47D007DED13 /* ExpenseByCategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF5C28529E6B47D007DED13 /* ExpenseByCategoryManager.swift */; };
 		BDF79F2229E7F9A9009B7D1D /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F2129E7F9A9009B7D1D /* BarChart.swift */; };
 		BDF79F2429E823F9009B7D1D /* ExpensesChartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F2329E823F9009B7D1D /* ExpensesChartScreen.swift */; };
 		BDF79F2729E95E71009B7D1D /* Total.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F2629E95E71009B7D1D /* Total.swift */; };
-		BDF79F2929EABDE0009B7D1D /* ExpenseChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F2829EABDE0009B7D1D /* ExpenseChartViewModel.swift */; };
+		BDF79F2929EABDE0009B7D1D /* ExpenseChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F2829EABDE0009B7D1D /* ExpenseChartManager.swift */; };
 		BDF79F2B29EF3814009B7D1D /* ListDebtScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F2A29EF3813009B7D1D /* ListDebtScreen.swift */; };
-		BDF79F2D29EF3848009B7D1D /* ViewModelDebt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F2C29EF3848009B7D1D /* ViewModelDebt.swift */; };
+		BDF79F2D29EF3848009B7D1D /* DebtManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F2C29EF3848009B7D1D /* DebtManager.swift */; };
 		BDF79F2F29EF387D009B7D1D /* ListCreditScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F2E29EF387D009B7D1D /* ListCreditScreen.swift */; };
-		BDF79F3129EF38B1009B7D1D /* ViewModelCredit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F3029EF38B1009B7D1D /* ViewModelCredit.swift */; };
+		BDF79F3129EF38B1009B7D1D /* CreditManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F3029EF38B1009B7D1D /* CreditManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +75,8 @@
 		BDAD60A52A0E57CC0098C5F7 /* SavingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsManager.swift; sourceTree = "<group>"; };
 		BDAD60A82A0E57F50098C5F7 /* SavingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsScreen.swift; sourceTree = "<group>"; };
 		BDAD60AA2A0E616A0098C5F7 /* SavingsEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsEditor.swift; sourceTree = "<group>"; };
+		BDAD60AC2A138B880098C5F7 /* GenericEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericEditor.swift; sourceTree = "<group>"; };
+		BDAD60AE2A139E6C0098C5F7 /* SavingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingItemView.swift; sourceTree = "<group>"; };
 		BDC8AE6D29EF54710076C571 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
 		BDC8AE6F29EF5EEB0076C571 /* CreditListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditListItemView.swift; sourceTree = "<group>"; };
 		BDC8AE7129EF81370076C571 /* EditorCreditScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorCreditScreen.swift; sourceTree = "<group>"; };
@@ -81,15 +85,15 @@
 		BDF5C27D29E5740E007DED13 /* SettingExpenseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingExpenseScreen.swift; sourceTree = "<group>"; };
 		BDF5C27F29E6B211007DED13 /* MoreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreScreen.swift; sourceTree = "<group>"; };
 		BDF5C28329E6B345007DED13 /* ExpensesByCategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesByCategoryScreen.swift; sourceTree = "<group>"; };
-		BDF5C28529E6B47D007DED13 /* ExpenseByCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseByCategoryViewModel.swift; sourceTree = "<group>"; };
+		BDF5C28529E6B47D007DED13 /* ExpenseByCategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseByCategoryManager.swift; sourceTree = "<group>"; };
 		BDF79F2129E7F9A9009B7D1D /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		BDF79F2329E823F9009B7D1D /* ExpensesChartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesChartScreen.swift; sourceTree = "<group>"; };
 		BDF79F2629E95E71009B7D1D /* Total.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Total.swift; sourceTree = "<group>"; };
-		BDF79F2829EABDE0009B7D1D /* ExpenseChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseChartViewModel.swift; sourceTree = "<group>"; };
+		BDF79F2829EABDE0009B7D1D /* ExpenseChartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseChartManager.swift; sourceTree = "<group>"; };
 		BDF79F2A29EF3813009B7D1D /* ListDebtScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDebtScreen.swift; sourceTree = "<group>"; };
-		BDF79F2C29EF3848009B7D1D /* ViewModelDebt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelDebt.swift; sourceTree = "<group>"; };
+		BDF79F2C29EF3848009B7D1D /* DebtManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtManager.swift; sourceTree = "<group>"; };
 		BDF79F2E29EF387D009B7D1D /* ListCreditScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCreditScreen.swift; sourceTree = "<group>"; };
-		BDF79F3029EF38B1009B7D1D /* ViewModelCredit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelCredit.swift; sourceTree = "<group>"; };
+		BDF79F3029EF38B1009B7D1D /* CreditManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,7 @@
 		BD11260B29DEFA3900B1FBFA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BDAD60AC2A138B880098C5F7 /* GenericEditor.swift */,
 				BDF79F2129E7F9A9009B7D1D /* BarChart.swift */,
 				BDF5C27A29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift */,
 			);
@@ -173,7 +178,7 @@
 		BD73595D29F154B900766F9A /* Debt */ = {
 			isa = PBXGroup;
 			children = (
-				BDF79F2C29EF3848009B7D1D /* ViewModelDebt.swift */,
+				BDF79F2C29EF3848009B7D1D /* DebtManager.swift */,
 				BDF79F2A29EF3813009B7D1D /* ListDebtScreen.swift */,
 				BD73596229F157BD00766F9A /* EditorDebtScreen.swift */,
 				BD73595E29F1552C00766F9A /* Debt.swift */,
@@ -197,7 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				BDF79F2329E823F9009B7D1D /* ExpensesChartScreen.swift */,
-				BDF79F2829EABDE0009B7D1D /* ExpenseChartViewModel.swift */,
+				BDF79F2829EABDE0009B7D1D /* ExpenseChartManager.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -206,7 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				BDF5C28329E6B345007DED13 /* ExpensesByCategoryScreen.swift */,
-				BDF5C28529E6B47D007DED13 /* ExpenseByCategoryViewModel.swift */,
+				BDF5C28529E6B47D007DED13 /* ExpenseByCategoryManager.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 				BDAD60A52A0E57CC0098C5F7 /* SavingsManager.swift */,
 				BDAD60A82A0E57F50098C5F7 /* SavingsScreen.swift */,
 				BDAD60AA2A0E616A0098C5F7 /* SavingsEditor.swift */,
+				BDAD60AE2A139E6C0098C5F7 /* SavingItemView.swift */,
 			);
 			path = Savings;
 			sourceTree = "<group>";
@@ -224,7 +230,7 @@
 		BDC8AE6C29EF54270076C571 /* Credit */ = {
 			isa = PBXGroup;
 			children = (
-				BDF79F3029EF38B1009B7D1D /* ViewModelCredit.swift */,
+				BDF79F3029EF38B1009B7D1D /* CreditManager.swift */,
 				BDF79F2E29EF387D009B7D1D /* ListCreditScreen.swift */,
 				BDC8AE7129EF81370076C571 /* EditorCreditScreen.swift */,
 				BDC8AE6F29EF5EEB0076C571 /* CreditListItemView.swift */,
@@ -360,9 +366,10 @@
 				BDF5C27E29E5740E007DED13 /* SettingExpenseScreen.swift in Sources */,
 				BD665CF62A02668600497E40 /* ProductsListScreen.swift in Sources */,
 				BDF5C27B29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift in Sources */,
-				BDF79F3129EF38B1009B7D1D /* ViewModelCredit.swift in Sources */,
+				BDF79F3129EF38B1009B7D1D /* CreditManager.swift in Sources */,
 				BD17A0B229DD6AD90052668D /* Expense.swift in Sources */,
-				BDF5C28629E6B47D007DED13 /* ExpenseByCategoryViewModel.swift in Sources */,
+				BDF5C28629E6B47D007DED13 /* ExpenseByCategoryManager.swift in Sources */,
+				BDAD60AD2A138B880098C5F7 /* GenericEditor.swift in Sources */,
 				BD7359BD29F7EED700766F9A /* UIExpense.swift in Sources */,
 				BDAD60A92A0E57F50098C5F7 /* SavingsScreen.swift in Sources */,
 				BD73596129F1574C00766F9A /* DebtListItemView.swift in Sources */,
@@ -372,7 +379,7 @@
 				BD11260829DED33E00B1FBFA /* EditorExpenseScreen.swift in Sources */,
 				BDC8AE7229EF81370076C571 /* EditorCreditScreen.swift in Sources */,
 				BDAD60A42A0BED360098C5F7 /* InflationManager.swift in Sources */,
-				BDF79F2929EABDE0009B7D1D /* ExpenseChartViewModel.swift in Sources */,
+				BDF79F2929EABDE0009B7D1D /* ExpenseChartManager.swift in Sources */,
 				BD11260629DDC9FE00B1FBFA /* ManagerExpense.swift in Sources */,
 				BD11260D29DFE88200B1FBFA /* InitialTabScreen.swift in Sources */,
 				BD11260A29DEF7F500B1FBFA /* Extensions.swift in Sources */,
@@ -381,7 +388,7 @@
 				BD11260429DDC7D500B1FBFA /* ExpenseListView.swift in Sources */,
 				BD665CF92A026C4600497E40 /* InflationScreen.swift in Sources */,
 				BDF5C28429E6B345007DED13 /* ExpensesByCategoryScreen.swift in Sources */,
-				BDF79F2D29EF3848009B7D1D /* ViewModelDebt.swift in Sources */,
+				BDF79F2D29EF3848009B7D1D /* DebtManager.swift in Sources */,
 				BD73595F29F1552C00766F9A /* Debt.swift in Sources */,
 				BDF79F2F29EF387D009B7D1D /* ListCreditScreen.swift in Sources */,
 				BDAD60AB2A0E616A0098C5F7 /* SavingsEditor.swift in Sources */,
@@ -392,6 +399,7 @@
 				BDC8AE7029EF5EEB0076C571 /* CreditListItemView.swift in Sources */,
 				BDF79F2B29EF3814009B7D1D /* ListDebtScreen.swift in Sources */,
 				BD17A09F29DD63EB0052668D /* MyFinance_IApp.swift in Sources */,
+				BDAD60AF2A139E6C0098C5F7 /* SavingItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpensesChartScreen: View {
-    let vm: ExpenseChartViewModel
+    let vm: ExpenseChartManager
     
     @State private var selectedYear = 2023
     @State private var years = [Int]()
@@ -69,6 +69,6 @@ struct ExpensesChartScreen: View {
 
 struct MonthlyExpensesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ExpensesChartScreen(vm: ExpenseChartViewModel())
+        ExpensesChartScreen(vm: ExpenseChartManager())
     }
 }

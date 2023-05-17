@@ -10,42 +10,34 @@ import SwiftUI
 struct SavingsEditor: View {
     
     @EnvironmentObject var manager: SavingsManager
+    @Environment(\.dismiss) var dismiss
     var item: Saving?
     @State private var amount = ""
     @State private var date = Date()
+    @FocusState private var amountFocused: Bool?
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                form
-                saveButton
-            }
-            .navigationTitle("Saving Editor")
-        }
-    }
-    
-    var form: some View {
-        Form {
-            TextField("amount", text: $amount).keyboardType(.numberPad)
-            DatePicker("date", selection: $date, displayedComponents: [.date])
-        }
-    }
-    
-    var saveButton: some View {
-        GeometryReader { geometry in
-            Button(action: {
-                // TODO: validate
+        GenericEditor(title: "Savings Editor", saveAction: {
+            if let item = item {
+                manager.update(item, date, Int(amount) ?? 0)
+            } else {
                 manager.create(date, Int(amount) ?? 0)
-            }, label: {
-                Text("Save")
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .background(Color.yellow1)
-                    .cornerRadius(16)
-                    .foregroundColor(.white)
-                    .font(.headline)
-            })
+            }
+            dismiss()
+        }, content: {
+            TextField("amount", text: $amount)
+                .keyboardType(.numberPad)
+                .focused($amountFocused, equals: true)
+                .onAppear {
+                    amountFocused = true
+                }
+            DatePicker("date", selection: $date, displayedComponents: [.date])
+        }).onAppear {
+            if let item = item {
+                amount = String(item.amount)
+                date = item.date
+            }
         }
-        .frame(height: 64)
     }
 }
 

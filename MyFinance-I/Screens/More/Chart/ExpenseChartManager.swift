@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ExpenseChartViewModel: ObservableObject {
+class ExpenseChartManager: ObservableObject {
     
 //    MARK: Intents
     func getMonthlyExpensesFor(_ year: Int) -> [BarChartData] {

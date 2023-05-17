@@ -23,7 +23,7 @@ extension Credit {
     }
     
     static func fetchRequest(_ predicate: NSPredicate) -> Results<Credit> {
-        return Realm.shared.objects(Credit.self).filter(predicate).sorted(byKeyPath: "date", ascending: false)
+        return Realm.shared().objects(Credit.self).filter(predicate).sorted(byKeyPath: "date", ascending: false)
     }
     
     func paid() {

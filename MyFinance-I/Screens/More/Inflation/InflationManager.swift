@@ -14,14 +14,14 @@ class InflationManager: ObservableObject {
         let expenses = Expense.fetchRequest(.all).filter("name = %@", product).sorted { $0.date > $1.date }
         var result = [Expense]()
         
-        for year in 2020...Date().year {
+//        for year in 2020...Date().year {
             for expense in expenses {
-                if expense.date.year == year {
+//                if expense.date.year == year {
                     result.append(expense)
-                    break
-                }
+//                    break
+//                }
             }
-        }
+//        }
         return result
     }
         

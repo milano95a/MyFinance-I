@@ -13,6 +13,9 @@ struct MyFinance_IApp: SwiftUI.App {
                 .environmentObject(InflationManager())
                 .environmentObject(ExpenseChartManager())
                 .environmentObject(SavingsManager())
+                .environmentObject(ExportManager())
+                .environmentObject(ImportManager())
+                .environmentObject(ManagerCostOfThingsIn30Years(ManagerExpense()))
         }
     }
 }

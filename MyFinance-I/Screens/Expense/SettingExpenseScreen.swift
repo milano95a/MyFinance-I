@@ -43,21 +43,8 @@ struct SettingExpenseScreen: View {
                         })
 
                 }
-                Button("Import Old Expenses", action: {
-                    showImportJsonPopup = true
-                })
-                Button("Export", action: {
-                    if let url = manager.exportData() {
-                        share(items: [url])
-                    }
-                })
             }
             .navigationTitle("Settings")
-            .jsonFileImporter([OldExpense].self, isPresented: $showImportJsonPopup) { oldExpenses in
-                manager.deleteAll()
-                manager.add(oldExpenenses: oldExpenses)
-                manager.calculateTotals()
-            }
             .onAppear {
                 showYearlyTotal = manager.showYearlyTotal
                 showMonthlyTotal = manager.showMonthlyTotal

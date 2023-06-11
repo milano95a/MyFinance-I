@@ -62,7 +62,7 @@ extension Double {
 extension Realm {
     // TODO: use this shared instance everywhere 
     static func shared() -> Realm {
-        var configuration = Realm.Configuration(schemaVersion: 5)
+        let configuration = Realm.Configuration(schemaVersion: 5)
         Realm.Configuration.defaultConfiguration = configuration
         let realm = try! Realm()
         return realm
@@ -76,6 +76,18 @@ extension Realm {
             }
         } catch let error {
             print(error)
+        }
+    }
+    
+    static func deleteWithTry(_ object: Object) {
+        Realm.writeWithTry { realm in
+            realm.delete(object)
+        }
+    }
+    
+    static func addWithTry(_ object: Object) {
+        Realm.writeWithTry { realm in
+            realm.add(object)
         }
     }
     
@@ -141,6 +153,18 @@ extension Date {
     
     func isSameMonth(_ date: Date) -> Bool {
         self.monthOfTheYear == date.monthOfTheYear && self.year == date.year
+    }
+    
+    func monthsSince(_ date: Date) -> [Date] {
+        var result = [Date]()
+        var nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: date)!
+
+        while nextMonth < Date.now {
+            result.append(nextMonth)
+            nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: nextMonth)!
+        }
+                    
+        return result
     }
 }
 
@@ -255,5 +279,16 @@ extension View {
     /// This will not work with multiple TextField's in a single view due to not able to match the selected TextField with underlying UITextField
     public func selectAllTextOnEditing() -> some View {
         modifier(SelectAllTextOnEditingModifier())
+    }
+}
+
+extension NSPredicate {
+    static var all = NSPredicate(format: "TRUEPREDICATE")
+    static var none = NSPredicate(format: "FALSEPREDICATE")
+    static func contains(field: String, _ string: String) -> NSPredicate {
+        NSPredicate(format: "\(field) CONTAINS[c] '\(string)'")
+    }
+    static func equals(field: String, equalsTo string: ObjectId) -> NSPredicate {
+        NSPredicate(format: "\(field) == \(string)")
     }
 }

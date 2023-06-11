@@ -115,16 +115,3 @@ extension Expense {
         Int(quantity * Double(price))
     }
 }
-
-extension NSPredicate {
-    static var all = NSPredicate(format: "TRUEPREDICATE")
-    static var none = NSPredicate(format: "FALSEPREDICATE")
-    static func contains(field: String, _ string: String) -> NSPredicate {
-        NSPredicate(format: "\(field) CONTAINS[c] '\(string)'")
-    }
-    static func equals(field: String, equalsTo string: ObjectId) -> NSPredicate {
-        NSPredicate(format: "\(field) == \(string)")
-    }
-
-}
-

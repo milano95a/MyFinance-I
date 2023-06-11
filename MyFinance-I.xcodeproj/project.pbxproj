@@ -32,6 +32,12 @@
 		BDAD60AB2A0E616A0098C5F7 /* SavingsEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60AA2A0E616A0098C5F7 /* SavingsEditor.swift */; };
 		BDAD60AD2A138B880098C5F7 /* GenericEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60AC2A138B880098C5F7 /* GenericEditor.swift */; };
 		BDAD60AF2A139E6C0098C5F7 /* SavingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60AE2A139E6C0098C5F7 /* SavingItemView.swift */; };
+		BDAD60B12A160A140098C5F7 /* CustomNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60B02A160A140098C5F7 /* CustomNavigationLink.swift */; };
+		BDAD60B32A160E8E0098C5F7 /* ExportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60B22A160E8E0098C5F7 /* ExportManager.swift */; };
+		BDAD60B62A161D6E0098C5F7 /* ImportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60B52A161D6E0098C5F7 /* ImportManager.swift */; };
+		BDAD60B92A178B020098C5F7 /* ManagerCostOfThingsIn30Years.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60B82A178B020098C5F7 /* ManagerCostOfThingsIn30Years.swift */; };
+		BDAD60BB2A178B3A0098C5F7 /* ScreenCostOfThingsIn30Years.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60BA2A178B3A0098C5F7 /* ScreenCostOfThingsIn30Years.swift */; };
+		BDAD60BE2A1794380098C5F7 /* AssetsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD60BD2A1794380098C5F7 /* AssetsScreen.swift */; };
 		BDC8AE6E29EF54710076C571 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC8AE6D29EF54710076C571 /* Credit.swift */; };
 		BDC8AE7029EF5EEB0076C571 /* CreditListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC8AE6F29EF5EEB0076C571 /* CreditListItemView.swift */; };
 		BDC8AE7229EF81370076C571 /* EditorCreditScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC8AE7129EF81370076C571 /* EditorCreditScreen.swift */; };
@@ -75,6 +81,12 @@
 		BDAD60AA2A0E616A0098C5F7 /* SavingsEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsEditor.swift; sourceTree = "<group>"; };
 		BDAD60AC2A138B880098C5F7 /* GenericEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericEditor.swift; sourceTree = "<group>"; };
 		BDAD60AE2A139E6C0098C5F7 /* SavingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingItemView.swift; sourceTree = "<group>"; };
+		BDAD60B02A160A140098C5F7 /* CustomNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationLink.swift; sourceTree = "<group>"; };
+		BDAD60B22A160E8E0098C5F7 /* ExportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportManager.swift; sourceTree = "<group>"; };
+		BDAD60B52A161D6E0098C5F7 /* ImportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportManager.swift; sourceTree = "<group>"; };
+		BDAD60B82A178B020098C5F7 /* ManagerCostOfThingsIn30Years.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerCostOfThingsIn30Years.swift; sourceTree = "<group>"; };
+		BDAD60BA2A178B3A0098C5F7 /* ScreenCostOfThingsIn30Years.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCostOfThingsIn30Years.swift; sourceTree = "<group>"; };
+		BDAD60BD2A1794380098C5F7 /* AssetsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsScreen.swift; sourceTree = "<group>"; };
 		BDC8AE6D29EF54710076C571 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
 		BDC8AE6F29EF5EEB0076C571 /* CreditListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditListItemView.swift; sourceTree = "<group>"; };
 		BDC8AE7129EF81370076C571 /* EditorCreditScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorCreditScreen.swift; sourceTree = "<group>"; };
@@ -110,8 +122,6 @@
 		BD11260029DDA4F100B1FBFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BD11260B29DEFA3900B1FBFA /* Views */,
-				BD11260929DEF7F500B1FBFA /* Extensions.swift */,
 				BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */,
 				BD17A0A229DD63ED0052668D /* Assets.xcassets */,
 			);
@@ -124,6 +134,7 @@
 				BDAD60AC2A138B880098C5F7 /* GenericEditor.swift */,
 				BDF79F2129E7F9A9009B7D1D /* BarChart.swift */,
 				BDF5C27A29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift */,
+				BDAD60B02A160A140098C5F7 /* CustomNavigationLink.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -148,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				BDF5C28729E728CB007DED13 /* Screens */,
+				BDAD60B42A160E950098C5F7 /* Others */,
 				BD11260029DDA4F100B1FBFA /* Supporting Files */,
 				BD17A0A429DD63ED0052668D /* Preview Content */,
 				BDF5C27C29E429EB007DED13 /* Info.plist */,
@@ -225,6 +237,33 @@
 			path = Savings;
 			sourceTree = "<group>";
 		};
+		BDAD60B42A160E950098C5F7 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				BD11260B29DEFA3900B1FBFA /* Views */,
+				BD11260929DEF7F500B1FBFA /* Extensions.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		BDAD60B72A161D8C0098C5F7 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				BDAD60B22A160E8E0098C5F7 /* ExportManager.swift */,
+				BDAD60B52A161D6E0098C5F7 /* ImportManager.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		BDAD60BC2A1791430098C5F7 /* CostOfThingsIn30Years */ = {
+			isa = PBXGroup;
+			children = (
+				BDAD60B82A178B020098C5F7 /* ManagerCostOfThingsIn30Years.swift */,
+				BDAD60BA2A178B3A0098C5F7 /* ScreenCostOfThingsIn30Years.swift */,
+			);
+			path = CostOfThingsIn30Years;
+			sourceTree = "<group>";
+		};
 		BDC8AE6C29EF54270076C571 /* Credit */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,12 +303,15 @@
 			isa = PBXGroup;
 			children = (
 				BDF5C27F29E6B211007DED13 /* MoreScreen.swift */,
+				BDAD60B72A161D8C0098C5F7 /* Setting */,
 				BDC8AE6C29EF54270076C571 /* Credit */,
 				BD73595D29F154B900766F9A /* Debt */,
 				BD7359BF29F7EF4300766F9A /* Chart */,
 				BD7359C029F7EF4D00766F9A /* Category */,
 				BD665CF72A02693200497E40 /* Inflation */,
 				BDAD60A72A0E57DD0098C5F7 /* Savings */,
+				BDAD60BC2A1791430098C5F7 /* CostOfThingsIn30Years */,
+				BDAD60BD2A1794380098C5F7 /* AssetsScreen.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -363,12 +405,15 @@
 				BDF5C27E29E5740E007DED13 /* SettingExpenseScreen.swift in Sources */,
 				BD665CF62A02668600497E40 /* ProductsListScreen.swift in Sources */,
 				BDF5C27B29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift in Sources */,
+				BDAD60B12A160A140098C5F7 /* CustomNavigationLink.swift in Sources */,
 				BDF79F3129EF38B1009B7D1D /* CreditManager.swift in Sources */,
 				BD17A0B229DD6AD90052668D /* Expense.swift in Sources */,
 				BDF5C28629E6B47D007DED13 /* ExpenseByCategoryManager.swift in Sources */,
 				BDAD60AD2A138B880098C5F7 /* GenericEditor.swift in Sources */,
 				BD7359BD29F7EED700766F9A /* UIExpense.swift in Sources */,
 				BDAD60A92A0E57F50098C5F7 /* SavingsScreen.swift in Sources */,
+				BDAD60BE2A1794380098C5F7 /* AssetsScreen.swift in Sources */,
+				BDAD60BB2A178B3A0098C5F7 /* ScreenCostOfThingsIn30Years.swift in Sources */,
 				BD73596129F1574C00766F9A /* DebtListItemView.swift in Sources */,
 				BDF5C28029E6B211007DED13 /* MoreScreen.swift in Sources */,
 				BDF79F2429E823F9009B7D1D /* ExpensesChartScreen.swift in Sources */,
@@ -378,13 +423,16 @@
 				BDAD60A42A0BED360098C5F7 /* InflationManager.swift in Sources */,
 				BDF79F2929EABDE0009B7D1D /* ExpenseChartManager.swift in Sources */,
 				BD11260629DDC9FE00B1FBFA /* ManagerExpense.swift in Sources */,
+				BDAD60B32A160E8E0098C5F7 /* ExportManager.swift in Sources */,
 				BD11260D29DFE88200B1FBFA /* InitialTabScreen.swift in Sources */,
 				BD11260A29DEF7F500B1FBFA /* Extensions.swift in Sources */,
 				BD17A0A129DD63EB0052668D /* ListExpenseScreen.swift in Sources */,
 				BD73596329F157BD00766F9A /* EditorDebtScreen.swift in Sources */,
 				BD665CF92A026C4600497E40 /* InflationScreen.swift in Sources */,
 				BDF5C28429E6B345007DED13 /* ExpensesByCategoryScreen.swift in Sources */,
+				BDAD60B92A178B020098C5F7 /* ManagerCostOfThingsIn30Years.swift in Sources */,
 				BDF79F2D29EF3848009B7D1D /* DebtManager.swift in Sources */,
+				BDAD60B62A161D6E0098C5F7 /* ImportManager.swift in Sources */,
 				BD73595F29F1552C00766F9A /* Debt.swift in Sources */,
 				BDF79F2F29EF387D009B7D1D /* ListCreditScreen.swift in Sources */,
 				BDAD60AB2A0E616A0098C5F7 /* SavingsEditor.swift in Sources */,

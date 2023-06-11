@@ -20,7 +20,7 @@ struct InflationScreen: View {
                 }
                 Text("\(items[index].name)")
                 HStack {
-                    Text(priceChangeForItemAt(index))
+                    Text("\(items[index].price)")
                     Spacer()
                     if let change = priceChangePercentForItemAt(index) {
                         if change > 0 {
@@ -34,30 +34,35 @@ struct InflationScreen: View {
         }
     }
     
-    func priceChangeForItemAt(_ index: Int) -> String {
-        let price2 = "\(items[index].price)"
-        var price1 = "na"
-        if items.indices.contains(index-1) {
-            price1 = "\(items[index-1].price)"
-        }
-        return "\(price1)  >  \(price2)"
-    }
+//    func priceChangeForItemAt(_ index: Int) -> String {
+//        let currentPrice = "\(items[index].price)"
+//        var previousPrice = "na"
+//        if items.indices.contains(index-1) {
+//            price1 = "\(items[index-1].price)"
+//        }
+//        return "\(price1)  >  \(price2)"
+//    }
     
     func priceChangePercentForItemAt(_ index: Int) -> Double? {
-        let newPrice = items[index].price
-        var oldPrice = 0
-        var result: Double? = nil
-        if items.indices.contains(index-1) {
-            oldPrice = items[index-1].price
+        let currentPrice = items[index].price
+        var previousPrice: Int!
+        var result: Double?
+        
+        if items.indices.contains(index+1) {
+            previousPrice = items[index+1].price
         } else {
-            return result
+            return nil
         }
         
-        let change = Double(newPrice) / Double(oldPrice)
+        let change = Double(currentPrice) / Double(previousPrice)
         if change > 1 {
             result = (change - 1) * 100
         } else {
             result = -(1-change) * 100
+        }
+        
+        if result == 0 {
+            return nil
         }
         
         return result?.rounded(toPlaces: 2)

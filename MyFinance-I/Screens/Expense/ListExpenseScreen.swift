@@ -19,15 +19,7 @@ struct ListExpenseScreen: View {
                 addButton
             }
             .navigationTitle("Expenses")
-            .toolbar {
-                ToolbarItem {
-                    Button(action: {
-                        showSettingsPopup = true
-                    }, label: {
-                        Image(systemName: "gear")
-                    })
-                }
-            }
+            .toolbar { toolbar }
             .searchable(text: $searchText).onChange(of: searchText) { newValue in
                 vm.searchExpenses(with: searchText)
             }
@@ -43,6 +35,17 @@ struct ListExpenseScreen: View {
 }
 
 extension ListExpenseScreen {
+    @ToolbarContentBuilder
+    var toolbar: some ToolbarContent {
+        ToolbarItem {
+            Button(action: {
+                showSettingsPopup = true
+            }, label: {
+                Image(systemName: "gear")
+            })
+        }
+    }
+
     @ViewBuilder
     var listOfExpenses: some View {
         List(vm.getExpenses()) { expense in

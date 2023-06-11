@@ -189,15 +189,6 @@ class ManagerExpense: ObservableObject {
         UserDefaults.standard.set(showExpense, forKey: "showExpense")
         self.showExpense = UserDefaults.standard.bool(forKey: "showExpense")
     }
-
-    func exportData() -> URL? {
-        let jsonData = try! JSONEncoder().encode(expenses)
-        guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else { return nil }
-        let fileName = "\(Date().dayOfTheYear)-\(Date().monthOfTheYear)-\(Date().year)"
-        let fileURL = directory.appendingPathComponent("my-finance-\(fileName).json")
-        try! jsonData.write(to: fileURL, options: .atomic)
-        return fileURL
-    }
     
     func searchExpenses(with searchText: String) {
         if searchText.starts(with: "c:") {

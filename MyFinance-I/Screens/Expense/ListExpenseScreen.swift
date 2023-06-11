@@ -10,6 +10,8 @@ struct ListExpenseScreen: View {
     @State private var selectedExpenseId: ObjectId?
     @State private var showSettingsPopup = false
     @State private var searchText = ""
+    @State private var showDeleteAlert = false
+    @State private var selectedExpense: UIExpense?
     private let creationDate = Date()
 
     var body: some View {
@@ -26,7 +28,17 @@ struct ListExpenseScreen: View {
             .textInputAutocapitalization(.never)
             .popover(isPresented: $showSettingsPopup) {
                 SettingExpenseScreen()
-            }.onAppear {
+            }
+            .alert("Delete?", isPresented: $showDeleteAlert, presenting: selectedExpense, actions: { expense in
+                Button("Delete", action: {
+                    vm.delete(expense)
+                })
+                Button("Cancel", role: .cancel, action: {
+                    
+                })
+
+            })
+            .onAppear {
                 let interval = Date().timeIntervalSince(creationDate)
                 print("ExpenseScreen \(interval)")
             }
@@ -63,7 +75,8 @@ extension ListExpenseScreen {
                 showExpense: expense.showExpense)
             .swipeActions {
                 Button("Delete") {
-                    vm.delete(expense)
+                    selectedExpense = expense
+                    showDeleteAlert = true
                 }.tint(.red)
                 Button("Edit") {
                     selectedExpenseId = expense.id

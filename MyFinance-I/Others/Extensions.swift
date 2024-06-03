@@ -166,6 +166,13 @@ extension Date {
                     
         return result
     }
+    
+    /// Converts date inito string with custom format
+    func formatDate(with format: String) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
 }
 
 extension String {

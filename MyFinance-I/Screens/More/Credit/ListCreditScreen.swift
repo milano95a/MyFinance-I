@@ -109,6 +109,10 @@ extension ListCreditScreen {
 
 struct CreditScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ListCreditScreen()
+        NavigationStack {
+            ListCreditScreen()
+                .environmentObject(CreditManager())
+
+        }
     }
 }

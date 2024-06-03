@@ -16,7 +16,7 @@ struct MyFinance_IApp: SwiftUI.App {
                 .environmentObject(ExportManager())
                 .environmentObject(ImportManager())
                 .environmentObject(ManagerCostOfThingsIn30Years(MFExpenseViewModel()))
-                .environmentObject(MFExpenseViewModel())
+                .environmentObject(MFBudgetViewModel())
         }
     }
 }

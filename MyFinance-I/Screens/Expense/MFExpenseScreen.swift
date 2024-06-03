@@ -30,7 +30,7 @@ struct MFExpenseScreen: View {
                 }
             }
             .navigationTitle("Expenses")
-            .toolbar { toolbar }
+            .toolbar { MFToolbar { showSettingsPopup = true } }
             .searchable(text: $searchText).onChange(of: searchText) { newValue in
                 vm.searchExpenses(with: searchText)
             }
@@ -56,16 +56,6 @@ struct MFExpenseScreen: View {
 }
 
 extension MFExpenseScreen {
-    @ToolbarContentBuilder
-    var toolbar: some ToolbarContent {
-        ToolbarItem {
-            Button(action: {
-                showSettingsPopup = true
-            }, label: {
-                Image(systemName: "gear")
-            })
-        }
-    }
 
     @ViewBuilder
     var listOfExpenses: some View {

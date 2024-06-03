@@ -27,6 +27,7 @@ struct MoreScreen: View {
             CustomNavigationLink("Savings", destination: SavingsScreen())
             CustomNavigationLink("Cost of things in 30 years", destination: ScreenCostOfThingsIn30Years())
             CustomNavigationLink("Assets", destination: AssetsScreen())
+            CustomNavigationLink("Budget", destination: MFBudgetScreen())
         }
         .foregroundColor(.defaultTextColor)
     }
@@ -39,29 +40,6 @@ struct MoreScreen: View {
             }, label: {
                 Image(systemName: "gear")
             })
-        }
-    }
-}
-
-struct MoreSettingsScreen: View {
-    
-    @EnvironmentObject var exportManager: ExportManager
-    @EnvironmentObject var importManager: ImportManager
-    @State private var showImportJsonPopup = false
-    
-    var body: some View {
-        Form {
-            Button("Export") {
-                if let url = exportManager.exportData() {
-                    share(items: [url])
-                }
-            }
-            Button("Import") {
-                showImportJsonPopup = true
-            }
-        }
-        .jsonFileImporter(ExportData.self, isPresented: $showImportJsonPopup) { data in
-            importManager.importData(data)
         }
     }
 }

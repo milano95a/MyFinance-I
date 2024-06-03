@@ -1,10 +1,16 @@
+//
+//  MFExpenseViewModel.swift
+//  MyFinance-I
+//
+//  Created by Workspace (Abdurakhmon Jamoliddinov) on 05/04/23.
+//
 
 import SwiftUI
 import RealmSwift
 
-struct ListExpenseScreen: View {
+struct MFExpenseScreen: View {
 
-    @EnvironmentObject var vm: ManagerExpense
+    @EnvironmentObject var vm: MFExpenseViewModel
     @State private var showAddExpensePopup = false
     @State private var showEditExpensePopup = false
     @State private var selectedExpenseId: ObjectId?
@@ -18,7 +24,10 @@ struct ListExpenseScreen: View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
                 listOfExpenses
-                addButton
+                MFFloatingButton {
+                    selectedExpenseId = nil
+                    showAddExpensePopup = true
+                }
             }
             .navigationTitle("Expenses")
             .toolbar { toolbar }
@@ -46,7 +55,7 @@ struct ListExpenseScreen: View {
     }
 }
 
-extension ListExpenseScreen {
+extension MFExpenseScreen {
     @ToolbarContentBuilder
     var toolbar: some ToolbarContent {
         ToolbarItem {
@@ -92,21 +101,6 @@ extension ListExpenseScreen {
             } else {
                 EditorExpenseScreen()
             }
-        }
-    }
-    
-    var addButton: some View {
-        ZStack {
-            Circle()
-                .frame(width: 64)
-                .foregroundColor(.addButtonColor)
-                .padding()
-                .onTapGesture {
-                    selectedExpenseId = nil
-                    showAddExpensePopup = true
-                }
-            Image(systemName: "plus")
-                .foregroundColor(.white)
         }
     }
 }
@@ -162,6 +156,7 @@ extension ListExpenseScreen {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ListExpenseScreen()
+        MFExpenseScreen()
+            .environmentObject(MFExpenseViewModel())
     }
 }

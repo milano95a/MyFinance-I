@@ -7,7 +7,7 @@ struct MyFinance_IApp: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
             InitialTabScreen()
-                .environmentObject(ManagerExpense())
+                .environmentObject(MFExpenseViewModel())
                 .environmentObject(CreditManager())
                 .environmentObject(DebtManager())
                 .environmentObject(InflationManager())
@@ -15,7 +15,8 @@ struct MyFinance_IApp: SwiftUI.App {
                 .environmentObject(SavingsManager())
                 .environmentObject(ExportManager())
                 .environmentObject(ImportManager())
-                .environmentObject(ManagerCostOfThingsIn30Years(ManagerExpense()))
+                .environmentObject(ManagerCostOfThingsIn30Years(MFExpenseViewModel()))
+                .environmentObject(MFExpenseViewModel())
         }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingExpenseScreen: View {
     
-    @EnvironmentObject var manager: ManagerExpense
+    @EnvironmentObject var manager: MFExpenseViewModel
     @State private var showImportJsonPopup = false
     @State private var showYearlyTotal = false
     @State private var showMonthlyTotal = false

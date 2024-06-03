@@ -11,7 +11,7 @@ struct InitialTabScreen: View {
     
     var body: some View {
         TabView {
-            ListExpenseScreen()
+            MFExpenseScreen()
                 .tabItem {
                     Label("Expenses", systemImage: "dollarsign.circle")
                 }

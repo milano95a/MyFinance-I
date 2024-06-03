@@ -10,7 +10,7 @@ import Foundation
 class ManagerCostOfThingsIn30Years: ObservableObject {
     @Published var items: [CostIn30Years]
     
-    init(_ exepenseManager: ManagerExpense) {
+    init(_ exepenseManager: MFExpenseViewModel) {
         var items = [CostIn30Years]()
         
         func calculateCostIn30Years(_ cost: Int) -> Int {

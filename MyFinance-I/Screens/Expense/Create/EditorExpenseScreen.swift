@@ -9,7 +9,7 @@ struct EditorExpenseScreen: View {
     }
     
     var expense: Expense?
-    @EnvironmentObject var manager: ManagerExpense
+    @EnvironmentObject var manager: MFExpenseViewModel
     @Environment(\.dismiss) var dismiss
     @FocusState private var focusedField: FocusedField?
     @State private var name: String

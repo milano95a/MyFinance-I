@@ -1,5 +1,5 @@
 //
-//  ExpenseViewModel.swift
+//  MFExpenseViewModel.swift
 //  MyFinance-I
 //
 //  Created by Workspace (Abdurakhmon Jamoliddinov) on 05/04/23.
@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class ManagerExpense: ObservableObject {
+class MFExpenseViewModel: ObservableObject {
     
     @Published var expenses: Results<Expense>
     @Published var total: Total
@@ -207,7 +207,7 @@ class ManagerExpense: ObservableObject {
 }
 
 // MARK: Totals APIs
-extension ManagerExpense {
+extension MFExpenseViewModel {
     
     func calculateTotals() {
         let creationDate = Date()
@@ -275,7 +275,7 @@ extension ManagerExpense {
 }
 
 // MARK: Charts APIs
-extension ManagerExpense {
+extension MFExpenseViewModel {
     func monthlyExpenses(_ year: String) -> [BarChartData] {
         var data = [BarChartData]()
         let keysForGivenYear = total.monthlyTotals.keys.filter { $0.hasPrefix(year) }
@@ -294,7 +294,7 @@ extension ManagerExpense {
 }
 
 // MARK: Suggestions APIs
-extension ManagerExpense {
+extension MFExpenseViewModel {
     func getSuggestions(with string: String) -> [Expense] {
         let result = Expense.fetchRequest(.contains(field: "name", string))
         var uniqueExpenseNames = Set<String>()

@@ -62,7 +62,7 @@ extension Double {
 extension Realm {
     // TODO: use this shared instance everywhere 
     static func shared() -> Realm {
-        let configuration = Realm.Configuration(schemaVersion: 5)
+        let configuration = Realm.Configuration(schemaVersion: 6)
         Realm.Configuration.defaultConfiguration = configuration
         let realm = try! Realm()
         return realm

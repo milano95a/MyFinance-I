@@ -27,7 +27,7 @@ struct MoreScreen: View {
             CustomNavigationLink("Savings", destination: SavingsScreen())
             CustomNavigationLink("Cost of things in 30 years", destination: ScreenCostOfThingsIn30Years())
             CustomNavigationLink("Assets", destination: AssetsScreen())
-            CustomNavigationLink("Budget", destination: MFBudgetScreen())
+            CustomNavigationLink("Budget", destination: MFBudgetsListScreen())
         }
         .foregroundColor(.defaultTextColor)
     }

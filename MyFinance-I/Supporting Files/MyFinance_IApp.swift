@@ -6,7 +6,7 @@ import RealmSwift
 struct MyFinance_IApp: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
-            InitialTabScreen()
+            InitialTabScreen()                
                 .environmentObject(MFExpenseViewModel())
                 .environmentObject(CreditManager())
                 .environmentObject(DebtManager())
@@ -16,7 +16,7 @@ struct MyFinance_IApp: SwiftUI.App {
                 .environmentObject(ExportManager())
                 .environmentObject(ImportManager())
                 .environmentObject(ManagerCostOfThingsIn30Years(MFExpenseViewModel()))
-                .environmentObject(MFBudgetViewModel())
+                .environmentObject(MFBudgetsListViewModel())      
         }
     }
 }

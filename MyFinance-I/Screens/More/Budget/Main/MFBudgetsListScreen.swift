@@ -12,10 +12,30 @@ struct MFBudget {
     
 }
 
-class MFBudgetDTO: Object, ObjectKeyIdentifiable, Codable {
+class MFBudgetItemDTO: Object, ObjectKeyIdentifiable, Codable {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var name: String = ""
+    @Persisted var amount: Int = 0
+    
+    func update(_ name: String?, _ amount: Int?) {
+        self.writeToDB { thawedObj, thawedRealm in
+            if let item = thawedObj as? MFBudgetItemDTO {
+                if let name {
+                    item.name = name
+                }
+                if let amount {
+                    item.amount = amount
+                }
+            }
+        }
+    }
+}
+
+class MFBudgetDTO: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var date: Date = Date()
     @Persisted var amount: Int = 0
+    @Persisted var budgetItem: RealmSwift.List<MFBudgetItemDTO>
     
     func update(_ amount: Int, _ date: Date) {
         self.writeToDB { thawedObj, thawedRealm in
@@ -25,15 +45,23 @@ class MFBudgetDTO: Object, ObjectKeyIdentifiable, Codable {
             }
         }
     }
+    
+    func append(_ child: MFBudgetItemDTO) {
+        self.writeToDB { thawedObj, thawedRealm in
+            if let item = thawedObj as? MFBudgetDTO {
+                item.budgetItem.append(child)
+            }
+        }
+    }
 }
 
-struct MFBudgetEditorScreen: View {
+struct MFBudgetsListEditorScreen: View {
     
     enum FocusedField: Hashable {
         case amount
     }
 
-    @EnvironmentObject var vm: MFBudgetViewModel
+    @EnvironmentObject var vm: MFBudgetsListViewModel
     var item: MFBudgetDTO?
     
     @State private var amount               : String
@@ -81,9 +109,9 @@ struct MFBudgetEditorScreen: View {
     }
 }
 
-struct MFBudgetScreen: View {
+struct MFBudgetsListScreen: View {
     
-    @EnvironmentObject var vm: MFBudgetViewModel
+    @EnvironmentObject var vm: MFBudgetsListViewModel
     @State private var selectedItem: MFBudgetDTO?
     @State private var showDeleteAlert = false
     @State private var showCreateItemePopup = false
@@ -96,32 +124,34 @@ struct MFBudgetScreen: View {
                 showCreateItemePopup = true
             }
         }
-        .navigationTitle("Budget")
+        .navigationTitle("Budgets")
         .toolbar { MFToolbar { } }
     }
     
     @ViewBuilder
     var list: some View {
         List(vm.items.freeze()) { item in
-            VStack(alignment: .leading) {
-                Text("Budget: \(item.date.formatDate(with: "MMM yyyy") ?? "n/a")")
-                Text("\(item.amount)")
-            }
-            .swipeActions {
-                Button("Delete") {
-                    selectedItem = item
-                    showDeleteAlert = true
-                }.tint(.red)
-                Button("Edit") {
-                    selectedItem = item
-                    showCreateItemePopup = true
-                }.tint(.blue)
+            NavigationLink(destination: MFBudgetScreen(vm: MFBudgetViewModel(parent: item))) {
+                VStack(alignment: .leading) {
+                    Text("Budget: \(item.date.formatDate(with: "MMM yyyy") ?? "n/a")")
+                    Text("\(item.amount)")
+                }
+                .swipeActions {
+                    Button("Delete") {
+                        selectedItem = item
+                        showDeleteAlert = true
+                    }.tint(.red)
+                    Button("Edit") {
+                        selectedItem = item
+                        showCreateItemePopup = true
+                    }.tint(.blue)
+                }
             }
         }
         .listRowSeparator(.hidden)
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
         .popover(isPresented: $showCreateItemePopup) { [selectedItem] in
-            MFBudgetEditorScreen(item: selectedItem)
+            MFBudgetsListEditorScreen(item: selectedItem)
         }
         .alert("Delete?", isPresented: $showDeleteAlert, presenting: selectedItem, actions: { expense in
             Button("Delete", action: {
@@ -213,12 +243,9 @@ struct MFBudgetScreen: View {
 
 
 
-
-
-
 #Preview {
     NavigationStack {
-        MFBudgetScreen()
-            .environmentObject(MFBudgetViewModel())
+        MFBudgetsListScreen()
+            .environmentObject(MFBudgetsListViewModel())
     }
 }

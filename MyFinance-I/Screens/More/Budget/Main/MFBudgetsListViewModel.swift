@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class MFBudgetViewModel: ObservableObject {
+class MFBudgetsListViewModel: ObservableObject {
     @Published var items: Results<MFBudgetDTO>
     
     init() {

@@ -56,10 +56,17 @@
 		BDF79F3129EF38B1009B7D1D /* CreditManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF79F3029EF38B1009B7D1D /* CreditManager.swift */; };
 		F02CF6292C0D961700BE538B /* MFToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF6282C0D961700BE538B /* MFToolbar.swift */; };
 		F02CF62D2C0DA42A00BE538B /* Object+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */; };
-		F064BF592C0D8A2B00136B8D /* MFBudgetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF582C0D8A2B00136B8D /* MFBudgetScreen.swift */; };
-		F064BF5B2C0D8A3A00136B8D /* MFBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF5A2C0D8A3A00136B8D /* MFBudgetViewModel.swift */; };
+		F064BF592C0D8A2B00136B8D /* MFBudgetsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF582C0D8A2B00136B8D /* MFBudgetsListScreen.swift */; };
+		F064BF5B2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF5A2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift */; };
 		F064BF5E2C0D8AA100136B8D /* MoreSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF5D2C0D8AA100136B8D /* MoreSettingsScreen.swift */; };
 		F064BF622C0D8E9800136B8D /* MFFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF612C0D8E9800136B8D /* MFFloatingButton.swift */; };
+		F07EA8F92C0DD3B10057BDDB /* MFBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA8F82C0DD3B10057BDDB /* MFBudgetViewModel.swift */; };
+		F07EA8FB2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA8FA2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift */; };
+		F07EA8FD2C10886F0057BDDB /* MFBudgetListHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA8FC2C10886F0057BDDB /* MFBudgetListHeaderItem.swift */; };
+		F07EA9032C10923D0057BDDB /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA9022C10923D0057BDDB /* View+Ext.swift */; };
+		F07EA9052C1097EA0057BDDB /* MFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA9042C1097EA0057BDDB /* MFButton.swift */; };
+		F07EA9072C10980F0057BDDB /* MyComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA9062C10980F0057BDDB /* MyComponents.swift */; };
+		F0B80C5B2C0DCF7200C8D98E /* MFBudgetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B80C5A2C0DCF7200C8D98E /* MFBudgetScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,10 +119,17 @@
 		BDF79F3029EF38B1009B7D1D /* CreditManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditManager.swift; sourceTree = "<group>"; };
 		F02CF6282C0D961700BE538B /* MFToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFToolbar.swift; sourceTree = "<group>"; };
 		F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Object+Ext.swift"; sourceTree = "<group>"; };
-		F064BF582C0D8A2B00136B8D /* MFBudgetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetScreen.swift; sourceTree = "<group>"; };
-		F064BF5A2C0D8A3A00136B8D /* MFBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetViewModel.swift; sourceTree = "<group>"; };
+		F064BF582C0D8A2B00136B8D /* MFBudgetsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetsListScreen.swift; sourceTree = "<group>"; };
+		F064BF5A2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetsListViewModel.swift; sourceTree = "<group>"; };
 		F064BF5D2C0D8AA100136B8D /* MoreSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreSettingsScreen.swift; sourceTree = "<group>"; };
 		F064BF612C0D8E9800136B8D /* MFFloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFFloatingButton.swift; sourceTree = "<group>"; };
+		F07EA8F82C0DD3B10057BDDB /* MFBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetViewModel.swift; sourceTree = "<group>"; };
+		F07EA8FA2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetItemEditorScreen.swift; sourceTree = "<group>"; };
+		F07EA8FC2C10886F0057BDDB /* MFBudgetListHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetListHeaderItem.swift; sourceTree = "<group>"; };
+		F07EA9022C10923D0057BDDB /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
+		F07EA9042C1097EA0057BDDB /* MFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFButton.swift; sourceTree = "<group>"; };
+		F07EA9062C10980F0057BDDB /* MyComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyComponents.swift; sourceTree = "<group>"; };
+		F0B80C5A2C0DCF7200C8D98E /* MFBudgetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +163,9 @@
 				BDAD60B02A160A140098C5F7 /* CustomNavigationLink.swift */,
 				F064BF612C0D8E9800136B8D /* MFFloatingButton.swift */,
 				F02CF6282C0D961700BE538B /* MFToolbar.swift */,
+				F07EA8FC2C10886F0057BDDB /* MFBudgetListHeaderItem.swift */,
+				F07EA9042C1097EA0057BDDB /* MFButton.swift */,
+				F07EA9062C10980F0057BDDB /* MyComponents.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -256,6 +273,7 @@
 			children = (
 				BD11260B29DEFA3900B1FBFA /* Components */,
 				BD11260929DEF7F500B1FBFA /* Extensions.swift */,
+				F07EA9022C10923D0057BDDB /* View+Ext.swift */,
 				F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */,
 			);
 			path = Others;
@@ -352,8 +370,9 @@
 		F064BF5C2C0D8A4100136B8D /* Budget */ = {
 			isa = PBXGroup;
 			children = (
-				F064BF582C0D8A2B00136B8D /* MFBudgetScreen.swift */,
-				F064BF5A2C0D8A3A00136B8D /* MFBudgetViewModel.swift */,
+				F0B80C5C2C0DCF7900C8D98E /* Main */,
+				F07EA9012C108B1F0057BDDB /* Budget Editor */,
+				F0B80C5D2C0DCF8A00C8D98E /* Budget */,
 			);
 			path = Budget;
 			sourceTree = "<group>";
@@ -372,6 +391,32 @@
 				BD11260729DED33D00B1FBFA /* EditorExpenseScreen.swift */,
 			);
 			path = Create;
+			sourceTree = "<group>";
+		};
+		F07EA9012C108B1F0057BDDB /* Budget Editor */ = {
+			isa = PBXGroup;
+			children = (
+				F07EA8FA2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift */,
+			);
+			path = "Budget Editor";
+			sourceTree = "<group>";
+		};
+		F0B80C5C2C0DCF7900C8D98E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F064BF582C0D8A2B00136B8D /* MFBudgetsListScreen.swift */,
+				F064BF5A2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		F0B80C5D2C0DCF8A00C8D98E /* Budget */ = {
+			isa = PBXGroup;
+			children = (
+				F0B80C5A2C0DCF7200C8D98E /* MFBudgetScreen.swift */,
+				F07EA8F82C0DD3B10057BDDB /* MFBudgetViewModel.swift */,
+			);
+			path = Budget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -457,6 +502,8 @@
 				BD665CF62A02668600497E40 /* ProductsListScreen.swift in Sources */,
 				BDF5C27B29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift in Sources */,
 				BDAD60B12A160A140098C5F7 /* CustomNavigationLink.swift in Sources */,
+				F07EA8FB2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift in Sources */,
+				F07EA9032C10923D0057BDDB /* View+Ext.swift in Sources */,
 				BDF79F3129EF38B1009B7D1D /* CreditManager.swift in Sources */,
 				BD17A0B229DD6AD90052668D /* Expense.swift in Sources */,
 				BDF5C28629E6B47D007DED13 /* ExpenseByCategoryManager.swift in Sources */,
@@ -475,7 +522,7 @@
 				BDAD60A42A0BED360098C5F7 /* InflationManager.swift in Sources */,
 				BDF79F2929EABDE0009B7D1D /* ExpenseChartManager.swift in Sources */,
 				BD11260629DDC9FE00B1FBFA /* MFExpenseViewModel.swift in Sources */,
-				F064BF5B2C0D8A3A00136B8D /* MFBudgetViewModel.swift in Sources */,
+				F064BF5B2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift in Sources */,
 				BDAD60B32A160E8E0098C5F7 /* ExportManager.swift in Sources */,
 				F064BF622C0D8E9800136B8D /* MFFloatingButton.swift in Sources */,
 				BD11260D29DFE88200B1FBFA /* InitialTabScreen.swift in Sources */,
@@ -483,16 +530,21 @@
 				BD17A0A129DD63EB0052668D /* MFExpenseScreen.swift in Sources */,
 				BD73596329F157BD00766F9A /* EditorDebtScreen.swift in Sources */,
 				BD665CF92A026C4600497E40 /* InflationScreen.swift in Sources */,
+				F07EA9072C10980F0057BDDB /* MyComponents.swift in Sources */,
 				BDF5C28429E6B345007DED13 /* ExpensesByCategoryScreen.swift in Sources */,
 				BDAD60B92A178B020098C5F7 /* ManagerCostOfThingsIn30Years.swift in Sources */,
 				BDF79F2D29EF3848009B7D1D /* DebtManager.swift in Sources */,
 				BDAD60B62A161D6E0098C5F7 /* ImportManager.swift in Sources */,
+				F07EA8FD2C10886F0057BDDB /* MFBudgetListHeaderItem.swift in Sources */,
 				BD73595F29F1552C00766F9A /* Debt.swift in Sources */,
 				BDF79F2F29EF387D009B7D1D /* ListCreditScreen.swift in Sources */,
 				F064BF5E2C0D8AA100136B8D /* MoreSettingsScreen.swift in Sources */,
 				BDAD60AB2A0E616A0098C5F7 /* SavingsEditor.swift in Sources */,
 				BDC8AE6E29EF54710076C571 /* Credit.swift in Sources */,
-				F064BF592C0D8A2B00136B8D /* MFBudgetScreen.swift in Sources */,
+				F07EA8F92C0DD3B10057BDDB /* MFBudgetViewModel.swift in Sources */,
+				F0B80C5B2C0DCF7200C8D98E /* MFBudgetScreen.swift in Sources */,
+				F064BF592C0D8A2B00136B8D /* MFBudgetsListScreen.swift in Sources */,
+				F07EA9052C1097EA0057BDDB /* MFButton.swift in Sources */,
 				BDF79F2229E7F9A9009B7D1D /* BarChart.swift in Sources */,
 				BD11260229DDC6CB00B1FBFA /* ExpenseListItemView.swift in Sources */,
 				BD11260F29E014FC00B1FBFA /* OldExpense.swift in Sources */,

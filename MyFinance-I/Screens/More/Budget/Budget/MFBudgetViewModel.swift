@@ -43,7 +43,7 @@ class MFBudgetViewModel: ObservableObject {
     // MARK: Public API(s)
     func percentage(budgetAmount: Int) -> String {
         if let parent {
-            return "\((Double(budgetAmount) / Double(parent.amount) * 100).removeZerosFromEnd())%"
+            return "\((Double(budgetAmount) / Double(parent.amount) * 100).rounded(toPlaces: 2))%"
         } else {
             return "n/a"
         }

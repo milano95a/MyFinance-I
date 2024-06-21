@@ -19,7 +19,7 @@ struct SavingItemView: View {
                 Spacer()
             }
             HStack {
-                Text("\(item.amount)")
+                Text("\(item.amountWithFraction.removeZerosFromEnd())")
                 Spacer()
                 if change > 0 {
                     Text("+\(change.removeZerosFromEnd())%")

@@ -19,14 +19,14 @@ struct SavingsEditor: View {
     var body: some View {
         GenericEditor(title: "Savings Editor", saveAction: {
             if let item = item {
-                manager.update(item, date, Int(amount) ?? 0)
+                manager.update(item, date, Double(amount) ?? 0)
             } else {
                 manager.create(date, Int(amount) ?? 0)
             }
             dismiss()
         }, content: {
             TextField("amount", text: $amount)
-                .keyboardType(.numberPad)
+                .keyboardType(.numbersAndPunctuation)
                 .focused($amountFocused, equals: true)
                 .onAppear {
                     amountFocused = true
@@ -34,7 +34,7 @@ struct SavingsEditor: View {
             DatePicker("date", selection: $date, displayedComponents: [.date])
         }).onAppear {
             if let item = item {
-                amount = String(item.amount)
+                amount = String(item.amountWithFraction)
                 date = item.date
             }
         }

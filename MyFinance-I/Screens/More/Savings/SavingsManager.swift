@@ -24,12 +24,12 @@ class SavingsManager: ObservableObject {
         saving.deleteFromDB()
     }
     
-    func update(_ saving: Saving, _ date: Date, _ amount: Int) {
+    func update(_ saving: Saving, _ date: Date, _ amount: Double) {
         self.objectWillChange.send()
         saving.writeToDB { thawedObj, thawedRealm in
             if let saving = thawedObj as? Saving {
                 saving.date = date
-                saving.amount = amount
+                saving.amountWithFraction = amount
             }
         }
     }
@@ -41,8 +41,8 @@ class SavingsManager: ObservableObject {
         
         for index in stride(from: items.count-2, through: 0, by: -1) {
             if item.id == items[index].id {
-                let currentAmount = Double(items[index].amount)
-                let previousAmount = Double(items[index+1].amount)
+                let currentAmount = items[index].amountWithFraction
+                let previousAmount = items[index+1].amountWithFraction
                 let change = currentAmount / previousAmount
                 if change > 1 {
                     result = (change-1)  * 100
@@ -60,7 +60,16 @@ class SavingsManager: ObservableObject {
 class Saving: Object, ObjectKeyIdentifiable, Codable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var date: Date = Date()
-    @Persisted var amount: Int = 0
+    @Persisted private var amount: Int = 0
+    
+    var amountWithFraction: Double {
+        get {
+            return Double(amount)/100.0
+        }
+        set {
+            amount = Int(newValue * 100.0)
+        }
+    }
     
     init(date: Date, amount: Int, change: Double) {
         self.date = date

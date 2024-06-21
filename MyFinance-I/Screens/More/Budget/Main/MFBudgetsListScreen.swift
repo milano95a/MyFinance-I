@@ -8,10 +8,6 @@
 import SwiftUI
 import RealmSwift
 
-struct MFBudget {
-    
-}
-
 class MFBudgetItemDTO: Object, ObjectKeyIdentifiable, Codable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var name: String = ""

@@ -12,7 +12,7 @@ class MFBudgetsListViewModel: ObservableObject {
     @Published var items: Results<MFBudgetDTO>
     
     init() {
-        items = MFBudgetDTO.fetchRequest(.all)
+        items = MFBudgetDTO.fetchRequest(.all).sorted(by: \.date, ascending: false)
     }
     
     func save(_ item: MFBudgetDTO) {

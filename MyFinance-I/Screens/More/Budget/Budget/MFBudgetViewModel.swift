@@ -41,6 +41,7 @@ class MFBudgetViewModel: ObservableObject {
     }
     
     // MARK: Public API(s)
+        
     func percentage(budgetAmount: Int) -> String {
         if let parent {
             return "\((Double(budgetAmount) / Double(parent.amount) * 100).rounded(toPlaces: 2))%"
@@ -72,8 +73,10 @@ class MFBudgetViewModel: ObservableObject {
     init(parent: MFBudgetDTO) {
         self.parent = Realm.shared().objects(MFBudgetDTO.self).where { $0.id == parent.id }.first
         
-        $amount.sink { newValue in
-            
+        $selectedItem.sink { [weak self] newValue in
+            guard let newValue else { return }
+            self?.name = newValue.name
+            self?.amount = String(newValue.amount)
         }.store(in: &cancellables)
         
         $percentage.sink { [weak self] newValue in

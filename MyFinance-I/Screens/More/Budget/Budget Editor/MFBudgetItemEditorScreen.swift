@@ -11,9 +11,6 @@ struct MFBudgetItemEditorScreen: View {
     @EnvironmentObject var vm: MFBudgetViewModel
     @FocusState private var focusedField    : FocusedField?
     @Environment(\.dismiss) var dismiss
-        
-//    let parent: MFBudgetDTO
-//    let item: MFBudgetItemDTO?
     
     var body: some View {
         NavigationStack {
@@ -51,8 +48,6 @@ struct MFBudgetItemEditorScreen: View {
             .padding()
         }
         .onAppear {
-//            vm.parent = parent
-//            vm.item = item
             focusedField = .name
         }
     }

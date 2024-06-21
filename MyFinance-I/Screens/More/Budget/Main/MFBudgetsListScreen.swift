@@ -141,6 +141,9 @@ struct MFBudgetsListScreen: View {
                         selectedItem = item
                         showCreateItemePopup = true
                     }.tint(.blue)
+                    Button("Duplicate") {
+                        vm.duplicate(item)
+                    }.tint(.orange)
                 }
             }
         }

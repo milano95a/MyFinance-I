@@ -29,4 +29,18 @@ class MFBudgetsListViewModel: ObservableObject {
         self.objectWillChange.send()
         item.update(amount, date)
     }
+    
+    func duplicate(_ item: MFBudgetDTO) {
+        self.objectWillChange.send()
+        let a = MFBudgetDTO()
+        a.amount = item.amount
+        a.addToDB()
+        for b in item.budgetItem {
+            let c = MFBudgetItemDTO()
+            c.amount = b.amount
+            c.name = b.name
+            c.addToDB()
+            a.append(c)
+        }
+    }
 }

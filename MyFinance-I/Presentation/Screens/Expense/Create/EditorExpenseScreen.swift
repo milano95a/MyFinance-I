@@ -5,7 +5,7 @@ import Combine
 struct EditorExpenseScreen: View {
     
     enum FocusedField: Hashable {
-        case name, category, price, quantity
+        case name, category, price, quantity, cost
     }
     
     var expense: Expense?
@@ -16,6 +16,7 @@ struct EditorExpenseScreen: View {
     @State private var nameFieldIsFocused = false
     @State private var category: String
     @State private var categoryFieldIsFocused = false
+    @State private var cost: String
     @State private var price: String
     @State private var quantity: String
     @State private var date: Date
@@ -42,6 +43,7 @@ extension EditorExpenseScreen {
             self._name = State(initialValue: expense.name)
             self._price = State(initialValue: String(expense.price))
             self._quantity = State(initialValue: String(expense.quantity))
+            self._cost = State(initialValue: String(expense.cost))
             self._date = State(initialValue: expense.date)
             self._category = State(initialValue: expense.category)
         } else {
@@ -50,7 +52,10 @@ extension EditorExpenseScreen {
             self._quantity = State(initialValue: "")
             self._date = State(initialValue: Date())
             self._category = State(initialValue: "")
+            self._cost = State(initialValue: "")
         }
+        
+        
     }
 
     var expenseForm: some View {
@@ -58,10 +63,12 @@ extension EditorExpenseScreen {
             nameTextFieldWithAutoCompleteSuggestion
             
             cateogryTextFieldWithAutoCompleteSuggestion
-
+            
             priceTextField
-
+            
             quantityTextField
+            
+            costTextField
 
             datePicker
         }
@@ -79,6 +86,7 @@ extension EditorExpenseScreen {
                 category = expense.category
                 price = "\(expense.price)"
                 quantity = "\(expense.quantity)"
+                cost = String(Int(Double(expense.price) * expense.quantity))
             },
             getSuggestionText: { expense in
                 expense.name
@@ -93,6 +101,7 @@ extension EditorExpenseScreen {
             categoryFieldIsFocused = true
         }
         .selectAllTextOnEditing()
+        .font(.title2)
     }
     
     var cateogryTextFieldWithAutoCompleteSuggestion: some View {
@@ -117,8 +126,9 @@ extension EditorExpenseScreen {
             categoryFieldIsFocused = false
         }
         .selectAllTextOnEditing()
+        .font(.title2)
     }
-        
+    
     var priceTextField: some View {
         TextField("price", text: $price)
             .keyboardType(.numbersAndPunctuation)
@@ -126,19 +136,65 @@ extension EditorExpenseScreen {
             .submitLabel(.next)
             .onSubmit { focusedField = .quantity }
             .selectAllTextOnEditing()
-
+            .font(.title2)
+            .onChange(of: price) { newValue in
+                if focusedField == .price {
+                    if let quantity = Double(quantity), let price = Double(price) {
+                        cost = String(Int(quantity * price))
+                    }
+                    else if let cost = Double(cost), let price = Double(price) {
+                        guard price > 0 else { return }
+                        quantity = String(cost / price)
+                    }
+                }
+            }
     }
 
     var quantityTextField: some View {
         TextField("quantity", text: $quantity)
             .keyboardType(.numbersAndPunctuation)
             .focused($focusedField, equals: .quantity)
+            .onSubmit { focusedField = .cost }
+            .submitLabel(.next)
+            .selectAllTextOnEditing()
+            .font(.title2)
+            .onChange(of: quantity) { newValue in
+                if focusedField == .quantity {
+                    if let cost = Double(cost), let quantity = Double(quantity) {
+                        guard quantity > 0 else { return }
+                        price = String(Int(cost / quantity))
+                    }
+                    else if let quantity = Double(quantity), let price = Double(price) {
+                        cost = String(Int(quantity * price))
+                    }
+                }
+            }
+    }
+    
+    var costTextField: some View {
+        TextField("cost", text: $cost)
+            .keyboardType(.numbersAndPunctuation)
+            .focused($focusedField, equals: .cost)
             .submitLabel(.done)
             .selectAllTextOnEditing()
+            .font(.title2)
+            .onChange(of: cost) { newValue in
+                if focusedField == .cost {
+                    if let cost = Double(cost), let quantity = Double(quantity) {
+                        guard quantity > 0 else { return }
+                        price = String(Int(cost / quantity))
+                    }
+                    else if let cost = Double(cost), let price = Double(price) {
+                        guard price > 0 else { return }
+                        quantity = String(cost / price)
+                    }
+                }
+            }
     }
     
     var datePicker: some View {
         DatePicker("date", selection: $date, displayedComponents: [.date])
+            .font(.title2)
     }
     
     var saveButton: some View {

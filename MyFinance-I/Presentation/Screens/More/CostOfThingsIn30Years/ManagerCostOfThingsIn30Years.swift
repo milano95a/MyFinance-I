@@ -20,7 +20,7 @@ class ManagerCostOfThingsIn30Years: ObservableObject {
             return Int(result)
         }
 
-        for expense in exepenseManager.expenses {
+        for expense in exepenseManager.expensesDOM { 
             let item = CostIn30Years(id: expense.id, name: expense.name, cost: calculateCostIn30Years(expense.cost))
             items.append(item)
         }

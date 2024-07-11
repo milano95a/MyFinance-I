@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpenseListItemView: View {
-    let expense: UIExpense
+    let expense: MFExepnse
     let displayDate: Bool
     let shouldShowDailyTotal: Bool
     let shouldShowWeeklyTotal: Bool

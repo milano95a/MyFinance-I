@@ -8,49 +8,6 @@
 import SwiftUI
 import RealmSwift
 
-class MFBudgetItemDTO: Object, ObjectKeyIdentifiable, Codable {
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var name: String = ""
-    @Persisted var amount: Int = 0
-    
-    func update(_ name: String?, _ amount: Int?) {
-        self.writeToDB { thawedObj, thawedRealm in
-            if let item = thawedObj as? MFBudgetItemDTO {
-                if let name {
-                    item.name = name
-                }
-                if let amount {
-                    item.amount = amount
-                }
-            }
-        }
-    }
-}
-
-class MFBudgetDTO: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var date: Date = Date()
-    @Persisted var amount: Int = 0
-    @Persisted var budgetItem: RealmSwift.List<MFBudgetItemDTO>
-    
-    func update(_ amount: Int, _ date: Date) {
-        self.writeToDB { thawedObj, thawedRealm in
-            if let item = thawedObj as? MFBudgetDTO {
-                item.amount = amount
-                item.date = date
-            }
-        }
-    }
-    
-    func append(_ child: MFBudgetItemDTO) {
-        self.writeToDB { thawedObj, thawedRealm in
-            if let item = thawedObj as? MFBudgetDTO {
-                item.budgetItem.append(child)
-            }
-        }
-    }
-}
-
 struct MFBudgetsListEditorScreen: View {
     
     enum FocusedField: Hashable {

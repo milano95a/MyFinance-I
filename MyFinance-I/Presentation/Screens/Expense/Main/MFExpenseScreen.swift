@@ -12,13 +12,10 @@ struct MFExpenseScreen: View {
 
     @EnvironmentObject var vm: MFExpenseViewModel
     @State private var showAddExpensePopup = false
-    @State private var showEditExpensePopup = false
     @State private var selectedExpenseId: ObjectId?
     @State private var showSettingsPopup = false
     @State private var searchText = ""
     @State private var showDeleteAlert = false
-    @State private var selectedExpense: UIExpense?
-    private let creationDate = Date()
 
     var body: some View {
         NavigationStack {
@@ -36,33 +33,34 @@ struct MFExpenseScreen: View {
             }
             .textInputAutocapitalization(.never)
             .popover(isPresented: $showSettingsPopup) {
-                SettingExpenseScreen()
+                SettingExpenseScreen(showYearlyTotal: vm.showYearlyTotal,
+                                     showMonthlyTotal: vm.showMonthlyTotal,
+                                     showWeeklyTotal: vm.showWeeklyTotal,
+                                     showDailyTotal: vm.showDailyTotal,
+                                     showExpense: vm.showExpense,
+                                     onChangeYearlyTotal: vm.setPreferenceYearlyTotal,
+                                     onChangeMonthlyTotal: vm.setPreferenceMonthlyTotal,
+                                     onChangeWeeklyTotal: vm.setPreferenceWeeklyTotal,
+                                     onChangeDailyTotal: vm.setPreferenceDailyTotal,
+                                     onChangeExpense: vm.setPreferenceExpense)
             }
-            .alert("Delete?", isPresented: $showDeleteAlert, presenting: selectedExpense, actions: { expense in
+            .alert("Delete?", isPresented: $showDeleteAlert, presenting: selectedExpenseId, actions: { expense in
                 Button("Delete", action: {
-                    vm.delete(expense)
+                    vm.delete(selectedExpenseId)
                 })
-                Button("Cancel", role: .cancel, action: {
-                    
-                })
-
+                Button("Cancel", role: .cancel, action: { })
             })
-            .onAppear {
-                let interval = Date().timeIntervalSince(creationDate)
-                print("ExpenseScreen \(interval)")
-            }
         }
     }
 }
 
 extension MFExpenseScreen {
-
     @ViewBuilder
     var listOfExpenses: some View {
-        List(vm.getExpenses()) { expense in
+        List(vm.expenses) { expense in
             ExpenseListItemView(
                 expense: expense,
-                displayDate: !expense.isSameDayAsPrevious,
+                displayDate: expense.showDate,
                 shouldShowDailyTotal: expense.showDailyTotal,
                 shouldShowWeeklyTotal: expense.showWeeklyTotal,
                 shouldShowMonthlyTotal: expense.showMonthlyTotal,
@@ -74,7 +72,7 @@ extension MFExpenseScreen {
                 showExpense: expense.showExpense)
             .swipeActions {
                 Button("Delete") {
-                    selectedExpense = expense
+                    selectedExpenseId = expense.id
                     showDeleteAlert = true
                 }.tint(.red)
                 Button("Edit") {

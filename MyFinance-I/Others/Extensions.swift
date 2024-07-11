@@ -299,3 +299,18 @@ extension NSPredicate {
         NSPredicate(format: "\(field) == \(string)")
     }
 }
+
+extension Collection {
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+    
+    func element(at index: Index?) -> Element? {
+        if let index {
+            return self[safe: index]
+        } else {
+            return nil
+        }
+    }
+}

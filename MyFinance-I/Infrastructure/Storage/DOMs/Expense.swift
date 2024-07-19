@@ -9,6 +9,9 @@ class Expense: Object, ObjectKeyIdentifiable, Decodable, Encodable {
     @Persisted var price: Int = 0
     @Persisted var date: Date = Date()
     @Persisted var category: String = ""
+    @Persisted var income: Int = 0
+    @Persisted var ufRate: Int = 0
+    @Persisted var usdRate: Int = 0
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -56,13 +59,16 @@ extension Expense {
         }
     }
     
-    static func add(name: String, category: String, quantity: Double, price: Int, date: Date) {
+    static func add(name: String, category: String, quantity: Double, price: Int, date: Date, income: Int, ufRate: Int, usdRate: Int) {
         let expense = Expense()
         expense.name = name
         expense.category = category
         expense.quantity = quantity
         expense.price = price
         expense.date = date
+        expense.income = income
+        expense.ufRate = ufRate
+        expense.usdRate = usdRate
 
         Realm.writeWithTry { realm in
             realm.add(expense)
@@ -81,13 +87,16 @@ extension Expense {
         }
     }
     
-    static func update(_ expense: Expense, name: String?, category: String?, quantity: Double?, price: Int?, date: Date?) {
+    static func update(_ expense: Expense, name: String?, category: String?, quantity: Double?, price: Int?, date: Date?, income: Int?, ufRate: Int?, usdRate: Int?) {
         expense.write { thawedObj, thawedRealm in
             if let name = name { thawedObj.name = name }
             if let category = category { thawedObj.category = category }
             if let quantity = quantity { thawedObj.quantity = quantity }
             if let price = price { thawedObj.price = price }
             if let date = date { thawedObj.date = date }
+            if let income = income { thawedObj.income = income }
+            if let ufRate = ufRate { thawedObj.ufRate = ufRate }
+            if let usdRate = usdRate { thawedObj.usdRate = usdRate }
         }
     }
     
@@ -113,5 +122,13 @@ extension Expense {
 extension Expense {
     var cost: Int {
         Int(quantity * Double(price))
+    }
+    
+    var costDividedByIncome: Double {
+        if income > 0 {
+            return Double(cost) / Double(income)
+        } else {
+            return 0
+        }
     }
 }

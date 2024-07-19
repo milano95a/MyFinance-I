@@ -14,10 +14,10 @@ struct ExpenseListItemView: View {
     let shouldShowWeeklyTotal: Bool
     let shouldShowMonthlyTotal: Bool
     let shouldShowYearlyTotal: Bool
-    let dailyTotal: Int
-    let weeklyTotal: Int
-    let monthlyTotal: Int
-    let yearlyTotal: Int
+    let dailyTotal: Double
+    let weeklyTotal: Double
+    let monthlyTotal: Double
+    let yearlyTotal: Double
     let showExpense: Bool
     
     var body: some View {
@@ -79,7 +79,7 @@ struct ExpenseListItemView: View {
         HStack {
             Text("Y\(String(expense.date.year))")
             Spacer()
-            Text("\(yearlyTotal)").fontWeight(.bold)
+            Text("\(yearlyTotal.removeZerosFromEnd())").fontWeight(.bold)
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.yearlyTotalColor)
@@ -89,7 +89,7 @@ struct ExpenseListItemView: View {
         HStack {
             Text("M\(expense.date.monthOfTheYear)")
             Spacer()
-            Text("\(monthlyTotal)").fontWeight(.bold)
+            Text("\(monthlyTotal.removeZerosFromEnd())").fontWeight(.bold)
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.monthlyTotalColor)
@@ -99,7 +99,7 @@ struct ExpenseListItemView: View {
         HStack {
             Text("W\(expense.date.weekOfTheYear)")
             Spacer()
-            Text("\(weeklyTotal)").fontWeight(.bold)
+            Text("\(weeklyTotal.removeZerosFromEnd())").fontWeight(.bold)
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.weeklyTotalColor)
@@ -109,7 +109,7 @@ struct ExpenseListItemView: View {
         HStack {
             Text("D\(expense.date.dayOfTheYear)")
             Spacer()
-            Text("\(dailyTotal)").fontWeight(.bold)
+            Text("\(dailyTotal.removeZerosFromEnd())").fontWeight(.bold)
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.dailyTotalColor)

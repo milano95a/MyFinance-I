@@ -38,11 +38,13 @@ struct MFExpenseScreen: View {
                                      showWeeklyTotal: vm.showWeeklyTotal,
                                      showDailyTotal: vm.showDailyTotal,
                                      showExpense: vm.showExpense,
+                                     selectedUnit: vm.selectedUnit,
                                      onChangeYearlyTotal: vm.setPreferenceYearlyTotal,
                                      onChangeMonthlyTotal: vm.setPreferenceMonthlyTotal,
                                      onChangeWeeklyTotal: vm.setPreferenceWeeklyTotal,
                                      onChangeDailyTotal: vm.setPreferenceDailyTotal,
-                                     onChangeExpense: vm.setPreferenceExpense)
+                                     onChangeExpense: vm.setPreferenceExpense, 
+                                     onChangeUnit: vm.setPreferencUnit)
             }
             .alert("Delete?", isPresented: $showDeleteAlert, presenting: selectedExpenseId, actions: { expense in
                 Button("Delete", action: {
@@ -58,18 +60,17 @@ extension MFExpenseScreen {
     @ViewBuilder
     var listOfExpenses: some View {
         List(vm.expenses) { expense in
-            ExpenseListItemView(
-                expense: expense,
-                displayDate: expense.showDate,
-                shouldShowDailyTotal: expense.showDailyTotal,
-                shouldShowWeeklyTotal: expense.showWeeklyTotal,
-                shouldShowMonthlyTotal: expense.showMonthlyTotal,
-                shouldShowYearlyTotal: expense.showYearlyTotal,
-                dailyTotal: expense.dailyTotal,
-                weeklyTotal: expense.weeklyTotal,
-                monthlyTotal: expense.monthlyTotal,
-                yearlyTotal: expense.yearlyTotal,
-                showExpense: expense.showExpense)
+            ExpenseListItemView(expense: expense,
+                                displayDate: expense.showDate,
+                                shouldShowDailyTotal: expense.showDailyTotal,
+                                shouldShowWeeklyTotal: expense.showWeeklyTotal,
+                                shouldShowMonthlyTotal: expense.showMonthlyTotal,
+                                shouldShowYearlyTotal: expense.showYearlyTotal,
+                                dailyTotal: expense.dailyTotal,
+                                weeklyTotal: expense.weeklyTotal,
+                                monthlyTotal: expense.monthlyTotal,
+                                yearlyTotal: expense.yearlyTotal,
+                                showExpense: expense.showExpense)
             .swipeActions {
                 Button("Delete") {
                     selectedExpenseId = expense.id

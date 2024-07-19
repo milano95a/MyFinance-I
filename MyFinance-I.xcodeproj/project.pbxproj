@@ -15,7 +15,6 @@
 		BD17A09F29DD63EB0052668D /* MyFinance_IApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */; };
 		BD17A0A129DD63EB0052668D /* MFExpenseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A0A029DD63EB0052668D /* MFExpenseScreen.swift */; };
 		BD17A0A329DD63ED0052668D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD17A0A229DD63ED0052668D /* Assets.xcassets */; };
-		BD17A0A629DD63ED0052668D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD17A0A529DD63ED0052668D /* Preview Assets.xcassets */; };
 		BD17A0AE29DD67DC0052668D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = BD17A0AD29DD67DC0052668D /* Realm */; };
 		BD17A0B029DD67DC0052668D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BD17A0AF29DD67DC0052668D /* RealmSwift */; };
 		BD17A0B229DD6AD90052668D /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17A0B129DD6AD90052668D /* Expense.swift */; };
@@ -55,6 +54,8 @@
 		F02A720D2C3FF64200257F2E /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02A720C2C3FF64200257F2E /* Saving.swift */; };
 		F02A720F2C3FF67A00257F2E /* MFBudgetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02A720E2C3FF67A00257F2E /* MFBudgetDTO.swift */; };
 		F02A72112C3FF69F00257F2E /* MFBudgetItemDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02A72102C3FF69F00257F2E /* MFBudgetItemDTO.swift */; };
+		F02A72142C4136C600257F2E /* MFIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02A72132C4136C600257F2E /* MFIncomeView.swift */; };
+		F02A72162C4136EE00257F2E /* MFIncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02A72152C4136EE00257F2E /* MFIncomeViewModel.swift */; };
 		F02CF6292C0D961700BE538B /* MFToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF6282C0D961700BE538B /* MFToolbar.swift */; };
 		F02CF62D2C0DA42A00BE538B /* Object+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */; };
 		F064BF592C0D8A2B00136B8D /* MFBudgetsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF582C0D8A2B00136B8D /* MFBudgetsListScreen.swift */; };
@@ -68,6 +69,8 @@
 		F07EA9052C1097EA0057BDDB /* MFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA9042C1097EA0057BDDB /* MFButton.swift */; };
 		F07EA9072C10980F0057BDDB /* MyComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA9062C10980F0057BDDB /* MyComponents.swift */; };
 		F0B80C5B2C0DCF7200C8D98E /* MFBudgetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B80C5A2C0DCF7200C8D98E /* MFBudgetScreen.swift */; };
+		F0CC0F432C4A66C3009C0707 /* MFIncomeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC0F422C4A66C3009C0707 /* MFIncomeDTO.swift */; };
+		F0CC0F452C4A7890009C0707 /* MFUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC0F442C4A7890009C0707 /* MFUnit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +83,6 @@
 		BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFinance_IApp.swift; sourceTree = "<group>"; };
 		BD17A0A029DD63EB0052668D /* MFExpenseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFExpenseScreen.swift; sourceTree = "<group>"; };
 		BD17A0A229DD63ED0052668D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BD17A0A529DD63ED0052668D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BD17A0B129DD6AD90052668D /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		BD665CF52A02668600497E40 /* ProductsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListScreen.swift; sourceTree = "<group>"; };
 		BD665CF82A026C4600497E40 /* InflationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InflationScreen.swift; sourceTree = "<group>"; };
@@ -119,6 +121,8 @@
 		F02A720C2C3FF64200257F2E /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
 		F02A720E2C3FF67A00257F2E /* MFBudgetDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetDTO.swift; sourceTree = "<group>"; };
 		F02A72102C3FF69F00257F2E /* MFBudgetItemDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetItemDTO.swift; sourceTree = "<group>"; };
+		F02A72132C4136C600257F2E /* MFIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFIncomeView.swift; sourceTree = "<group>"; };
+		F02A72152C4136EE00257F2E /* MFIncomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFIncomeViewModel.swift; sourceTree = "<group>"; };
 		F02CF6282C0D961700BE538B /* MFToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFToolbar.swift; sourceTree = "<group>"; };
 		F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Object+Ext.swift"; sourceTree = "<group>"; };
 		F064BF582C0D8A2B00136B8D /* MFBudgetsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetsListScreen.swift; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 		F07EA9042C1097EA0057BDDB /* MFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFButton.swift; sourceTree = "<group>"; };
 		F07EA9062C10980F0057BDDB /* MyComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyComponents.swift; sourceTree = "<group>"; };
 		F0B80C5A2C0DCF7200C8D98E /* MFBudgetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetScreen.swift; sourceTree = "<group>"; };
+		F0CC0F422C4A66C3009C0707 /* MFIncomeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFIncomeDTO.swift; sourceTree = "<group>"; };
+		F0CC0F442C4A7890009C0707 /* MFUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFUnit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,29 +153,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BD11260029DDA4F100B1FBFA /* Supporting Files */ = {
+		BD11260029DDA4F100B1FBFA /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
 				BD17A09E29DD63EB0052668D /* MyFinance_IApp.swift */,
-				BD17A0A229DD63ED0052668D /* Assets.xcassets */,
 			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BD11260B29DEFA3900B1FBFA /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				BDAD60AC2A138B880098C5F7 /* GenericEditor.swift */,
-				BDF79F2129E7F9A9009B7D1D /* BarChart.swift */,
-				BDF5C27A29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift */,
-				BDAD60B02A160A140098C5F7 /* CustomNavigationLink.swift */,
-				F064BF612C0D8E9800136B8D /* MFFloatingButton.swift */,
-				F02CF6282C0D961700BE538B /* MFToolbar.swift */,
-				F07EA8FC2C10886F0057BDDB /* MFBudgetListHeaderItem.swift */,
-				F07EA9042C1097EA0057BDDB /* MFButton.swift */,
-				F07EA9062C10980F0057BDDB /* MyComponents.swift */,
-			);
-			path = Components;
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		BD17A09229DD63EB0052668D = {
@@ -191,22 +180,14 @@
 		BD17A09D29DD63EB0052668D /* MyFinance-I */ = {
 			isa = PBXGroup;
 			children = (
-				F02A72092C3FF5E300257F2E /* Infrastructure */,
 				BDF5C28729E728CB007DED13 /* Presentation */,
-				BDAD60B42A160E950098C5F7 /* Others */,
-				BD11260029DDA4F100B1FBFA /* Supporting Files */,
-				BD17A0A429DD63ED0052668D /* Preview Content */,
+				F02A72092C3FF5E300257F2E /* Infrastructure */,
+				F0CC0F402C4A4C38009C0707 /* Resources */,
+				BDAD60B42A160E950098C5F7 /* Extensions */,
+				BD11260029DDA4F100B1FBFA /* Configuration */,
 				BDF5C27C29E429EB007DED13 /* Info.plist */,
 			);
 			path = "MyFinance-I";
-			sourceTree = "<group>";
-		};
-		BD17A0A429DD63ED0052668D /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				BD17A0A529DD63ED0052668D /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		BD665CF72A02693200497E40 /* Inflation */ = {
@@ -267,15 +248,14 @@
 			path = Savings;
 			sourceTree = "<group>";
 		};
-		BDAD60B42A160E950098C5F7 /* Others */ = {
+		BDAD60B42A160E950098C5F7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				BD11260B29DEFA3900B1FBFA /* Components */,
 				BD11260929DEF7F500B1FBFA /* Extensions.swift */,
 				F07EA9022C10923D0057BDDB /* View+Ext.swift */,
 				F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */,
 			);
-			path = Others;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		BDAD60B72A161D8C0098C5F7 /* Setting */ = {
@@ -312,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				F02A72052C3FF46000257F2E /* Screens */,
+				F02A72172C41372B00257F2E /* Views */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -332,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				BDF5C27F29E6B211007DED13 /* MoreScreen.swift */,
+				F02A72122C4135A000257F2E /* Income */,
 				BDAD60B72A161D8C0098C5F7 /* Setting */,
 				BDC8AE6C29EF54270076C571 /* Credit */,
 				BD73595D29F154B900766F9A /* Debt */,
@@ -357,7 +339,7 @@
 		F02A72052C3FF46000257F2E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				BD11260C29DFE88100B1FBFA /* InitialTabScreen.swift */,
+				F0CC0F412C4A4D36009C0707 /* Main */,
 				BDF79F1F29E72ABA009B7D1D /* More */,
 				BDF79F1E29E729E4009B7D1D /* Expense */,
 			);
@@ -377,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				F02A720A2C3FF5FD00257F2E /* Storage */,
+				F0CC0F442C4A7890009C0707 /* MFUnit.swift */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -398,8 +381,34 @@
 				F02A720C2C3FF64200257F2E /* Saving.swift */,
 				F02A720E2C3FF67A00257F2E /* MFBudgetDTO.swift */,
 				F02A72102C3FF69F00257F2E /* MFBudgetItemDTO.swift */,
+				F0CC0F422C4A66C3009C0707 /* MFIncomeDTO.swift */,
 			);
 			path = DOMs;
+			sourceTree = "<group>";
+		};
+		F02A72122C4135A000257F2E /* Income */ = {
+			isa = PBXGroup;
+			children = (
+				F02A72132C4136C600257F2E /* MFIncomeView.swift */,
+				F02A72152C4136EE00257F2E /* MFIncomeViewModel.swift */,
+			);
+			path = Income;
+			sourceTree = "<group>";
+		};
+		F02A72172C41372B00257F2E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BDAD60AC2A138B880098C5F7 /* GenericEditor.swift */,
+				BDF79F2129E7F9A9009B7D1D /* BarChart.swift */,
+				BDF5C27A29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift */,
+				BDAD60B02A160A140098C5F7 /* CustomNavigationLink.swift */,
+				F064BF612C0D8E9800136B8D /* MFFloatingButton.swift */,
+				F02CF6282C0D961700BE538B /* MFToolbar.swift */,
+				F07EA8FC2C10886F0057BDDB /* MFBudgetListHeaderItem.swift */,
+				F07EA9042C1097EA0057BDDB /* MFButton.swift */,
+				F07EA9062C10980F0057BDDB /* MyComponents.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F064BF572C0D8A0400136B8D /* Assets */ = {
@@ -460,6 +469,22 @@
 				F07EA8F82C0DD3B10057BDDB /* MFBudgetViewModel.swift */,
 			);
 			path = Budget;
+			sourceTree = "<group>";
+		};
+		F0CC0F402C4A4C38009C0707 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BD17A0A229DD63ED0052668D /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F0CC0F412C4A4D36009C0707 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				BD11260C29DFE88100B1FBFA /* InitialTabScreen.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -527,7 +552,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD17A0A629DD63ED0052668D /* Preview Assets.xcassets in Resources */,
 				BD17A0A329DD63ED0052668D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +568,7 @@
 				BD665CF62A02668600497E40 /* ProductsListScreen.swift in Sources */,
 				BDF5C27B29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift in Sources */,
 				BDAD60B12A160A140098C5F7 /* CustomNavigationLink.swift in Sources */,
+				F0CC0F452C4A7890009C0707 /* MFUnit.swift in Sources */,
 				F07EA8FB2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift in Sources */,
 				F02A72112C3FF69F00257F2E /* MFBudgetItemDTO.swift in Sources */,
 				F07EA9032C10923D0057BDDB /* View+Ext.swift in Sources */,
@@ -564,6 +589,8 @@
 				BD11260829DED33E00B1FBFA /* EditorExpenseScreen.swift in Sources */,
 				BDC8AE7229EF81370076C571 /* EditorCreditScreen.swift in Sources */,
 				BDAD60A42A0BED360098C5F7 /* InflationManager.swift in Sources */,
+				F0CC0F432C4A66C3009C0707 /* MFIncomeDTO.swift in Sources */,
+				F02A72162C4136EE00257F2E /* MFIncomeViewModel.swift in Sources */,
 				BDF79F2929EABDE0009B7D1D /* ExpenseChartManager.swift in Sources */,
 				BD11260629DDC9FE00B1FBFA /* MFExpenseViewModel.swift in Sources */,
 				F064BF5B2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift in Sources */,
@@ -571,6 +598,7 @@
 				F064BF622C0D8E9800136B8D /* MFFloatingButton.swift in Sources */,
 				BD11260D29DFE88200B1FBFA /* InitialTabScreen.swift in Sources */,
 				BD11260A29DEF7F500B1FBFA /* Extensions.swift in Sources */,
+				F02A72142C4136C600257F2E /* MFIncomeView.swift in Sources */,
 				BD17A0A129DD63EB0052668D /* MFExpenseScreen.swift in Sources */,
 				BD73596329F157BD00766F9A /* EditorDebtScreen.swift in Sources */,
 				BD665CF92A026C4600497E40 /* InflationScreen.swift in Sources */,

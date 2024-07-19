@@ -10,7 +10,17 @@ import RealmSwift
 
 class MFExepnse: Identifiable {
     
-    init?(expense: Expense?, olderExpense: MFExepnse? = nil, newerExpense: MFExepnse? = nil, isYearlyTotalOn: Bool = true, isMonthlyTotalOn: Bool = true, isWeeklyTotalOn: Bool = true, isDailyTotalOn: Bool = true, isExpenseOn: Bool = true) {
+    init?(expense: Expense?, 
+          olderExpense: MFExepnse? = nil,
+          newerExpense: MFExepnse? = nil,
+          isYearlyTotalOn: Bool = true,
+          isMonthlyTotalOn: Bool = true,
+          isWeeklyTotalOn: Bool = true,
+          isDailyTotalOn: Bool = true,
+          isExpenseOn: Bool = true,
+          unit: MFUnit,
+          income: Int) 
+    {
         guard let expense else { return nil}
         
         self.id = expense.id
@@ -24,29 +34,57 @@ class MFExepnse: Identifiable {
         self.monthOfTheYear = expense.date.monthOfTheYear
         self.weekOfTheYear = expense.date.weekOfTheYear
         self.dayOfTheYear = expense.date.dayOfTheYear
+        self.unit = unit
+        self.income = income
         
-        if let olderExpense, olderExpense.year == year {
-            self.yearlyTotal = expense.cost + olderExpense.yearlyTotal
+        if unit == .som {
+            if let olderExpense, olderExpense.year == year {
+                self.yearlyTotal = Double(expense.cost) + olderExpense.yearlyTotal
+            } else {
+                self.yearlyTotal = Double(expense.cost)
+            }
+            
+            if let olderExpense, olderExpense.year == year && olderExpense.monthOfTheYear == monthOfTheYear {
+                self.monthlyTotal = Double(expense.cost) + olderExpense.monthlyTotal
+            } else {
+                self.monthlyTotal = Double(expense.cost)
+            }
+            
+            if let olderExpense, olderExpense.year == year && olderExpense.weekOfTheYear == weekOfTheYear {
+                self.weeklyTotal = Double(expense.cost) + olderExpense.weeklyTotal
+            } else {
+                self.weeklyTotal = Double(expense.cost)
+            }
+            
+            if let olderExpense, olderExpense.year == year && olderExpense.dayOfTheYear == dayOfTheYear {
+                self.dailyTotal = Double(expense.cost) + olderExpense.dailyTotal
+            } else {
+                self.dailyTotal = Double(expense.cost)
+            }
         } else {
-            self.yearlyTotal = expense.cost
-        }
-        
-        if let olderExpense, olderExpense.year == year && olderExpense.monthOfTheYear == monthOfTheYear {
-            self.monthlyTotal = expense.cost + olderExpense.monthlyTotal
-        } else {
-            self.monthlyTotal = expense.cost
-        }
-        
-        if let olderExpense, olderExpense.year == year && olderExpense.weekOfTheYear == weekOfTheYear {
-            self.weeklyTotal = expense.cost + olderExpense.weeklyTotal
-        } else {
-            self.weeklyTotal = expense.cost
-        }
-        
-        if let olderExpense, olderExpense.year == year && olderExpense.dayOfTheYear == dayOfTheYear {
-            self.dailyTotal = expense.cost + olderExpense.dailyTotal
-        } else {
-            self.dailyTotal = expense.cost
+            if let olderExpense, olderExpense.year == year {
+                self.yearlyTotal = Double(expense.costDividedByIncome) + olderExpense.yearlyTotal
+            } else {
+                self.yearlyTotal = Double(expense.costDividedByIncome)
+            }
+            
+            if let olderExpense, olderExpense.year == year && olderExpense.monthOfTheYear == monthOfTheYear {
+                self.monthlyTotal = Double(expense.costDividedByIncome) + olderExpense.monthlyTotal
+            } else {
+                self.monthlyTotal = Double(expense.costDividedByIncome)
+            }
+            
+            if let olderExpense, olderExpense.year == year && olderExpense.weekOfTheYear == weekOfTheYear {
+                self.weeklyTotal = Double(expense.costDividedByIncome) + olderExpense.weeklyTotal
+            } else {
+                self.weeklyTotal = Double(expense.costDividedByIncome)
+            }
+            
+            if let olderExpense, olderExpense.year == year && olderExpense.dayOfTheYear == dayOfTheYear {
+                self.dailyTotal = Double(expense.costDividedByIncome) + olderExpense.dailyTotal
+            } else {
+                self.dailyTotal = Double(expense.costDividedByIncome)
+            }
         }
         
         self.isYearlyTotalOn = true
@@ -81,10 +119,10 @@ class MFExepnse: Identifiable {
     var dayOfTheYear: Int
     
 
-    var yearlyTotal: Int
-    var monthlyTotal: Int
-    var weeklyTotal: Int
-    var dailyTotal: Int
+    var yearlyTotal: Double
+    var monthlyTotal: Double
+    var weeklyTotal: Double
+    var dailyTotal: Double
 
     var isYearlyTotalOn: Bool
     var isMonthlyTotalOn: Bool
@@ -100,7 +138,18 @@ class MFExepnse: Identifiable {
  
     var showDate: Bool
     
-    var cost: Int {
-        Int(quantity * Double(price))
+    var unit: MFUnit
+    var income: Int
+    
+    var cost: String {
+        if unit == .som {
+            return String(Int(quantity * Double(price)))
+        } else {
+            if income > 0 {
+                return "\((quantity * Double(price) / Double(income) * 100).removeZerosFromEnd())%"
+            } else {
+                return "n/a"
+            }
+        }
     }
 }

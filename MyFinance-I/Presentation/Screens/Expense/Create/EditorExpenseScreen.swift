@@ -11,16 +11,20 @@ struct EditorExpenseScreen: View {
     var expense: Expense?
     @EnvironmentObject var manager: MFExpenseViewModel
     @Environment(\.dismiss) var dismiss
-    @FocusState private var focusedField: FocusedField?
-    @State private var name: String
-    @State private var nameFieldIsFocused = false
-    @State private var category: String
-    @State private var categoryFieldIsFocused = false
-    @State private var cost: String
-    @State private var price: String
-    @State private var quantity: String
-    @State private var date: Date
+    @State private var name: String = ""
+    @State private var category: String = ""
+    @State private var cost: String = ""
+    @State private var price: String = ""
+    @State private var quantity: String = ""
+    @State private var date: Date = Date()
+    @State private var income: String = ""
     
+    @State private var categoryFieldIsFocused = false
+    @State private var nameFieldIsFocused = false
+    @State private var isQuantityEmpty = true
+    @FocusState private var focusedField: FocusedField?
+    @FocusState private var previousFocusField: FocusedField?
+
     var body: some View {
         VStack {
             expenseForm
@@ -46,16 +50,8 @@ extension EditorExpenseScreen {
             self._cost = State(initialValue: String(expense.cost))
             self._date = State(initialValue: expense.date)
             self._category = State(initialValue: expense.category)
-        } else {
-            self._name = State(initialValue: "")
-            self._price = State(initialValue: "")
-            self._quantity = State(initialValue: "")
-            self._date = State(initialValue: Date())
-            self._category = State(initialValue: "")
-            self._cost = State(initialValue: "")
+            self._income = State(initialValue: String(expense.income))
         }
-        
-        
     }
 
     var expenseForm: some View {
@@ -71,6 +67,10 @@ extension EditorExpenseScreen {
             costTextField
 
             datePicker
+            
+            if let selectedUnitStr = UserDefaults.standard.string(forKey: "showUnit"), let selectedUnit = MFUnit(rawValue: selectedUnitStr), selectedUnit == .income {
+                incomeTextField
+            }
         }
     }
         
@@ -142,10 +142,10 @@ extension EditorExpenseScreen {
                     if let quantity = Double(quantity), let price = Double(price) {
                         cost = String(Int(quantity * price))
                     }
-                    else if let cost = Double(cost), let price = Double(price) {
-                        guard price > 0 else { return }
-                        quantity = String(cost / price)
-                    }
+//                    else if let cost = Double(cost), let price = Double(price) {
+//                        guard price > 0 else { return }
+//                        quantity = String(cost / price)
+//                    }
                 }
             }
     }
@@ -160,11 +160,12 @@ extension EditorExpenseScreen {
             .font(.title2)
             .onChange(of: quantity) { newValue in
                 if focusedField == .quantity {
-                    if let cost = Double(cost), let quantity = Double(quantity) {
-                        guard quantity > 0 else { return }
-                        price = String(Int(cost / quantity))
-                    }
-                    else if let quantity = Double(quantity), let price = Double(price) {
+//                    if let cost = Double(cost), let quantity = Double(quantity) {
+//                        guard quantity > 0 else { return }
+//                        price = String(Int(cost / quantity))
+//                    }
+//                    else
+                    if let quantity = Double(quantity), let price = Double(price) {
                         cost = String(Int(quantity * price))
                     }
                 }
@@ -182,18 +183,26 @@ extension EditorExpenseScreen {
                 if focusedField == .cost {
                     if let cost = Double(cost), let quantity = Double(quantity) {
                         guard quantity > 0 else { return }
-                        price = String(Int(cost / quantity))
+                        price = String(Int(ceil(cost / quantity)))
                     }
-                    else if let cost = Double(cost), let price = Double(price) {
-                        guard price > 0 else { return }
-                        quantity = String(cost / price)
-                    }
+//                    else if let cost = Double(cost), let price = Double(price) {
+//                        guard price > 0 else { return }
+//                        quantity = String(cost / price)
+//                    }
                 }
             }
     }
     
     var datePicker: some View {
         DatePicker("date", selection: $date, displayedComponents: [.date])
+            .font(.title2)
+    }
+        
+    var incomeTextField: some View {
+        TextField("income", text: $income)
+            .keyboardType(.numbersAndPunctuation)
+            .submitLabel(.done)
+            .selectAllTextOnEditing()
             .font(.title2)
     }
     
@@ -210,22 +219,28 @@ extension EditorExpenseScreen {
                 
                 guard let price = Int(price) else { return }
                 let quantity = Double(quantity) ?? 1
+                let income = Int(income) ?? 0
 
                 if let expense = expense {
                     manager.update(expense,
-                              name: name,
-                              category: category,
-                              price: price,
-                              quantity: quantity,
-                              date: date)
+                                   name: name,
+                                   category: category,
+                                   price: price,
+                                   quantity: quantity,
+                                   date: date,
+                                   income: income,
+                                   ufRate: 0,
+                                   usdRate: 0)
                     dismiss()
                 } else {
-                    manager.add(
-                        name: name,
-                        category: category,
-                        price: price,
-                        quantity: quantity,
-                        date: date)
+                    manager.add(name: name,
+                                category: category,
+                                price: price,
+                                quantity: quantity,
+                                date: date,
+                                income: income,
+                                ufRate: 0,
+                                usdRate: 0)
                     dismiss()
                 }
             }, label: {

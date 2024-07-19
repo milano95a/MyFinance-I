@@ -14,10 +14,10 @@ struct ExpenseListItemView: View {
     let shouldShowWeeklyTotal: Bool
     let shouldShowMonthlyTotal: Bool
     let shouldShowYearlyTotal: Bool
-    let dailyTotal: Double
-    let weeklyTotal: Double
-    let monthlyTotal: Double
-    let yearlyTotal: Double
+    let dailyTotal: String
+    let weeklyTotal: String
+    let monthlyTotal: String
+    let yearlyTotal: String
     let showExpense: Bool
     
     var body: some View {
@@ -79,7 +79,7 @@ struct ExpenseListItemView: View {
         HStack {
             Text("Y\(String(expense.date.year))")
             Spacer()
-            Text("\(yearlyTotal.removeZerosFromEnd())").fontWeight(.bold)
+            Text(expense.yearlyTotal).fontWeight(.bold)
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.yearlyTotalColor)
@@ -89,7 +89,7 @@ struct ExpenseListItemView: View {
         HStack {
             Text("M\(expense.date.monthOfTheYear)")
             Spacer()
-            Text("\(monthlyTotal.removeZerosFromEnd())").fontWeight(.bold)
+            Text(expense.monthlyTotal).fontWeight(.bold)
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.monthlyTotalColor)
@@ -99,7 +99,7 @@ struct ExpenseListItemView: View {
         HStack {
             Text("W\(expense.date.weekOfTheYear)")
             Spacer()
-            Text("\(weeklyTotal.removeZerosFromEnd())").fontWeight(.bold)
+            Text(expense.weeklyTotal).fontWeight(.bold)
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.weeklyTotalColor)
@@ -109,7 +109,7 @@ struct ExpenseListItemView: View {
         HStack {
             Text("D\(expense.date.dayOfTheYear)")
             Spacer()
-            Text("\(dailyTotal.removeZerosFromEnd())").fontWeight(.bold)
+            Text(expense.dailyTotal).fontWeight(.bold)
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.dailyTotalColor)

@@ -71,6 +71,8 @@
 		F0B80C5B2C0DCF7200C8D98E /* MFBudgetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B80C5A2C0DCF7200C8D98E /* MFBudgetScreen.swift */; };
 		F0CC0F432C4A66C3009C0707 /* MFIncomeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC0F422C4A66C3009C0707 /* MFIncomeDTO.swift */; };
 		F0CC0F452C4A7890009C0707 /* MFUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC0F442C4A7890009C0707 /* MFUnit.swift */; };
+		F0E53D4D2C53B2F600D20AAC /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E53D4C2C53B2F600D20AAC /* Double+Ext.swift */; };
+		F0E53D4F2C53B97700D20AAC /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E53D4E2C53B97700D20AAC /* UserDefaults+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +140,8 @@
 		F0B80C5A2C0DCF7200C8D98E /* MFBudgetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetScreen.swift; sourceTree = "<group>"; };
 		F0CC0F422C4A66C3009C0707 /* MFIncomeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFIncomeDTO.swift; sourceTree = "<group>"; };
 		F0CC0F442C4A7890009C0707 /* MFUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFUnit.swift; sourceTree = "<group>"; };
+		F0E53D4C2C53B2F600D20AAC /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		F0E53D4E2C53B97700D20AAC /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,9 +186,7 @@
 			children = (
 				BDF5C28729E728CB007DED13 /* Presentation */,
 				F02A72092C3FF5E300257F2E /* Infrastructure */,
-				F0CC0F402C4A4C38009C0707 /* Resources */,
-				BDAD60B42A160E950098C5F7 /* Extensions */,
-				BD11260029DDA4F100B1FBFA /* Configuration */,
+				F0E53D4B2C53A7D700D20AAC /* Supporting Files */,
 				BDF5C27C29E429EB007DED13 /* Info.plist */,
 			);
 			path = "MyFinance-I";
@@ -254,6 +256,8 @@
 				BD11260929DEF7F500B1FBFA /* Extensions.swift */,
 				F07EA9022C10923D0057BDDB /* View+Ext.swift */,
 				F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */,
+				F0E53D4C2C53B2F600D20AAC /* Double+Ext.swift */,
+				F0E53D4E2C53B97700D20AAC /* UserDefaults+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -487,6 +491,16 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		F0E53D4B2C53A7D700D20AAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F0CC0F402C4A4C38009C0707 /* Resources */,
+				BDAD60B42A160E950098C5F7 /* Extensions */,
+				BD11260029DDA4F100B1FBFA /* Configuration */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -565,8 +579,10 @@
 			files = (
 				F02CF62D2C0DA42A00BE538B /* Object+Ext.swift in Sources */,
 				BDF5C27E29E5740E007DED13 /* SettingExpenseScreen.swift in Sources */,
+				F0E53D4D2C53B2F600D20AAC /* Double+Ext.swift in Sources */,
 				BD665CF62A02668600497E40 /* ProductsListScreen.swift in Sources */,
 				BDF5C27B29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift in Sources */,
+				F0E53D4F2C53B97700D20AAC /* UserDefaults+Ext.swift in Sources */,
 				BDAD60B12A160A140098C5F7 /* CustomNavigationLink.swift in Sources */,
 				F0CC0F452C4A7890009C0707 /* MFUnit.swift in Sources */,
 				F07EA8FB2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift in Sources */,

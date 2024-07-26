@@ -132,3 +132,16 @@ extension Expense {
         }
     }
 }
+
+// MARK: Mock
+extension Expense {
+    static var mockData: Expense {
+        let expense = Expense()
+        expense.name = "yoghurt"
+        expense.quantity = 0.9
+        expense.price = 20_000
+        expense.date = Date()
+        expense.category = "food"
+        return expense
+    }
+}

@@ -33,12 +33,12 @@ struct MFExpenseScreen: View {
             }
             .textInputAutocapitalization(.never)
             .popover(isPresented: $showSettingsPopup) {
-                SettingExpenseScreen(showYearlyTotal: vm.showYearlyTotal,
-                                     showMonthlyTotal: vm.showMonthlyTotal,
-                                     showWeeklyTotal: vm.showWeeklyTotal,
-                                     showDailyTotal: vm.showDailyTotal,
-                                     showExpense: vm.showExpense,
-                                     selectedUnit: vm.selectedUnit,
+                SettingExpenseScreen(showYearlyTotal: vm.selectedPreferenceShowYearlyTotal,
+                                     showMonthlyTotal: vm.selectedPreferenceShowMonthlyTotal,
+                                     showWeeklyTotal: vm.selectedPreferenceShowWeeklyTotal,
+                                     showDailyTotal: vm.selectedPreferenceShowDailyTotal,
+                                     showExpense: vm.selectedPreferenceShowExpenses,
+                                     selectedUnit: vm.selectedUnitOfCounting,
                                      onChangeYearlyTotal: vm.setPreferenceYearlyTotal,
                                      onChangeMonthlyTotal: vm.setPreferenceMonthlyTotal,
                                      onChangeWeeklyTotal: vm.setPreferenceWeeklyTotal,

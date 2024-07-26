@@ -58,7 +58,7 @@ struct ExpenseListItemView: View {
         HStack {
             Text("\(expense.name)")
             Spacer()
-            Text("\(expense.cost)")
+            Text(expense.cost)
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         HStack {
@@ -114,4 +114,21 @@ struct ExpenseListItemView: View {
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.dailyTotalColor)
     }
+}
+
+
+
+
+#Preview {
+    ExpenseListItemView(expense: MFExepnse.mockData,
+                        displayDate: true,
+                        shouldShowDailyTotal: true,
+                        shouldShowWeeklyTotal: true,
+                        shouldShowMonthlyTotal: true,
+                        shouldShowYearlyTotal: true,
+                        dailyTotal: MFExepnse.mockData.cost,
+                        weeklyTotal: MFExepnse.mockData.cost,
+                        monthlyTotal: MFExepnse.mockData.cost,
+                        yearlyTotal: MFExepnse.mockData.cost,
+                        showExpense: true)
 }

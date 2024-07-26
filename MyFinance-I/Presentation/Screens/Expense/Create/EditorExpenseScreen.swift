@@ -68,7 +68,7 @@ extension EditorExpenseScreen {
 
             datePicker
             
-            if let selectedUnitStr = UserDefaults.standard.string(forKey: "showUnit"), let selectedUnit = MFUnit(rawValue: selectedUnitStr), selectedUnit == .income {
+            if UserDefaults.selectedUnitOfCounting == .income {
                 incomeTextField
             }
         }
@@ -142,10 +142,6 @@ extension EditorExpenseScreen {
                     if let quantity = Double(quantity), let price = Double(price) {
                         cost = String(Int(quantity * price))
                     }
-//                    else if let cost = Double(cost), let price = Double(price) {
-//                        guard price > 0 else { return }
-//                        quantity = String(cost / price)
-//                    }
                 }
             }
     }
@@ -160,11 +156,6 @@ extension EditorExpenseScreen {
             .font(.title2)
             .onChange(of: quantity) { newValue in
                 if focusedField == .quantity {
-//                    if let cost = Double(cost), let quantity = Double(quantity) {
-//                        guard quantity > 0 else { return }
-//                        price = String(Int(cost / quantity))
-//                    }
-//                    else
                     if let quantity = Double(quantity), let price = Double(price) {
                         cost = String(Int(quantity * price))
                     }
@@ -185,10 +176,6 @@ extension EditorExpenseScreen {
                         guard quantity > 0 else { return }
                         price = String(Int(ceil(cost / quantity)))
                     }
-//                    else if let cost = Double(cost), let price = Double(price) {
-//                        guard price > 0 else { return }
-//                        quantity = String(cost / price)
-//                    }
                 }
             }
     }

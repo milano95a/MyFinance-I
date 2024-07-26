@@ -15,31 +15,37 @@ class MFExpenseViewModel: ObservableObject {
     @Published var expenses: [MFExepnse] = []
     var subscriptions = Set<AnyCancellable>()
     
-    var showYearlyTotal: Bool
-    var showMonthlyTotal: Bool
-    var showWeeklyTotal: Bool
-    var showDailyTotal: Bool
-    var showExpense: Bool
-    var selectedUnit: MFUnit {
-        didSet {
-            UserDefaults.standard.set(selectedUnit.rawValue, forKey: "showUnit")
-            expensesDOM = Expense.fetchRequest(.all)
-        }
-    }
+    @Published var selectedPreferenceShowYearlyTotal: Bool
+    @Published var selectedPreferenceShowMonthlyTotal: Bool
+    @Published var selectedPreferenceShowWeeklyTotal: Bool
+    @Published var selectedPreferenceShowDailyTotal: Bool
+    @Published var selectedPreferenceShowExpenses: Bool
+//    var showMonthlyTotal: Bool
+//    var showWeeklyTotal: Bool
+//    var showDailyTotal: Bool
+//    var showExpense: Bool
+    @Published var selectedUnitOfCounting: MFUnit 
+//    {
+//        didSet {
+//            UserDefaults.selectedUnitOfCounting = selectedUnitOfCounting
+//            expensesDOM = Expense.fetchRequest(.all)
+//        }
+//    }
     
     init() {
-        expensesDOM         = Expense.fetchRequest(.all)
-        showYearlyTotal     = UserDefaults.standard.bool(forKey: "showYearlyTotal")
-        showMonthlyTotal    = UserDefaults.standard.bool(forKey: "showMonthlyTotal")
-        showWeeklyTotal     = UserDefaults.standard.bool(forKey: "showWeeklyTotal")
-        showDailyTotal      = UserDefaults.standard.bool(forKey: "showDailyTotal")
-        showExpense         = UserDefaults.standard.bool(forKey: "showExpense")
+        expensesDOM = Expense.fetchRequest(.all)
+        selectedPreferenceShowYearlyTotal = UserDefaults.selectedPreferenceShowYearlyTotal
+//        UserDefaults.standard.bool(forKey: "showYearlyTotal")
+        selectedPreferenceShowMonthlyTotal = UserDefaults.selectedPreferenceShowMonthlyTotal
+//        UserDefaults.standard.bool(forKey: "showMonthlyTotal")
+        selectedPreferenceShowWeeklyTotal = UserDefaults.selectedPreferenceShowWeeklyTotal
+//        UserDefaults.standard.bool(forKey: "showWeeklyTotal")
+        selectedPreferenceShowDailyTotal = UserDefaults.selectedPreferenceShowDailyTotal
+//        UserDefaults.standard.bool(forKey: "showDailyTotal")
+        selectedPreferenceShowExpenses = UserDefaults.selectedPreferenceShowExpenses
+//        UserDefaults.standard.bool(forKey: "showExpense")
         
-        if let selectedUnitStr = UserDefaults.standard.string(forKey: "showUnit"), let selectedUnit = MFUnit(rawValue: selectedUnitStr) {
-            self.selectedUnit = selectedUnit
-        } else {
-            selectedUnit = .som
-        }
+        self.selectedUnitOfCounting = UserDefaults.selectedUnitOfCounting
         
         $expensesDOM
             .dropFirst()
@@ -51,10 +57,19 @@ class MFExpenseViewModel: ObservableObject {
                     if value[index].income > 0 {
                         latestIncome = value[index].income
                     }                    
-                    let newerExpense = MFExepnse(expense: value.element(at: index-1), unit: self.selectedUnit, income: latestIncome)
+                    let newerExpense = MFExepnse(expense: value.element(at: index-1), unit: self.selectedUnitOfCounting, income: latestIncome)
                     let olderExpense = newExpenses.last
                     
-                    if let newExpense = MFExepnse(expense: value[index],olderExpense: olderExpense, newerExpense: newerExpense, isYearlyTotalOn: showYearlyTotal, isMonthlyTotalOn: showMonthlyTotal, isWeeklyTotalOn: showWeeklyTotal, isDailyTotalOn: showDailyTotal, isExpenseOn: showExpense, unit: self.selectedUnit, income: latestIncome) {
+                    if let newExpense = MFExepnse(expense: value[index],
+                                                  olderExpense: olderExpense,
+                                                  newerExpense: newerExpense,
+                                                  isYearlyTotalOn: selectedPreferenceShowYearlyTotal,
+                                                  isMonthlyTotalOn: selectedPreferenceShowMonthlyTotal,
+                                                  isWeeklyTotalOn: selectedPreferenceShowWeeklyTotal,
+                                                  isDailyTotalOn: selectedPreferenceShowDailyTotal,
+                                                  isExpenseOn: selectedPreferenceShowExpenses,
+                                                  unit: selectedUnitOfCounting,
+                                                  income: latestIncome) {
                         newExpenses.append(newExpense)
                     }
                 }
@@ -73,16 +88,50 @@ class MFExpenseViewModel: ObservableObject {
                     if value[index].income > 0 {
                         latestIncome = value[index].income
                     }
-                    let newerExpense = MFExepnse(expense: value.element(at: index-1), unit: self.selectedUnit, income: latestIncome)
+                    let newerExpense = MFExepnse(expense: value.element(at: index-1), unit: self.selectedUnitOfCounting, income: latestIncome)
                     let olderExpense = newExpenses.last
                     
-                    if let newExpense = MFExepnse(expense: value[index],olderExpense: olderExpense, newerExpense: newerExpense, isYearlyTotalOn: showYearlyTotal, isMonthlyTotalOn: showMonthlyTotal, isWeeklyTotalOn: showWeeklyTotal, isDailyTotalOn: showDailyTotal, isExpenseOn: showExpense, unit: self.selectedUnit, income: latestIncome) {
+                    if let newExpense = MFExepnse(expense: value[index],
+                                                  olderExpense: olderExpense,
+                                                  newerExpense: newerExpense,
+                                                  isYearlyTotalOn: selectedPreferenceShowYearlyTotal,
+                                                  isMonthlyTotalOn: selectedPreferenceShowMonthlyTotal,
+                                                  isWeeklyTotalOn: selectedPreferenceShowWeeklyTotal,
+                                                  isDailyTotalOn: selectedPreferenceShowDailyTotal,
+                                                  isExpenseOn: selectedPreferenceShowExpenses,
+                                                  unit: selectedUnitOfCounting,
+                                                  income: latestIncome) {
                         newExpenses.append(newExpense)
                     }
                 }
                             
                 expenses = newExpenses.reversed()
             }).store(in: &subscriptions)
+        
+        $selectedPreferenceShowYearlyTotal.sink { [weak self] value in
+            UserDefaults.selectedPreferenceShowYearlyTotal = value
+//            self?.expensesDOM = Expense.fetchRequest(.all)
+        }.store(in: &subscriptions)
+        
+        $selectedPreferenceShowMonthlyTotal.sink { [weak self] value in
+            UserDefaults.selectedPreferenceShowMonthlyTotal = value
+//            self?.expensesDOM = Expense.fetchRequest(.all)
+        }.store(in: &subscriptions)
+        
+        $selectedPreferenceShowWeeklyTotal.sink { [weak self] value in
+            UserDefaults.selectedPreferenceShowWeeklyTotal = value
+//            self?.expensesDOM = Expense.fetchRequest(.all)
+        }.store(in: &subscriptions)
+        
+        $selectedPreferenceShowDailyTotal.sink { [weak self] value in
+            UserDefaults.selectedPreferenceShowDailyTotal = value
+//            self?.expensesDOM = Expense.fetchRequest(.all)
+        }.store(in: &subscriptions)
+        
+        $selectedPreferenceShowExpenses.sink { [weak self] value in
+            UserDefaults.selectedPreferenceShowExpenses = value
+//            self?.expensesDOM = Expense.fetchRequest(.all)
+        }.store(in: &subscriptions)
     }
     
     // MARK: Intents
@@ -158,37 +207,47 @@ extension MFExpenseViewModel {
 
 // MARK: Preferenes APIs
 extension MFExpenseViewModel {
-    func setPreferenceYearlyTotal(_ showYearlyTotal: Bool) {
-        UserDefaults.standard.set(showYearlyTotal, forKey: "showYearlyTotal")
-        self.showYearlyTotal = UserDefaults.standard.bool(forKey: "showYearlyTotal")
-        expensesDOM = Expense.fetchRequest(.all)
+    func setPreferenceYearlyTotal(_ value: Bool) {
+        selectedPreferenceShowYearlyTotal = value
+//        UserDefaults.selectedPreferenceShowYearlyTotal = showYearlyTotal
+//        UserDefaults.standard.set(showYearlyTotal, forKey: "showYearlyTotal")
+//        self.showYearlyTotal = UserDefaults.standard.bool(forKey: "showYearlyTotal")
+//        expensesDOM = Expense.fetchRequest(.all)
     }
 
-    func setPreferenceMonthlyTotal(_ showMonthlyTotal: Bool) {
-        UserDefaults.standard.set(showMonthlyTotal, forKey: "showMonthlyTotal")
-        self.showMonthlyTotal = UserDefaults.standard.bool(forKey: "showMonthlyTotal")
-        expensesDOM = Expense.fetchRequest(.all)
+    func setPreferenceMonthlyTotal(_ value: Bool) {
+        selectedPreferenceShowMonthlyTotal = value
+//        UserDefaults.selectedPreferenceShowMonthlyTotal = showMonthlyTotal
+//        UserDefaults.standard.set(showMonthlyTotal, forKey: "showMonthlyTotal")
+//        self.showMonthlyTotal = UserDefaults.standard.bool(forKey: "showMonthlyTotal")
+//        expensesDOM = Expense.fetchRequest(.all)
     }
 
-    func setPreferenceWeeklyTotal(_ showWeeklyTotal: Bool) {
-        UserDefaults.standard.set(showWeeklyTotal, forKey: "showWeeklyTotal")
-        self.showWeeklyTotal = UserDefaults.standard.bool(forKey: "showWeeklyTotal")
-        expensesDOM = Expense.fetchRequest(.all)
+    func setPreferenceWeeklyTotal(_ value: Bool) {
+        selectedPreferenceShowWeeklyTotal = value
+//        UserDefaults.selectedPreferenceShowWeeklyTotal = showWeeklyTotal
+//        UserDefaults.standard.set(showWeeklyTotal, forKey: "showWeeklyTotal")
+//        self.showWeeklyTotal = UserDefaults.standard.bool(forKey: "showWeeklyTotal")
+//        expensesDOM = Expense.fetchRequest(.all)
     }
 
-    func setPreferenceDailyTotal(_ showDailyTotal: Bool) {
-        UserDefaults.standard.set(showDailyTotal, forKey: "showDailyTotal")
-        self.showDailyTotal = UserDefaults.standard.bool(forKey: "showDailyTotal")
-        expensesDOM = Expense.fetchRequest(.all)
+    func setPreferenceDailyTotal(_ value: Bool) {
+        selectedPreferenceShowDailyTotal = value
+//        UserDefaults.selectedPreferenceShowDailyTotal = showDailyTotal
+//        UserDefaults.standard.set(showDailyTotal, forKey: "showDailyTotal")
+//        self.showDailyTotal = UserDefaults.standard.bool(forKey: "showDailyTotal")
+//        expensesDOM = Expense.fetchRequest(.all)
     }
     
-    func setPreferenceExpense(_ showExpense: Bool) {
-        UserDefaults.standard.set(showExpense, forKey: "showExpense")
-        self.showExpense = UserDefaults.standard.bool(forKey: "showExpense")
-        expensesDOM = Expense.fetchRequest(.all)
+    func setPreferenceExpense(_ value: Bool) {
+        selectedPreferenceShowExpenses = value
+//        UserDefaults.selectedPreferenceShowExpenses = showExpense
+//        UserDefaults.standard.set(showExpense, forKey: "showExpense")
+//        self.showExpense = UserDefaults.standard.bool(forKey: "showExpense")
+//        expensesDOM = Expense.fetchRequest(.all)
     }
     
     func setPreferencUnit(_ unit: MFUnit) {
-        self.selectedUnit = unit
+        selectedUnitOfCounting = unit
     }
 }

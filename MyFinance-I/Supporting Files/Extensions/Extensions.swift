@@ -9,208 +9,27 @@ import SwiftUI
 import RealmSwift
 import Realm
 
-extension RealmSwiftObject {
-    func addToDB() {
-        Realm.writeWithTry { realm in
-            realm.add(self)
-        }
-    }
-    
-    func deleteFromDB() {
-        self.writeToDB { thawedObj, thawedRealm in
-            thawedRealm.delete(thawedObj)
-        }
-    }
-    
-    func writeToDB(_ callback: (RealmSwiftObject, Realm) -> Void) {
-        guard let thawedObj = self.thaw() else { return }
-        assert(thawedObj.isFrozen == false)
-        guard let thawedRealm = thawedObj.realm else { return }
-        do {
-            try thawedRealm.write {
-                callback(thawedObj, thawedRealm)
-            }
-        } catch let error {
-            print(error)
-        }
-    }
-}
 
-extension Array where Element: RealmSwiftObject {
-    func addToDB() {
-        Realm.writeWithTry { realm in
-            realm.add(self)
-        }
-    }
-}
-extension ObjectId {
-    func findById<T: RealmSwiftObject>() -> T? {
-        Realm.shared().object(ofType: T.self, forPrimaryKey: self)
-    }
-}
-
-extension Double {
-    func removeZerosFromEnd() -> String {
-        let formatter = NumberFormatter()
-        let number = NSNumber(value: self)
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 16 //maximum digits in Double after dot (maximum precision)
-        return String(formatter.string(from: number) ?? "")
-    }
-}
-
-extension Realm {
-    // TODO: use this shared instance everywhere 
-    static func shared() -> Realm {
-        let configuration = Realm.Configuration(schemaVersion: 7)
-        Realm.Configuration.defaultConfiguration = configuration
-        let realm = try! Realm()
-        return realm
-    }
-    
-    static func writeWithTry(_ callback: (Realm) -> Void ) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                callback(realm)
-            }
-        } catch let error {
-            print(error)
-        }
-    }
-    
-    static func deleteWithTry(_ object: Object) {
-        Realm.writeWithTry { realm in
-            realm.delete(object)
-        }
-    }
-    
-    static func addWithTry(_ object: Object) {
-        Realm.writeWithTry { realm in
-            realm.add(object)
-        }
-    }
-    
-    static func deleteAll() {
-        Realm.writeWithTry { realm in
-            realm.deleteAll()
-        }
-    }
-    
-    static func fetchRequest<Element: RealmFetchable>(_ predicate: NSPredicate) -> Results<Element> {
-        return Realm.shared().objects(Element.self)
-    }
-}
-
-extension View {
-    func jsonFileImporter<T: Codable>(_ someType: T.Type, isPresented: Binding<Bool>, _ callback: @escaping (T) -> Void) -> some View {
-        self.fileImporter(isPresented: isPresented, allowedContentTypes: [.json], allowsMultipleSelection: false) { result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let urls):
-                if urls[0].startAccessingSecurityScopedResource() {
-                    defer { urls[0].stopAccessingSecurityScopedResource() }
-                    let data = try! Data(contentsOf: urls[0])
-                    let items = try! JSONDecoder().decode(someType, from: data)
-                    callback(items)
-                } else {
-                    print("Failed to decode from JSON")
-                }
-            }
-        }
-    }
-}
-
-extension Date {
-    var dayOfTheYear: Int {
-        Calendar.current.ordinality(of: .day, in: .year, for: self)!
-    }
-    
-    var weekOfTheYear: Int {
-        Calendar.current.component(.weekOfYear, from: self)
-    }
-    
-    var monthOfTheYear: Int {
-        Calendar.current.component(.month, from: self)
-    }
-    
-    var year: Int {
-        Calendar.current.component(.year, from: self)
-    }
-
-    var friendlyDate: String {
-        self.formatted(date: .abbreviated, time: .omitted)
-    }
-    
-    func isSameWeek(_ date: Date) -> Bool {
-        self.weekOfTheYear == date.weekOfTheYear && self.year == date.year
-    }
-    
-    func isSameDay(_ date: Date) -> Bool {
-        return self.dayOfTheYear == date.dayOfTheYear && self.year == date.year
-    }
-    
-    func isSameMonth(_ date: Date) -> Bool {
-        self.monthOfTheYear == date.monthOfTheYear && self.year == date.year
-    }
-    
-    func monthsSince(_ date: Date) -> [Date] {
-        var result = [Date]()
-        var nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: date)!
-
-        while nextMonth < Date.now {
-            result.append(nextMonth)
-            nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: nextMonth)!
-        }
-                    
-        return result
-    }
-    
-    /// Converts date inito string with custom format
-    func formatDate(with format: String) -> String? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: self)
-    }
-}
-
-extension String {
-    func dropFirstWord() -> String {
-        if self.count > self.firstWord().count {
-            return String(self.dropFirst(self.firstWord().count))
-        } else {
-            return self
-        }
-    }
-    
-    func firstWord() -> String {
-        var word = ""
-        for char in self {
-            if char == " " {
-                return word
-            } else {
-                word.append(char)
-            }
-        }
-        return self
-    }
-}
-
-@discardableResult
-func share(items: [Any], excludedActivityTypes: [UIActivity.ActivityType]? = nil) -> Bool {
-    guard let source = UIApplication.shared.windows.last?.rootViewController else {
-        return false
-    }
-    let vc = UIActivityViewController(
-        activityItems: items,
-        applicationActivities: nil
-    )
-    vc.excludedActivityTypes = excludedActivityTypes
-    vc.popoverPresentationController?.sourceView = source.view
-    source.present(vc, animated: true)
-    return true
-}
+//@discardableResult
+//func share(items: [Any], excludedActivityTypes: [UIActivity.ActivityType]? = nil) -> Bool {
+////    for scene in UIApplication.shared.connectedScenes {
+////        print("")
+////    }
+////    guard let source = UIApplication.shared.keyWindow?.rootViewController else {
+////        return false
+////    }
+////    guard let source = UIApplication.shared.windows.last?.rootViewController else {
+////        return false
+////    }
+//    let vc = UIActivityViewController(
+//        activityItems: items,
+//        applicationActivities: nil
+//    )
+//    vc.excludedActivityTypes = excludedActivityTypes
+//    vc.popoverPresentationController?.sourceView = source.view
+//    source.present(vc, animated: true)
+//    return true
+//}
 
 extension Color {
     static var defaultTextColor = Color(uiColor: .darkGray)
@@ -313,4 +132,18 @@ extension Collection {
             return nil
         }
     }
+}
+
+struct ActivityViewController: UIViewControllerRepresentable {
+
+    var activityItems: [Any]
+    var applicationActivities: [UIActivity]? = nil
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
+
 }

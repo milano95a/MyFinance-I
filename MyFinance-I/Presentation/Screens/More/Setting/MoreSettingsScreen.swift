@@ -13,12 +13,15 @@ struct MoreSettingsScreen: View {
     @EnvironmentObject var importManager: ImportManager
     @State private var showImportJsonPopup = false
     
+    @State private var isSharePresented: Bool = false
+    
     var body: some View {
         Form {
             Button("Export") {
-                if let url = exportManager.exportData() {
-                    share(items: [url])
-                }
+                isSharePresented = true
+//                if let url = exportManager.exportData() {
+//                    share(items: [url])
+//                }
             }
             Button("Import") {
                 showImportJsonPopup = true
@@ -27,6 +30,13 @@ struct MoreSettingsScreen: View {
         .jsonFileImporter(ExportData.self, isPresented: $showImportJsonPopup) { data in
             importManager.importData(data)
         }
+        .sheet(isPresented: $isSharePresented, onDismiss: {
+            print("Dismiss")
+        }, content: {
+            if let url = exportManager.exportData() {
+                ActivityViewController(activityItems: [url])
+            }
+        })
     }
 }
 

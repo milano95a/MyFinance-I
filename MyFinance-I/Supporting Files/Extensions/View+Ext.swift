@@ -13,4 +13,23 @@ extension View {
         return clipShape(roundedRect)
              .overlay(roundedRect.strokeBorder(content, lineWidth: width))
     }
+    
+    func jsonFileImporter<T: Codable>(_ someType: T.Type, isPresented: Binding<Bool>, _ callback: @escaping (T) -> Void) -> some View {
+        self.fileImporter(isPresented: isPresented, allowedContentTypes: [.json], allowsMultipleSelection: false) { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let urls):
+                if urls[0].startAccessingSecurityScopedResource() {
+                    defer { urls[0].stopAccessingSecurityScopedResource() }
+                    let data = try! Data(contentsOf: urls[0])
+                    let items = try! JSONDecoder().decode(someType, from: data)
+                    callback(items)
+                } else {
+                    print("Failed to decode from JSON")
+                }
+            }
+        }
+    }
+
 }

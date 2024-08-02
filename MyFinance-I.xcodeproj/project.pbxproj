@@ -73,6 +73,11 @@
 		F0CC0F452C4A7890009C0707 /* MFUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC0F442C4A7890009C0707 /* MFUnit.swift */; };
 		F0E53D4D2C53B2F600D20AAC /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E53D4C2C53B2F600D20AAC /* Double+Ext.swift */; };
 		F0E53D4F2C53B97700D20AAC /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E53D4E2C53B97700D20AAC /* UserDefaults+Ext.swift */; };
+		F0E53D642C5CF08C00D20AAC /* Realm+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E53D632C5CF08C00D20AAC /* Realm+Ext.swift */; };
+		F0E53D662C5CF5A800D20AAC /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E53D652C5CF5A800D20AAC /* Array+Ext.swift */; };
+		F0E53D682C5CFA6900D20AAC /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E53D672C5CFA6900D20AAC /* Date+Ext.swift */; };
+		F0E53D6A2C5CFA8700D20AAC /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E53D692C5CFA8700D20AAC /* String+Ext.swift */; };
+		F0E53D6C2C5D09DC00D20AAC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E53D6B2C5D09DC00D20AAC /* UIApplication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +147,11 @@
 		F0CC0F442C4A7890009C0707 /* MFUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFUnit.swift; sourceTree = "<group>"; };
 		F0E53D4C2C53B2F600D20AAC /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		F0E53D4E2C53B97700D20AAC /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
+		F0E53D632C5CF08C00D20AAC /* Realm+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Ext.swift"; sourceTree = "<group>"; };
+		F0E53D652C5CF5A800D20AAC /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
+		F0E53D672C5CFA6900D20AAC /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		F0E53D692C5CFA8700D20AAC /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		F0E53D6B2C5D09DC00D20AAC /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,10 +264,15 @@
 			isa = PBXGroup;
 			children = (
 				BD11260929DEF7F500B1FBFA /* Extensions.swift */,
+				F0E53D6B2C5D09DC00D20AAC /* UIApplication.swift */,
+				F0E53D692C5CFA8700D20AAC /* String+Ext.swift */,
+				F0E53D672C5CFA6900D20AAC /* Date+Ext.swift */,
 				F07EA9022C10923D0057BDDB /* View+Ext.swift */,
 				F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */,
 				F0E53D4C2C53B2F600D20AAC /* Double+Ext.swift */,
 				F0E53D4E2C53B97700D20AAC /* UserDefaults+Ext.swift */,
+				F0E53D632C5CF08C00D20AAC /* Realm+Ext.swift */,
+				F0E53D652C5CF5A800D20AAC /* Array+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -580,6 +595,7 @@
 				F02CF62D2C0DA42A00BE538B /* Object+Ext.swift in Sources */,
 				BDF5C27E29E5740E007DED13 /* SettingExpenseScreen.swift in Sources */,
 				F0E53D4D2C53B2F600D20AAC /* Double+Ext.swift in Sources */,
+				F0E53D6A2C5CFA8700D20AAC /* String+Ext.swift in Sources */,
 				BD665CF62A02668600497E40 /* ProductsListScreen.swift in Sources */,
 				BDF5C27B29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift in Sources */,
 				F0E53D4F2C53B97700D20AAC /* UserDefaults+Ext.swift in Sources */,
@@ -604,6 +620,8 @@
 				BDAD60A62A0E57CC0098C5F7 /* SavingsManager.swift in Sources */,
 				BD11260829DED33E00B1FBFA /* EditorExpenseScreen.swift in Sources */,
 				BDC8AE7229EF81370076C571 /* EditorCreditScreen.swift in Sources */,
+				F0E53D6C2C5D09DC00D20AAC /* UIApplication.swift in Sources */,
+				F0E53D662C5CF5A800D20AAC /* Array+Ext.swift in Sources */,
 				BDAD60A42A0BED360098C5F7 /* InflationManager.swift in Sources */,
 				F0CC0F432C4A66C3009C0707 /* MFIncomeDTO.swift in Sources */,
 				F02A72162C4136EE00257F2E /* MFIncomeViewModel.swift in Sources */,
@@ -615,6 +633,8 @@
 				BD11260D29DFE88200B1FBFA /* InitialTabScreen.swift in Sources */,
 				BD11260A29DEF7F500B1FBFA /* Extensions.swift in Sources */,
 				F02A72142C4136C600257F2E /* MFIncomeView.swift in Sources */,
+				F0E53D682C5CFA6900D20AAC /* Date+Ext.swift in Sources */,
+				F0E53D642C5CF08C00D20AAC /* Realm+Ext.swift in Sources */,
 				BD17A0A129DD63EB0052668D /* MFExpenseScreen.swift in Sources */,
 				BD73596329F157BD00766F9A /* EditorDebtScreen.swift in Sources */,
 				BD665CF92A026C4600497E40 /* InflationScreen.swift in Sources */,

@@ -13,6 +13,11 @@ class MFExpenseViewModel: ObservableObject {
     
     @Published var expensesDOM: Results<Expense>
     @Published var expenses: [MFExepnse] = []
+    @Published var pagableExpenses: [MFExepnse] = []
+    @Published var page = 1
+    @Published var hasMore = true
+    
+    @Published var searchText = ""
     var subscriptions = Set<AnyCancellable>()
     
     var selectedPreferenceShowYearlyTotal: Bool {
@@ -66,30 +71,18 @@ class MFExpenseViewModel: ObservableObject {
             .dropFirst()
             .sink { [weak self] value in
                 guard let self else { return }
-                var newExpenses = [MFExepnse]()
-                var latestIncome: Int = 0
-                for index in stride(from: value.count-1, through: 0, by: -1) {
-                    if value[index].income > 0 {
-                        latestIncome = value[index].income
-                    }                    
-                    let newerExpense = MFExepnse(expense: value.element(at: index-1), unit: self.selectedUnitOfCounting, income: latestIncome)
-                    let olderExpense = newExpenses.last
-                    
-                    if let newExpense = MFExepnse(expense: value[index],
-                                                  olderExpense: olderExpense,
-                                                  newerExpense: newerExpense,
-                                                  isYearlyTotalOn: selectedPreferenceShowYearlyTotal,
-                                                  isMonthlyTotalOn: selectedPreferenceShowMonthlyTotal,
-                                                  isWeeklyTotalOn: selectedPreferenceShowWeeklyTotal,
-                                                  isDailyTotalOn: selectedPreferenceShowDailyTotal,
-                                                  isExpenseOn: selectedPreferenceShowExpenses,
-                                                  unit: selectedUnitOfCounting,
-                                                  income: latestIncome) {
-                        newExpenses.append(newExpense)
-                    }
-                }
                             
-                expenses = newExpenses.reversed()
+                expenses = MFDefaultExpenseManager.shared.getExpensesWithTotals(unit: selectedUnitOfCounting, showYearlyTotal: selectedPreferenceShowYearlyTotal, showMonthlyTotal: selectedPreferenceShowMonthlyTotal, showWeeklyTotal: selectedPreferenceShowWeeklyTotal, showDailyTotal: selectedPreferenceShowDailyTotal, showExpenses: selectedPreferenceShowExpenses)
+                pagableExpenses = []
+                if expenses.count > 50 {
+                    pagableExpenses.append(contentsOf: expenses.prefix(50))
+                    page = 1
+                    hasMore = true
+                } else {
+                    pagableExpenses.append(contentsOf: expenses)
+                    page = 1
+                    hasMore = false
+                }
         }
         .store(in: &subscriptions)
         
@@ -97,35 +90,26 @@ class MFExpenseViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] value in
                 guard let self else { return }
-                var newExpenses = [MFExepnse]()
-                var latestIncome: Int = 0
-                for index in stride(from: value.count-1, through: 0, by: -1) {
-                    if value[index].income > 0 {
-                        latestIncome = value[index].income
-                    }
-                    let newerExpense = MFExepnse(expense: value.element(at: index-1), unit: self.selectedUnitOfCounting, income: latestIncome)
-                    let olderExpense = newExpenses.last
-                    
-                    if let newExpense = MFExepnse(expense: value[index],
-                                                  olderExpense: olderExpense,
-                                                  newerExpense: newerExpense,
-                                                  isYearlyTotalOn: selectedPreferenceShowYearlyTotal,
-                                                  isMonthlyTotalOn: selectedPreferenceShowMonthlyTotal,
-                                                  isWeeklyTotalOn: selectedPreferenceShowWeeklyTotal,
-                                                  isDailyTotalOn: selectedPreferenceShowDailyTotal,
-                                                  isExpenseOn: selectedPreferenceShowExpenses,
-                                                  unit: selectedUnitOfCounting,
-                                                  income: latestIncome) {
-                        newExpenses.append(newExpense)
-                    }
+                expenses = MFDefaultExpenseManager.shared.getExpensesWithTotals(unit: selectedUnitOfCounting, showYearlyTotal: selectedPreferenceShowYearlyTotal, showMonthlyTotal: selectedPreferenceShowMonthlyTotal, showWeeklyTotal: selectedPreferenceShowWeeklyTotal, showDailyTotal: selectedPreferenceShowDailyTotal, showExpenses: selectedPreferenceShowExpenses)
+                pagableExpenses = []
+                if expenses.count > 50 {
+                    pagableExpenses.append(contentsOf: expenses.prefix(50))
+                    page = 1
+                    hasMore = true
+                } else {
+                    pagableExpenses.append(contentsOf: expenses)
+                    page = 1
+                    hasMore = false
                 }
-                            
-                expenses = newExpenses.reversed()
             }).store(in: &subscriptions)
+        
+        $searchText.sink { [weak self] newValue in
+            self?.searchExpenses(with: newValue)
+        }.store(in: &subscriptions)
     }
     
     // MARK: Intents
-    
+        
     func findById(_ id: ObjectId) -> Expense? {
         Expense.findById(id)
     }
@@ -151,16 +135,36 @@ class MFExpenseViewModel: ObservableObject {
 
     func searchExpenses(with searchText: String) {
         if searchText.starts(with: "c:") {
-            let text = searchText.dropFirst(2)
-            if text.isEmpty {
-                expensesDOM = Expense.fetchRequest(.all)
-            } else {
-                expensesDOM = Expense.fetchRequest(.contains(field: "category", String(text)))
+            if searchText.count >= 5 {
+                pagableExpenses = MFDefaultExpenseManager.shared.getExpensesWithTotals(searchText: searchText, unit: selectedUnitOfCounting, showYearlyTotal: selectedPreferenceShowYearlyTotal, showMonthlyTotal: selectedPreferenceShowMonthlyTotal, showWeeklyTotal: selectedPreferenceShowWeeklyTotal, showDailyTotal: selectedPreferenceShowDailyTotal, showExpenses: selectedPreferenceShowExpenses)
+                hasMore = false
             }
-        } else if searchText.isEmpty || searchText.count < 3 {
-            expensesDOM = Expense.fetchRequest(.all)
+        } else if searchText.count >= 3 {
+            pagableExpenses = MFDefaultExpenseManager.shared.getExpensesWithTotals(searchText: searchText, unit: selectedUnitOfCounting, showYearlyTotal: selectedPreferenceShowYearlyTotal, showMonthlyTotal: selectedPreferenceShowMonthlyTotal, showWeeklyTotal: selectedPreferenceShowWeeklyTotal, showDailyTotal: selectedPreferenceShowDailyTotal, showExpenses: selectedPreferenceShowExpenses)
+            hasMore = false
+        }
+//        let startTime = CFAbsoluteTimeGetCurrent()
+//        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+    }
+    
+    func reset() {
+        expensesDOM = Expense.fetchRequest(.all)
+    }
+    
+    func loadMore() {
+        guard hasMore else { return }
+        
+        if expenses.count > 50 {
+            if pagableExpenses.lastIndex < (page+1)*50 {
+                pagableExpenses.append(contentsOf: expenses[page*50..<(page+1)*50])
+                page += 1
+            } else {
+                pagableExpenses.append(contentsOf: expenses[page*50..<expenses.count])
+                hasMore = false
+            }
         } else {
-            expensesDOM = Expense.fetchRequest(.contains(field: "name", searchText))
+            pagableExpenses.append(contentsOf: expenses)
+            hasMore = false
         }
     }
     

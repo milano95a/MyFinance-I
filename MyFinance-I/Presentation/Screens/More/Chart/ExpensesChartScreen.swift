@@ -27,6 +27,7 @@ struct ExpensesChartScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 years = manager.getYears()
+                selectedYear = years.last ?? 2023
             }
         }
     }

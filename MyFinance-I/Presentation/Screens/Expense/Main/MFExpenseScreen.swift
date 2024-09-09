@@ -14,7 +14,6 @@ struct MFExpenseScreen: View {
     @State private var showAddExpensePopup = false
     @State private var selectedExpenseId: ObjectId?
     @State private var showSettingsPopup = false
-    @State private var searchText = ""
     @State private var showDeleteAlert = false
 
     var body: some View {
@@ -25,12 +24,11 @@ struct MFExpenseScreen: View {
                     selectedExpenseId = nil
                     showAddExpensePopup = true
                 }
+                ChildView()
             }
             .navigationTitle("Expenses")
             .toolbar { MFToolbar { showSettingsPopup = true } }
-            .searchable(text: $searchText).onChange(of: searchText) { newValue in
-                vm.searchExpenses(with: searchText)
-            }
+            .searchable(text: $vm.searchText)
             .textInputAutocapitalization(.never)
             .popover(isPresented: $showSettingsPopup) {
                 SettingExpenseScreen(showYearlyTotal: vm.selectedPreferenceShowYearlyTotal,
@@ -56,30 +54,53 @@ struct MFExpenseScreen: View {
     }
 }
 
+struct ChildView : View {
+    @EnvironmentObject var vm: MFExpenseViewModel
+    @Environment(\.isSearching) var isSearching
+    
+    var body: some View {
+        Text("")
+            .onChange(of: isSearching) { newValue in
+                if !newValue {
+                    vm.reset()
+                }
+            }
+    }
+}
+
 extension MFExpenseScreen {
     @ViewBuilder
     var listOfExpenses: some View {
-        List(vm.expenses) { expense in
-            ExpenseListItemView(expense: expense,
-                                displayDate: expense.showDate,
-                                shouldShowDailyTotal: expense.showDailyTotal,
-                                shouldShowWeeklyTotal: expense.showWeeklyTotal,
-                                shouldShowMonthlyTotal: expense.showMonthlyTotal,
-                                shouldShowYearlyTotal: expense.showYearlyTotal,
-                                dailyTotal: expense.dailyTotal,
-                                weeklyTotal: expense.weeklyTotal,
-                                monthlyTotal: expense.monthlyTotal,
-                                yearlyTotal: expense.yearlyTotal,
-                                showExpense: expense.showExpense)
-            .swipeActions {
-                Button("Delete") {
-                    selectedExpenseId = expense.id
-                    showDeleteAlert = true
-                }.tint(.red)
-                Button("Edit") {
-                    selectedExpenseId = expense.id
-                    showAddExpensePopup = true
-                }.tint(.blue)
+//        let startTime = CFAbsoluteTimeGetCurrent()
+        List {
+            ForEach(vm.pagableExpenses.indices, id: \.self) { index in
+                let expense = vm.pagableExpenses[index]
+                ExpenseListItemView(expense: expense,
+                                    displayDate: expense.showDate,
+                                    shouldShowDailyTotal: expense.showDailyTotal,
+                                    shouldShowWeeklyTotal: expense.showWeeklyTotal,
+                                    shouldShowMonthlyTotal: expense.showMonthlyTotal,
+                                    shouldShowYearlyTotal: expense.showYearlyTotal,
+                                    dailyTotal: expense.dailyTotal,
+                                    weeklyTotal: expense.weeklyTotal,
+                                    monthlyTotal: expense.monthlyTotal,
+                                    yearlyTotal: expense.yearlyTotal,
+                                    showExpense: expense.showExpense)
+                .swipeActions {
+                    Button("Delete") {
+                        selectedExpenseId = expense.id
+                        showDeleteAlert = true
+                    }.tint(.red)
+                    Button("Edit") {
+                        selectedExpenseId = expense.id
+                        showAddExpensePopup = true
+                    }.tint(.blue)
+                }
+                .onAppear {
+                    if vm.pagableExpenses.last?.id == expense.id {
+                        vm.loadMore()
+                    }
+                }
             }
         }
         .listRowSeparator(.hidden)
@@ -91,6 +112,8 @@ extension MFExpenseScreen {
                 EditorExpenseScreen()
             }
         }
+//        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+//        let _ = print("drawing: \(timeElapsed)")
     }
 }
 

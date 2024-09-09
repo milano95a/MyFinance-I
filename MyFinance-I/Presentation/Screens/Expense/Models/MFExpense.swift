@@ -150,10 +150,10 @@ class MFExepnse: Identifiable {
     }
     var cost: String {
         if unit == .som {
-            return (quantity * Double(price)).toSpaceSeparated()
+            return (quantity * Double(price)).rounded(toPlaces: 0).toSpaceSeparated()
         } else {
             if income > 0 {
-                return "\((quantity * Double(price) / Double(income) * 100).rounded(toPlaces: 3).removeZerosFromEnd()) %"
+                return "\((quantity * Double(price) / Double(income) * 100).rounded(toPlaces: 0).removeZerosFromEnd()) %"
             } else {
                 return "n/a"
             }

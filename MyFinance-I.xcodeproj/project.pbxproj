@@ -58,6 +58,7 @@
 		F02A72162C4136EE00257F2E /* MFIncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02A72152C4136EE00257F2E /* MFIncomeViewModel.swift */; };
 		F02CF6292C0D961700BE538B /* MFToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF6282C0D961700BE538B /* MFToolbar.swift */; };
 		F02CF62D2C0DA42A00BE538B /* Object+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */; };
+		F05F10A12C8B2FBA00A5498D /* MFExpenseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05F10A02C8B2FBA00A5498D /* MFExpenseManager.swift */; };
 		F064BF592C0D8A2B00136B8D /* MFBudgetsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF582C0D8A2B00136B8D /* MFBudgetsListScreen.swift */; };
 		F064BF5B2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF5A2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift */; };
 		F064BF5E2C0D8AA100136B8D /* MoreSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF5D2C0D8AA100136B8D /* MoreSettingsScreen.swift */; };
@@ -132,6 +133,7 @@
 		F02A72152C4136EE00257F2E /* MFIncomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFIncomeViewModel.swift; sourceTree = "<group>"; };
 		F02CF6282C0D961700BE538B /* MFToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFToolbar.swift; sourceTree = "<group>"; };
 		F02CF62C2C0DA42A00BE538B /* Object+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Object+Ext.swift"; sourceTree = "<group>"; };
+		F05F10A02C8B2FBA00A5498D /* MFExpenseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFExpenseManager.swift; sourceTree = "<group>"; };
 		F064BF582C0D8A2B00136B8D /* MFBudgetsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetsListScreen.swift; sourceTree = "<group>"; };
 		F064BF5A2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetsListViewModel.swift; sourceTree = "<group>"; };
 		F064BF5D2C0D8AA100136B8D /* MoreSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreSettingsScreen.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			children = (
 				F02A720A2C3FF5FD00257F2E /* Storage */,
 				F0CC0F442C4A7890009C0707 /* MFUnit.swift */,
+				F05F10A02C8B2FBA00A5498D /* MFExpenseManager.swift */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				BDC8AE7229EF81370076C571 /* EditorCreditScreen.swift in Sources */,
 				F0E53D6C2C5D09DC00D20AAC /* UIApplication.swift in Sources */,
 				F0E53D662C5CF5A800D20AAC /* Array+Ext.swift in Sources */,
+				F05F10A12C8B2FBA00A5498D /* MFExpenseManager.swift in Sources */,
 				BDAD60A42A0BED360098C5F7 /* InflationManager.swift in Sources */,
 				F0CC0F432C4A66C3009C0707 /* MFIncomeDTO.swift in Sources */,
 				F02A72162C4136EE00257F2E /* MFIncomeViewModel.swift in Sources */,

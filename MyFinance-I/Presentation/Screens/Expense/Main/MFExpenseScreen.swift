@@ -19,7 +19,46 @@ struct MFExpenseScreen: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-                listOfExpenses
+                List {
+                    ForEach(vm.pagableExpenses.indices, id: \.self) { index in
+                        let expense = vm.pagableExpenses[index]
+                        ExpenseListItemView(expense: expense,
+                                            showDate: expense.showDate,
+                                            showDailyTotal: expense.showDailyTotal,
+                                            showWeeklyTotal: expense.showWeeklyTotal,
+                                            showMonthlyTotal: expense.showMonthlyTotal,
+                                            showYearlyTotal: expense.showYearlyTotal,
+                                            dailyTotal: expense.dailyTotal,
+                                            weeklyTotal: expense.weeklyTotal,
+                                            monthlyTotal: expense.monthlyTotal,
+                                            yearlyTotal: expense.yearlyTotal,
+                                            showExpense: expense.showExpense)
+                        .swipeActions {
+                            Button("Delete") {
+                                selectedExpenseId = expense.id
+                                showDeleteAlert = true
+                            }.tint(.red)
+                            Button("Edit") {
+                                selectedExpenseId = expense.id
+                                showAddExpensePopup = true
+                            }.tint(.blue)
+                        }
+                        .onAppear {
+                            if vm.pagableExpenses.last?.id == expense.id {
+                                vm.loadMore()
+                            }
+                        }
+                    }
+                }
+                .listRowSeparator(.hidden)
+                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .popover(isPresented: $showAddExpensePopup) { [selectedExpenseId] in
+                    if let id = selectedExpenseId {
+                        EditorExpenseScreen(expense: vm.findById(id))
+                    } else {
+                        EditorExpenseScreen()
+                    }
+                }
                 MFFloatingButton {
                     selectedExpenseId = nil
                     showAddExpensePopup = true
@@ -68,54 +107,14 @@ struct ChildView : View {
     }
 }
 
-extension MFExpenseScreen {
-    @ViewBuilder
-    var listOfExpenses: some View {
-//        let startTime = CFAbsoluteTimeGetCurrent()
-        List {
-            ForEach(vm.pagableExpenses.indices, id: \.self) { index in
-                let expense = vm.pagableExpenses[index]
-                ExpenseListItemView(expense: expense,
-                                    displayDate: expense.showDate,
-                                    shouldShowDailyTotal: expense.showDailyTotal,
-                                    shouldShowWeeklyTotal: expense.showWeeklyTotal,
-                                    shouldShowMonthlyTotal: expense.showMonthlyTotal,
-                                    shouldShowYearlyTotal: expense.showYearlyTotal,
-                                    dailyTotal: expense.dailyTotal,
-                                    weeklyTotal: expense.weeklyTotal,
-                                    monthlyTotal: expense.monthlyTotal,
-                                    yearlyTotal: expense.yearlyTotal,
-                                    showExpense: expense.showExpense)
-                .swipeActions {
-                    Button("Delete") {
-                        selectedExpenseId = expense.id
-                        showDeleteAlert = true
-                    }.tint(.red)
-                    Button("Edit") {
-                        selectedExpenseId = expense.id
-                        showAddExpensePopup = true
-                    }.tint(.blue)
-                }
-                .onAppear {
-                    if vm.pagableExpenses.last?.id == expense.id {
-                        vm.loadMore()
-                    }
-                }
-            }
-        }
-        .listRowSeparator(.hidden)
-        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-        .popover(isPresented: $showAddExpensePopup) { [selectedExpenseId] in
-            if let id = selectedExpenseId { 
-                EditorExpenseScreen(expense: vm.findById(id))
-            } else {
-                EditorExpenseScreen()
-            }
-        }
-//        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
-//        let _ = print("drawing: \(timeElapsed)")
-    }
-}
+
+
+
+
+
+
+
+
 
 
 

@@ -21,7 +21,7 @@ struct Bar: Shape {
     
     func path(in rect: CGRect) -> Path {
         var p = Path()
-        let height = min(CGFloat(expense * 20), rect.height)
+        let height = min(CGFloat(expense * 10), rect.height)
         let bottomLeft = CGPoint(x: rect.minX, y: rect.maxY)
         let bottomRight = CGPoint(x: rect.maxX, y: rect.maxY)
         let topLeft = CGPoint(x: rect.minX, y: rect.maxY - height)
@@ -56,16 +56,16 @@ struct BarShapeView: View {
     
     var body: some View {
         VStack {
-            Bar(data.value).fill(Color.red)
+            Bar(data.value).fill(Color(red: 255/255, green: 69/255, blue: 58/255))
             Text("\(data.value.removeZerosFromEnd())")
                 .lineLimit(1)
-                .minimumScaleFactor(0.01)
-                .frame(minHeight: 30)
+                .font(.system(size:8))
+                .frame(minHeight: 20)
                 .multilineTextAlignment(.center)
             Text("\(data.text)")
                 .lineLimit(1)
-                .minimumScaleFactor(0.01)
-                .frame(minHeight: 30)
+                .font(.system(size:11))
+                .frame(minHeight: 20)
         }.foregroundColor(.defaultTextColor)
     }
 }
@@ -114,7 +114,7 @@ struct BarShapeView: View {
 struct BarShapeView_Previews: PreviewProvider {
     static var previews: some View {
         BarChart(data: [
-            BarChartData(value: 10.5, text: "Jan"),
+            BarChartData(value: 196.5, text: "Jan"),
             BarChartData(value: 6.7, text: "Feb"),
             BarChartData(value: 22.3, text: "Mar"),
             BarChartData(value: 16.3, text: "Apr"),
@@ -125,7 +125,7 @@ struct BarShapeView_Previews: PreviewProvider {
             BarChartData(value: 16.3, text: "Sep"),
             BarChartData(value: 8.4, text: "Oct"),
             BarChartData(value: 6.4, text: "Nov"),
-            BarChartData(value: 7.4, text: "Dec"),
+            BarChartData(value: 70.4, text: "Dec"),
         ])
     }
 }

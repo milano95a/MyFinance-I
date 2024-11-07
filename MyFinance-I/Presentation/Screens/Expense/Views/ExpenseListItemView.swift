@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ExpenseListItemView: View {
     let expense: MFExepnse
-    let displayDate: Bool
-    let shouldShowDailyTotal: Bool
-    let shouldShowWeeklyTotal: Bool
-    let shouldShowMonthlyTotal: Bool
-    let shouldShowYearlyTotal: Bool
+    let showDate: Bool
+    let showDailyTotal: Bool
+    let showWeeklyTotal: Bool
+    let showMonthlyTotal: Bool
+    let showYearlyTotal: Bool
     let dailyTotal: String
     let weeklyTotal: String
     let monthlyTotal: String
@@ -21,24 +21,24 @@ struct ExpenseListItemView: View {
     let showExpense: Bool
     
     var body: some View {
-        if shouldShowYearlyTotal || shouldShowMonthlyTotal || shouldShowWeeklyTotal || shouldShowDailyTotal || showExpense {
+        if showYearlyTotal || showMonthlyTotal || showWeeklyTotal || showDailyTotal || showExpense {
             VStack(spacing: 0) {
-                if displayDate {
+                if showDate {
                     dateView
                     
-                    if shouldShowYearlyTotal {
+                    if showYearlyTotal {
                         yearlyTotalView
                     }
                     
-                    if shouldShowMonthlyTotal {
+                    if showMonthlyTotal {
                         monthlyTotalView
                     }
                     
-                    if shouldShowWeeklyTotal {
+                    if showWeeklyTotal {
                         weeklyTotalView
                     }
                     
-                    if shouldShowDailyTotal {
+                    if showDailyTotal {
                         dailyTotalView
                     }
                 }
@@ -121,11 +121,11 @@ struct ExpenseListItemView: View {
 
 #Preview {
     ExpenseListItemView(expense: MFExepnse.mockData,
-                        displayDate: true,
-                        shouldShowDailyTotal: true,
-                        shouldShowWeeklyTotal: true,
-                        shouldShowMonthlyTotal: true,
-                        shouldShowYearlyTotal: true,
+                        showDate: true,
+                        showDailyTotal: true,
+                        showWeeklyTotal: true,
+                        showMonthlyTotal: true,
+                        showYearlyTotal: true,
                         dailyTotal: MFExepnse.mockData.cost,
                         weeklyTotal: MFExepnse.mockData.cost,
                         monthlyTotal: MFExepnse.mockData.cost,

@@ -236,6 +236,7 @@
 		BD7359BF29F7EF4300766F9A /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				F05F10A22C8F1F7400A5498D /* Components */,
 				BDF79F2329E823F9009B7D1D /* ExpensesChartScreen.swift */,
 				BDF79F2829EABDE0009B7D1D /* ExpenseChartManager.swift */,
 			);
@@ -421,7 +422,6 @@
 			isa = PBXGroup;
 			children = (
 				BDAD60AC2A138B880098C5F7 /* GenericEditor.swift */,
-				BDF79F2129E7F9A9009B7D1D /* BarChart.swift */,
 				BDF5C27A29E15EFB007DED13 /* TextFieldWithAutoCompleteSuggestion.swift */,
 				BDAD60B02A160A140098C5F7 /* CustomNavigationLink.swift */,
 				F064BF612C0D8E9800136B8D /* MFFloatingButton.swift */,
@@ -431,6 +431,14 @@
 				F07EA9062C10980F0057BDDB /* MyComponents.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F05F10A22C8F1F7400A5498D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BDF79F2129E7F9A9009B7D1D /* BarChart.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		F064BF572C0D8A0400136B8D /* Assets */ = {

@@ -165,4 +165,7 @@ extension MFExepnse {
     static var mockData: MFExepnse {
         return MFExepnse(expense: Expense.mockData, unit: .som, income: 10_000_000)!
     }
+    static var mockData2: MFExepnse {
+        return MFExepnse(expense: Expense.mockData2, unit: .som, income: 10_000_000)!
+    }
 }

@@ -23,6 +23,7 @@ struct MFExpenseScreen: View {
                     ForEach(vm.pagableExpenses.indices, id: \.self) { index in
                         let expense = vm.pagableExpenses[index]
                         ExpenseListItemView(expense: expense,
+                                            lastPurchase: MFDefaultExpenseManager.shared.getPrevExpense(with: expense),
                                             showDate: expense.showDate,
                                             showDailyTotal: expense.showDailyTotal,
                                             showWeeklyTotal: expense.showWeeklyTotal,

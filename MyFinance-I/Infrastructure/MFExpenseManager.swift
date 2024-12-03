@@ -55,4 +55,21 @@ struct MFDefaultExpenseManager: MFExpenseManager {
         self.expenses = newExpenses.reversed()
         return expenses
     }
+    
+    func getPrevExpense(with currentItem: MFExepnse) -> MFExepnse? {
+        let items = Expense.fetchRequest(.contains(field: "name", currentItem.name))
+
+        var currentItemFound: Bool = false
+        
+        for element in items {
+            if currentItemFound {
+                return MFExepnse(expense: element, unit: .som, income: 0)
+            }
+            if element.id == currentItem.id {
+                currentItemFound = true
+            }
+        }
+        
+        return nil
+    }
 }

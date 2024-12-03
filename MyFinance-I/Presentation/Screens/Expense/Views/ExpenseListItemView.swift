@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExpenseListItemView: View {
     let expense: MFExepnse
+    let lastPurchase: MFExepnse?
     let showDate: Bool
     let showDailyTotal: Bool
     let showWeeklyTotal: Bool
@@ -58,7 +59,19 @@ struct ExpenseListItemView: View {
         HStack {
             Text("\(expense.name)")
             Spacer()
-            Text(expense.cost)
+            HStack(spacing: 0) {
+                if let change = change() {
+                    if change > 0 {
+                        Text("+\(change)%")
+                            .foregroundStyle(Color.red)
+                    } else if change < 0 {
+                        Text("\(change)%")
+                            .foregroundStyle(Color.green)
+                    }
+                }
+                Text(expense.cost)
+                    .padding(.leading, 8)
+            }
         }
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         HStack {
@@ -114,6 +127,11 @@ struct ExpenseListItemView: View {
         .padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
         .foregroundColor(.dailyTotalColor)
     }
+    
+    func change() -> Int? {
+        guard let lastPurchase else { return nil }
+        return Int((Double(expense.price) / Double(lastPurchase.price) - 1) * 100)
+    }
 }
 
 
@@ -121,6 +139,7 @@ struct ExpenseListItemView: View {
 
 #Preview {
     ExpenseListItemView(expense: MFExepnse.mockData,
+                        lastPurchase: .mockData2,
                         showDate: true,
                         showDailyTotal: true,
                         showWeeklyTotal: true,

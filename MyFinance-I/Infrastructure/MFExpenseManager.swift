@@ -57,8 +57,7 @@ struct MFDefaultExpenseManager: MFExpenseManager {
     }
     
     func getPrevExpense(with currentItem: MFExepnse) -> MFExepnse? {
-        let items = Expense.fetchRequest(.contains(field: "name", currentItem.name))
-
+        let items = Expense.fetchRequest(.findObjects(withName: currentItem.name))
         var currentItemFound: Bool = false
         
         for element in items {

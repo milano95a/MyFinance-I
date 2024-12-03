@@ -117,6 +117,10 @@ extension NSPredicate {
     static func equals(field: String, equalsTo string: ObjectId) -> NSPredicate {
         NSPredicate(format: "\(field) == \(string)")
     }
+    
+    static func findObjects(withName name: String) -> NSPredicate {
+        NSPredicate(format: "name == %@", name)
+    }
 }
 
 extension Collection {

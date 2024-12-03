@@ -62,10 +62,10 @@ struct ExpenseListItemView: View {
             HStack(spacing: 0) {
                 if let change = change() {
                     if change > 0 {
-                        Text("+\(change)%")
+                        Text("+\(change.removeZerosFromEnd())%")
                             .foregroundStyle(Color.red)
                     } else if change < 0 {
-                        Text("\(change)%")
+                        Text("\(change.removeZerosFromEnd())%")
                             .foregroundStyle(Color.green)
                     }
                 }
@@ -128,9 +128,9 @@ struct ExpenseListItemView: View {
         .foregroundColor(.dailyTotalColor)
     }
     
-    func change() -> Int? {
+    func change() -> Double? {
         guard let lastPurchase else { return nil }
-        return Int((Double(expense.price) / Double(lastPurchase.price) - 1) * 100)
+        return ((Double(expense.price) / Double(lastPurchase.price) - 1) * 100).rounded(toPlaces: 2)
     }
 }
 

@@ -13,6 +13,10 @@ class Expense: Object, ObjectKeyIdentifiable, Decodable, Encodable {
     @Persisted var ufRate: Int = 0
     @Persisted var usdRate: Int = 0
     
+    @Persisted var brand: String = ""
+    @Persisted var subCategory: String = ""
+    @Persisted var seller: String = ""
+    
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -20,6 +24,9 @@ class Expense: Object, ObjectKeyIdentifiable, Decodable, Encodable {
         case price
         case date
         case category
+        case brand
+        case subCategory
+        case seller
     }
     
     required override init() {}
@@ -33,6 +40,9 @@ class Expense: Object, ObjectKeyIdentifiable, Decodable, Encodable {
         price = try values.decode(Int.self, forKey: .price)
         date = try values.decode(Date.self, forKey: .date)
         category = try values.decode(String.self, forKey: .category)
+        brand = try values.decode(String.self, forKey: .brand)
+        subCategory = try values.decode(String.self, forKey: .subCategory)
+        seller = try values.decode(String.self, forKey: .seller)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -43,6 +53,9 @@ class Expense: Object, ObjectKeyIdentifiable, Decodable, Encodable {
         try container.encode(price, forKey: .price)
         try container.encode(date, forKey: .date)
         try container.encode(category, forKey: .category)
+        try container.encode(brand, forKey: .brand)
+        try container.encode(subCategory, forKey: .subCategory)
+        try container.encode(seller, forKey: .seller)
     }
 }
 
@@ -59,7 +72,7 @@ extension Expense {
         }
     }
     
-    static func add(name: String, category: String, quantity: Double, price: Int, date: Date, income: Int, ufRate: Int, usdRate: Int) {
+    static func add(name: String, category: String, quantity: Double, price: Int, date: Date, income: Int, ufRate: Int, usdRate: Int, brand: String, subCategory: String, seller: String) {
         let expense = Expense()
         expense.name = name
         expense.category = category
@@ -69,6 +82,9 @@ extension Expense {
         expense.income = income
         expense.ufRate = ufRate
         expense.usdRate = usdRate
+        expense.brand = brand
+        expense.subCategory = subCategory
+        expense.seller = seller
 
         Realm.writeWithTry { realm in
             realm.add(expense)
@@ -87,7 +103,7 @@ extension Expense {
         }
     }
     
-    static func update(_ expense: Expense, name: String?, category: String?, quantity: Double?, price: Int?, date: Date?, income: Int?, ufRate: Int?, usdRate: Int?) {
+    static func update(_ expense: Expense, name: String?, category: String?, quantity: Double?, price: Int?, date: Date?, income: Int?, ufRate: Int?, usdRate: Int?, brand: String?, subCategory: String?, seller: String?) {
         expense.write { thawedObj, thawedRealm in
             if let name = name { thawedObj.name = name }
             if let category = category { thawedObj.category = category }
@@ -97,6 +113,9 @@ extension Expense {
             if let income = income { thawedObj.income = income }
             if let ufRate = ufRate { thawedObj.ufRate = ufRate }
             if let usdRate = usdRate { thawedObj.usdRate = usdRate }
+            if let brand = brand { thawedObj.brand = brand }
+            if let subCategory = subCategory { thawedObj.subCategory = subCategory }
+            if let seller = seller { thawedObj.seller = seller }
         }
     }
     
@@ -124,13 +143,13 @@ extension Expense {
         Int(quantity * Double(price))
     }
     
-    var costDividedByIncome: Double {
-        if income > 0 {
-            return Double(cost) / Double(income)
-        } else {
-            return 0
-        }
-    }
+//    var costDividedByIncome: Double {
+//        if income > 0 {
+//            return Double(cost) / Double(income)
+//        } else {
+//            return 0
+//        }
+//    }
 }
 
 // MARK: Mock

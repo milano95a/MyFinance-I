@@ -10,7 +10,18 @@ import RealmSwift
 
 class MFExepnse: Identifiable {
     
-    init?(expense: Expense?, olderExpense: MFExepnse? = nil, newerExpense: MFExepnse? = nil, isYearlyTotalOn: Bool = true, isMonthlyTotalOn: Bool = true, isWeeklyTotalOn: Bool = true, isDailyTotalOn: Bool = true, isExpenseOn: Bool = true, unit: MFUnit, income: Int) {
+    init?(expense: Expense?,
+          olderExpense: MFExepnse? = nil,
+          newerExpense: MFExepnse? = nil,
+          isYearlyTotalOn: Bool = true,
+          isMonthlyTotalOn: Bool = true,
+          isWeeklyTotalOn: Bool = true,
+          isDailyTotalOn: Bool = true,
+          isExpenseOn: Bool = true,
+          unit: MFUnit,
+          income: Int,
+          usd: Int,
+          uf: Int) {
         
         guard let expense else { return nil}
         
@@ -27,6 +38,9 @@ class MFExepnse: Identifiable {
         self.dayOfTheYear = expense.date.dayOfTheYear
         self.unit = unit
         self.income = income
+        self.usd = usd
+        self.uf = uf
+        
         
         if let olderExpense, olderExpense.year == year {
             self._yearlyTotal = Double(expense.cost) + olderExpense._yearlyTotal
@@ -103,11 +117,26 @@ class MFExepnse: Identifiable {
     
     var unit: MFUnit
     var income: Int
+    var usd: Int
+    var uf: Int
 
     var yearlyTotal: String {
-        if unit == .som {
+        switch unit {
+        case .som:
             return _yearlyTotal.toSpaceSeparated()
-        } else {
+        case .uf:
+            if uf > 0 {
+                return "n/a"
+            } else {
+                return "n/a"
+            }
+        case .usd:
+            if usd > 0 {
+                return "n/a"
+            } else {
+                return "n/a"
+            }
+        case .income:
             if income > 0 {
                 return "n/a"
             } else {
@@ -116,9 +145,22 @@ class MFExepnse: Identifiable {
         }
     }
     var monthlyTotal: String {
-        if unit == .som {
+        switch unit {
+        case .som:
             return _monthlyTotal.toSpaceSeparated()
-        } else {
+        case .uf:
+            if uf > 0 {
+                return "\((_monthlyTotal / Double(uf)).rounded(toPlaces: 4).removeZerosFromEnd()) UF"
+            } else {
+                return "n/a"
+            }
+        case .usd:
+            if usd > 0 {
+                return "\((_monthlyTotal / Double(usd)).rounded(toPlaces: 2).removeZerosFromEnd()) $"
+            } else {
+                return "n/a"
+            }
+        case .income:
             if income > 0 {
                 return "\((_monthlyTotal / Double(income) * 100).rounded(toPlaces: 3).removeZerosFromEnd()) %"
             } else {
@@ -127,9 +169,22 @@ class MFExepnse: Identifiable {
         }
     }
     var weeklyTotal: String {
-        if unit == .som {
+        switch unit {
+        case .som:
             return _weeklyTotal.toSpaceSeparated()
-        } else {
+        case .uf:
+            if uf > 0 {
+                return "\((_weeklyTotal / Double(uf)).rounded(toPlaces: 4).removeZerosFromEnd()) UF"
+            } else {
+                return "n/a"
+            }
+        case .usd:
+            if usd > 0 {
+                return "\((_weeklyTotal / Double(usd)).rounded(toPlaces: 2).removeZerosFromEnd()) $"
+            } else {
+                return "n/a"
+            }
+        case .income:
             if income > 0 {
                 return "\((_weeklyTotal / Double(income) * 100).rounded(toPlaces: 3).removeZerosFromEnd()) %"
             } else {
@@ -138,9 +193,22 @@ class MFExepnse: Identifiable {
         }
     }
     var dailyTotal: String {
-        if unit == .som {
+        switch unit {
+        case .som:
             return _dailyTotal.toSpaceSeparated()
-        } else {
+        case .uf:
+            if uf > 0 {
+                return "\((_dailyTotal / Double(uf)).rounded(toPlaces: 4).removeZerosFromEnd()) UF"
+            } else {
+                return "n/a"
+            }
+        case .usd:
+            if usd > 0 {
+                return "\((_dailyTotal / Double(usd)).rounded(toPlaces: 2).removeZerosFromEnd()) $"
+            } else {
+                return "n/a"
+            }
+        case .income:
             if income > 0 {
                 return "\((_dailyTotal / Double(income) * 100).rounded(toPlaces: 3).removeZerosFromEnd()) %"
             } else {
@@ -149,9 +217,22 @@ class MFExepnse: Identifiable {
         }
     }
     var cost: String {
-        if unit == .som {
+        switch unit {
+        case .som:
             return (quantity * Double(price)).rounded(toPlaces: 0).toSpaceSeparated()
-        } else {
+        case .uf:
+            if uf > 0 {
+                return "\((quantity * Double(price) / Double(uf)).rounded(toPlaces: 4).removeZerosFromEnd()) UF"
+            } else {
+                return "n/a"
+            }
+        case .usd:
+            if usd > 0 {
+                return "\((quantity * Double(price) / Double(usd)).rounded(toPlaces: 2).removeZerosFromEnd()) $"
+            } else {
+                return "n/a"
+            }
+        case .income:
             if income > 0 {
                 return "\((quantity * Double(price) / Double(income) * 100).rounded(toPlaces: 0).removeZerosFromEnd()) %"
             } else {
@@ -163,9 +244,9 @@ class MFExepnse: Identifiable {
 
 extension MFExepnse {
     static var mockData: MFExepnse {
-        return MFExepnse(expense: Expense.mockData, unit: .som, income: 10_000_000)!
+        return MFExepnse(expense: Expense.mockData, unit: .som, income: 10_000_000, usd: 12_850, uf: 4_550_000)!
     }
     static var mockData2: MFExepnse {
-        return MFExepnse(expense: Expense.mockData2, unit: .som, income: 10_000_000)!
+        return MFExepnse(expense: Expense.mockData2, unit: .som, income: 10_000_000, usd: 12_850, uf: 4_550_000)!
     }
 }

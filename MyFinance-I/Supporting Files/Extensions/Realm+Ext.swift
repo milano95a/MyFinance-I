@@ -45,7 +45,7 @@ extension ObjectId {
 extension Realm {
     // TODO: use this shared instance everywhere
     static func shared() -> Realm {
-        let configuration = Realm.Configuration(schemaVersion: 7)
+        let configuration = Realm.Configuration(schemaVersion: 8)
         Realm.Configuration.defaultConfiguration = configuration
         let realm = try! Realm()
         return realm

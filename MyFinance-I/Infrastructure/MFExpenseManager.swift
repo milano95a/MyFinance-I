@@ -32,11 +32,19 @@ struct MFDefaultExpenseManager: MFExpenseManager {
 
         var newExpenses = [MFExepnse]()
         var latestIncome: Int = 0
+        var latestUSD: Int = 0
+        var latestUF: Int = 0
         for index in stride(from: expensesDOM.count-1, through: 0, by: -1) {
             if expensesDOM[index].income > 0 {
                 latestIncome = expensesDOM[index].income
             }
-            let newerExpense = MFExepnse(expense: expensesDOM.element(at: index-1), unit: unit, income: latestIncome)
+            if expensesDOM[index].usdRate > 0 {
+                latestUSD = expensesDOM[index].usdRate
+            }
+            if expensesDOM[index].ufRate > 0 {
+                latestUF = expensesDOM[index].ufRate
+            }
+            let newerExpense = MFExepnse(expense: expensesDOM.element(at: index-1), unit: unit, income: latestIncome, usd: latestUSD, uf: latestUF)
             let olderExpense = newExpenses.last
             
             if let newExpense = MFExepnse(expense: expensesDOM[index],
@@ -48,7 +56,9 @@ struct MFDefaultExpenseManager: MFExpenseManager {
                                           isDailyTotalOn: showDailyTotal,
                                           isExpenseOn: showExpenses,
                                           unit: unit,
-                                          income: latestIncome) {
+                                          income: latestIncome,
+                                          usd: latestUSD,
+                                          uf: latestUF) {
                 newExpenses.append(newExpense)
             }
         }
@@ -62,7 +72,7 @@ struct MFDefaultExpenseManager: MFExpenseManager {
         
         for element in items {
             if currentItemFound {
-                return MFExepnse(expense: element, unit: .som, income: 0)
+                return MFExepnse(expense: element, unit: .som, income: 0, usd: 0, uf: 0)
             }
             if element.id == currentItem.id {
                 currentItemFound = true

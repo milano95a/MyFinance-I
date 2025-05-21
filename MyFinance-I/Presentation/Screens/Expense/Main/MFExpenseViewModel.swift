@@ -123,14 +123,14 @@ class MFExpenseViewModel: ObservableObject {
         }
     }
     
-    func update(_ expense: Expense, name: String, category: String, price: Int, quantity: Double, date: Date, income: Int, ufRate: Int, usdRate: Int) {
+    func update(_ expense: Expense, name: String, category: String, price: Int, quantity: Double, date: Date, income: Int, ufRate: Int, usdRate: Int, brand: String, subCategory: String, seller: String) {
         self.objectWillChange.send()
-        Expense.update(expense, name: name, category: category, quantity: quantity, price: price, date: date, income: income, ufRate: ufRate, usdRate: usdRate)
+        Expense.update(expense, name: name, category: category, quantity: quantity, price: price, date: date, income: income, ufRate: ufRate, usdRate: usdRate, brand: brand, subCategory: subCategory, seller: seller)
     }
     
-    func add(name: String, category: String, price: Int, quantity: Double, date: Date, income: Int, ufRate: Int, usdRate: Int) {
+    func add(name: String, category: String, price: Int, quantity: Double, date: Date, income: Int, ufRate: Int, usdRate: Int, brand: String, subCategory: String, seller: String) {
         self.objectWillChange.send()
-        Expense.add(name: name, category: category, quantity: quantity, price: price, date: date, income: income, ufRate: ufRate, usdRate: usdRate)
+        Expense.add(name: name, category: category, quantity: quantity, price: price, date: date, income: income, ufRate: ufRate, usdRate: usdRate, brand: brand, subCategory: subCategory, seller: seller)
     }
 
     func searchExpenses(with searchText: String) {

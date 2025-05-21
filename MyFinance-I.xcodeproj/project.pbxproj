@@ -63,6 +63,7 @@
 		F064BF5B2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF5A2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift */; };
 		F064BF5E2C0D8AA100136B8D /* MoreSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF5D2C0D8AA100136B8D /* MoreSettingsScreen.swift */; };
 		F064BF622C0D8E9800136B8D /* MFFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064BF612C0D8E9800136B8D /* MFFloatingButton.swift */; };
+		F079F1D62D0060DC00347906 /* MFStorageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F079F1D52D0060DC00347906 /* MFStorageAPI.swift */; };
 		F07EA8F92C0DD3B10057BDDB /* MFBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA8F82C0DD3B10057BDDB /* MFBudgetViewModel.swift */; };
 		F07EA8FB2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA8FA2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift */; };
 		F07EA8FD2C10886F0057BDDB /* MFBudgetListHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EA8FC2C10886F0057BDDB /* MFBudgetListHeaderItem.swift */; };
@@ -138,6 +139,7 @@
 		F064BF5A2C0D8A3A00136B8D /* MFBudgetsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetsListViewModel.swift; sourceTree = "<group>"; };
 		F064BF5D2C0D8AA100136B8D /* MoreSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreSettingsScreen.swift; sourceTree = "<group>"; };
 		F064BF612C0D8E9800136B8D /* MFFloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFFloatingButton.swift; sourceTree = "<group>"; };
+		F079F1D52D0060DC00347906 /* MFStorageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFStorageAPI.swift; sourceTree = "<group>"; };
 		F07EA8F82C0DD3B10057BDDB /* MFBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetViewModel.swift; sourceTree = "<group>"; };
 		F07EA8FA2C0DDFD20057BDDB /* MFBudgetItemEditorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetItemEditorScreen.swift; sourceTree = "<group>"; };
 		F07EA8FC2C10886F0057BDDB /* MFBudgetListHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFBudgetListHeaderItem.swift; sourceTree = "<group>"; };
@@ -361,7 +363,7 @@
 		F02A72052C3FF46000257F2E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				F0CC0F412C4A4D36009C0707 /* Main */,
+				F0CC0F412C4A4D36009C0707 /* InitialTabScreen */,
 				BDF79F1F29E72ABA009B7D1D /* More */,
 				BDF79F1E29E729E4009B7D1D /* Expense */,
 			);
@@ -391,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				F02A720B2C3FF60500257F2E /* DOMs */,
+				F079F1D52D0060DC00347906 /* MFStorageAPI.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -509,12 +512,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		F0CC0F412C4A4D36009C0707 /* Main */ = {
+		F0CC0F412C4A4D36009C0707 /* InitialTabScreen */ = {
 			isa = PBXGroup;
 			children = (
 				BD11260C29DFE88100B1FBFA /* InitialTabScreen.swift */,
 			);
-			path = Main;
+			path = InitialTabScreen;
 			sourceTree = "<group>";
 		};
 		F0E53D4B2C53A7D700D20AAC /* Supporting Files */ = {
@@ -618,6 +621,7 @@
 				BDF79F3129EF38B1009B7D1D /* CreditManager.swift in Sources */,
 				BD17A0B229DD6AD90052668D /* Expense.swift in Sources */,
 				BDF5C28629E6B47D007DED13 /* ExpenseByCategoryManager.swift in Sources */,
+				F079F1D62D0060DC00347906 /* MFStorageAPI.swift in Sources */,
 				F02A720D2C3FF64200257F2E /* Saving.swift in Sources */,
 				BDAD60AD2A138B880098C5F7 /* GenericEditor.swift in Sources */,
 				BDAD60A92A0E57F50098C5F7 /* SavingsScreen.swift in Sources */,
@@ -797,14 +801,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyFinance-I/Preview Content\"";
-				DEVELOPMENT_TEAM = VPJ4257952;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7S9LS24CC2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MyFinance-I/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyFinance;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -815,8 +823,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jamoliddinovabdu.MyFinance-I";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamoliddinovabdu.MyFinance-I.test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Jamoliddinov Abduraxmon Provisioning Profile iMac4";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -828,14 +838,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyFinance-I/Preview Content\"";
-				DEVELOPMENT_TEAM = VPJ4257952;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7S9LS24CC2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MyFinance-I/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyFinance;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -846,8 +860,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jamoliddinovabdu.MyFinance-I";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamoliddinovabdu.MyFinance-I.test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Jamoliddinov Abduraxmon Provisioning Profile iMac4";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

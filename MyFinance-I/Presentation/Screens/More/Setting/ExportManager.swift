@@ -9,7 +9,6 @@ import Foundation
 import RealmSwift
 
 class ExportManager: ObservableObject {
-
     func exportData() -> URL? {
         let realm = try! Realm()
         let expenses = realm.objects(Expense.self)
@@ -62,4 +61,3 @@ struct ExportData: Codable {
         try container.encode(savings, forKey: .savings)
     }
 }
-

@@ -5,7 +5,7 @@ import Combine
 struct EditorExpenseScreen: View {
     
     enum FocusedField: Hashable {
-        case name, category, price, quantity, cost
+        case name, brand, category, subCategory, price, quantity, cost, seller
     }
     
     var expense: Expense?
@@ -18,6 +18,11 @@ struct EditorExpenseScreen: View {
     @State private var quantity: String = ""
     @State private var date: Date = Date()
     @State private var income: String = ""
+    @State private var usd: String = ""
+    @State private var uf: String = ""
+    @State private var brand: String = ""
+    @State private var subCategory: String = ""
+    @State private var seller: String = ""
     
     @State private var categoryFieldIsFocused = false
     @State private var nameFieldIsFocused = false
@@ -45,12 +50,17 @@ extension EditorExpenseScreen {
         self.expense = expense
         if let expense {
             self._name = State(initialValue: expense.name)
+            self._brand = State(initialValue: expense.brand)
             self._price = State(initialValue: String(expense.price))
             self._quantity = State(initialValue: String(expense.quantity))
             self._cost = State(initialValue: String(expense.cost))
             self._date = State(initialValue: expense.date)
             self._category = State(initialValue: expense.category)
+            self._subCategory = State(initialValue: expense.subCategory)
+            self._seller = State(initialValue: expense.seller)
             self._income = State(initialValue: String(expense.income))
+            self._usd = State(initialValue: String(expense.usdRate))
+            self._uf = State(initialValue: String(expense.ufRate))
         }
     }
 
@@ -58,7 +68,11 @@ extension EditorExpenseScreen {
         VStack {
             nameTextFieldWithAutoCompleteSuggestion
             
+            brandTextField
+            
             cateogryTextFieldWithAutoCompleteSuggestion
+            
+            subCategoryTextField
             
             priceTextField
             
@@ -66,10 +80,16 @@ extension EditorExpenseScreen {
             
             costTextField
 
+            sellerTextField
+            
             datePicker
             
             if UserDefaults.selectedUnitOfCounting == .income {
                 incomeTextField
+            } else if UserDefaults.selectedUnitOfCounting == .usd {
+                usdTextField
+            } else if UserDefaults.selectedUnitOfCounting == .uf {
+                ufTextField
             }
         }
     }
@@ -83,10 +103,13 @@ extension EditorExpenseScreen {
             textBinding: $name,
             onSuggestionTap: { expense in
                 name = expense.name
+                brand = expense.brand
                 category = expense.category
+                subCategory = expense.subCategory
                 price = "\(expense.price)"
                 quantity = "\(expense.quantity)"
                 cost = String(Int(Double(expense.price) * expense.quantity))
+                seller = expense.seller
             },
             getSuggestionText: { expense in
                 expense.name
@@ -96,12 +119,23 @@ extension EditorExpenseScreen {
         .focused($focusedField, equals: .name)
         .submitLabel(.next)
         .onSubmit {
-            focusedField = .category
+            focusedField = .brand
             nameFieldIsFocused = false
-            categoryFieldIsFocused = true
         }
         .selectAllTextOnEditing()
         .font(.title2)
+    }
+    
+    var brandTextField: some View {
+        TextField("brand", text: $brand)
+            .focused($focusedField, equals: .brand)
+            .submitLabel(.next)
+            .selectAllTextOnEditing()
+            .font(.title2)
+            .onSubmit {
+                focusedField = .category
+                categoryFieldIsFocused = true
+            }
     }
     
     var cateogryTextFieldWithAutoCompleteSuggestion: some View {
@@ -122,11 +156,22 @@ extension EditorExpenseScreen {
         .focused($focusedField, equals: .category)
         .submitLabel(.next)
         .onSubmit {
-            focusedField = .price
+            focusedField = .subCategory
             categoryFieldIsFocused = false
         }
         .selectAllTextOnEditing()
         .font(.title2)
+    }
+    
+    var subCategoryTextField: some View {
+        TextField("subcategory", text: $subCategory)
+            .focused($focusedField, equals: .subCategory)
+            .submitLabel(.next)
+            .selectAllTextOnEditing()
+            .font(.title2)
+            .onSubmit {
+                focusedField = .price
+            }
     }
     
     var priceTextField: some View {
@@ -145,7 +190,7 @@ extension EditorExpenseScreen {
                 }
             }
     }
-
+    
     var quantityTextField: some View {
         TextField("quantity", text: $quantity)
             .keyboardType(.numbersAndPunctuation)
@@ -167,7 +212,7 @@ extension EditorExpenseScreen {
         TextField("cost", text: $cost)
             .keyboardType(.numbersAndPunctuation)
             .focused($focusedField, equals: .cost)
-            .submitLabel(.done)
+            .submitLabel(.next)
             .selectAllTextOnEditing()
             .font(.title2)
             .onChange(of: cost) { newValue in
@@ -178,6 +223,17 @@ extension EditorExpenseScreen {
                     }
                 }
             }
+            .onSubmit {
+                focusedField = .subCategory
+            }
+    }
+    
+    var sellerTextField: some View {
+        TextField("seller", text: $seller)
+            .focused($focusedField, equals: .seller)
+            .submitLabel(.done)
+            .selectAllTextOnEditing()
+            .font(.title2)
     }
     
     var datePicker: some View {
@@ -187,6 +243,22 @@ extension EditorExpenseScreen {
         
     var incomeTextField: some View {
         TextField("income", text: $income)
+            .keyboardType(.numbersAndPunctuation)
+            .submitLabel(.done)
+            .selectAllTextOnEditing()
+            .font(.title2)
+    }
+    
+    var usdTextField: some View {
+        TextField("usd", text: $usd)
+            .keyboardType(.numbersAndPunctuation)
+            .submitLabel(.done)
+            .selectAllTextOnEditing()
+            .font(.title2)
+    }
+    
+    var ufTextField: some View {
+        TextField("uf", text: $uf)
             .keyboardType(.numbersAndPunctuation)
             .submitLabel(.done)
             .selectAllTextOnEditing()
@@ -207,6 +279,8 @@ extension EditorExpenseScreen {
                 guard let price = Int(price) else { return }
                 let quantity = Double(quantity) ?? 1
                 let income = Int(income) ?? 0
+                let usd = Int(usd) ?? 0
+                let uf = Int(uf) ?? 0
 
                 if let expense = expense {
                     manager.update(expense,
@@ -216,8 +290,11 @@ extension EditorExpenseScreen {
                                    quantity: quantity,
                                    date: date,
                                    income: income,
-                                   ufRate: 0,
-                                   usdRate: 0)
+                                   ufRate: uf,
+                                   usdRate: usd,
+                                   brand: brand,
+                                   subCategory: subCategory,
+                                   seller: seller)
                     dismiss()
                 } else {
                     manager.add(name: name,
@@ -226,8 +303,11 @@ extension EditorExpenseScreen {
                                 quantity: quantity,
                                 date: date,
                                 income: income,
-                                ufRate: 0,
-                                usdRate: 0)
+                                ufRate: uf,
+                                usdRate: usd,
+                                brand: brand,
+                                subCategory: subCategory,
+                                seller: seller)
                     dismiss()
                 }
             }, label: {
@@ -248,6 +328,9 @@ extension EditorExpenseScreen {
         price = "\(expense.price)"
         quantity = "\(expense.quantity.removeZerosFromEnd())"
         date = expense.date
+        brand = expense.brand
+        subCategory = expense.subCategory
+        seller = expense.seller
     }
 }
 
